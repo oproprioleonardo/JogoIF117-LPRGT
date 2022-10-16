@@ -62,12 +62,10 @@ class EntidadeViva extends Entidade {
     }
 
     droparVida() {
-        locVidas.push({
+        cenarioManager.cenario.entidades.push(new VidaE({
             x: this.posicao.x + this.largura / 2,
-            y: 435,
-            largura: 25,
-            altura: 25
-        });
+            
+        }));
     }
 
     matar() {

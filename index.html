@@ -11,10 +11,11 @@
     <script src="classes/Jogador.js"></script>
     <script src="classes/Projetil.js"></script>
     <script src="classes/Inimigo.js"></script>
-    <script src="js/transicoes.js"></script>
-    <script src="js/dialogos.js"></script>
-    <!--<script src="Perri.js"></script>
-    <script src="Frame.js"></script>-->
+    <script src="classes/Dialogo.js"></script>
+    <script src="classes/Porta.js"></script>
+    <script src="classes/Cenario.js"></script>
+    <script src="classes/CenarioManager.js"></script>
+    <script src="classes/VidaE.js"></script>
     <title>Ivaldo's fight</title>
 </head>
 
@@ -24,204 +25,6 @@
     </div>
 
     <script>
-        const canvas = document.querySelector('canvas')
-        const ctx = canvas.getContext('2d')
-        const gravidade = 0.6
-        let gameframe = 0
-        let primeirotexto = false
-
-        const max = new Jogador({
-            skinSource: "./img/max/max",
-            rate: 10,
-            frames: 2,
-            estado: "parado",
-            direcao: "d"
-        })
-
-        let naoclica = false
-        let tiros = []
-        let pessoa = []
-        let dialogo = []
-
-        let level = 0
-        let portas = []
-        let objetos = []
-        let cenarios = {
-            0: {
-                iniciar: () => {
-                    dialogo = ["...", "...", "Que sonho doido...", "O que foi tudo isso?", "Max, acorda!", "Alguém ta me chamando...",
-                        "Preciso me levantar..."]
-                    pessoa = ["...", "...", "...", "...", "Voz desconhecida", "Max", "Max"]
-                }
-            },
-            1: {
-                iniciar: () => {
-                    bg = new Entidade({
-                        largura: canvas.width,
-                        altura: canvas.height,
-                        skinSource: "./img/cenario/cenario0",
-                        autoplay: false,
-						rate: 1,
-						loop: false,
-						frames: 2,
-
-                    });
-					inimigos = [
-					new Inimigo({
-						skinSource: "./img/cenario/animados/espantalho/robo",
-						largura:70,
-						altura:150,
-						frames: 1,
-						direcao: "e",
-						lado: 1,
-						y: 250
-					})]
-                    dialogo = ["Professor? O que você está fazendo aqui?", "Você ficou com notas ruins em matemática e prática de laboratório",
-                        "Precisa compensar isso", "Mas você deveria mesmo ta aqui?", "Você é prof de física, afinal",
-                        "Continue assim e no próximo bimestre, será em física", "Já que com vocês eu posso avançar mais", "...",
-                        "Não faça isso.", "Por favor.", "De qualquer forma, você precisa lutar", "Não será fácil ganhar essa nota",
-                        "Procure pelo Perri e Ivaldo e salve seu boletim!", "Ta bom, vai ser moleza!", "...", "...", "Vou sair de fininho...", "Antes de eu sair..", "LUTE COM O ROBÔ", "PS: Espaço atira",
-						"VOCÊ VAI MORRER!!"],
-                    pessoa = ["Max", "Marciel", "Marciel", "Max", "Max", "Marciel", "Marciel", "Max",
-                        "Max", "Max", "Marciel", "Marciel", "Marciel", "Marciel", "Max", "Marciel", "Marciel", "Marciel", "Marciel","Marciel","ROBÔ SHEIPADO"]
-
-                    objetos = [
-                        new Entidade({
-                            largura: 100,
-                            altura: 280,
-                            posicao: {
-                                x: 960,
-                                y: 128
-                            },
-                            skinSource: "./img/cenario/animados/bolhas",
-                            rate: 8,
-                            frames: 4
-                        }),
-                        new Entidade({
-                            largura: 80,
-                            altura: 200,
-                            posicao: {
-                                x: 700,
-                                y: 270
-                            },
-                            skinSource: "./img/cenario/animados/marciel",
-                            rate: 15,
-                            frames: 2
-                        }),
-                        new Entidade({
-                            largura: 60,
-                            altura: 60,
-                            posicao: {
-                                x: 840,
-                                y: canvas.height - 130
-                            },
-                            skinSource: "./img/cenario/animados/gatinho",
-                            rate: 10,
-                            frames: 2
-                        })
-					]
-
-                    portas = [
-                        new Entidade({
-                            largura: 140,
-                            altura: 180,
-                            posicao: {
-                                x: 95,
-                                y: 280
-                            },
-                            skinSource: "./img/cenario/salvar/Porta0",
-                            rate: 8,
-                            autoplay: false,
-                            loop: false,
-                            frames: 4
-                        })
-                    ]
-                }
-            },
-            2: {
-                iniciar: () => {
-                    bg = new Entidade({
-                        largura: canvas.width,
-                        altura: canvas.height,
-                        skinSource: "./img/cenario/cenario1",
-                        frames: 1
-                    });
-
-                    objetos = [
-                        new Entidade({
-                            largura: 220,
-                            altura: 320,
-                            posicao: {
-                                x: 760,
-                                y: -50
-                            },
-                            skinSource: "./img/cenario/animados/ventilador",
-                            rate: 7,
-                            frames: 2
-                        }),
-                        new Entidade({
-                            largura: 60,
-                            altura: 60,
-                            posicao: {
-                                x: 230,
-                                y: canvas.height - 220
-                            },
-                            skinSource: "./img/cenario/animados/gatinho",
-                            rate: 10,
-                            frames: 2
-                        })
-                    ]
-
-                    portas = [
-                        new Entidade({
-                            largura: 140,
-                            altura: 320,
-                            posicao: {
-                                x: 0,
-                                y: 200
-                            },
-                            skinSource: "./img/cenario/animados/porta",
-                            rate: 8,
-                            autoplay: false,
-                            loop: false,
-                            frames: 2
-                        })
-                    ]
-                    dialogo = []
-                    pessoa = []
-                    gerarInimigos()
-                }
-            },
-            3: {
-                iniciar: () => {
-                    bg = new Entidade({
-                        largura: canvas.width,
-                        altura: canvas.height,
-                        skinSource: "./img/cenario/cenario2",
-                        frames: 1
-                    });
-
-                    objetos = [
-                        new Entidade({
-                            largura: 60,
-                            altura: 60,
-                            posicao: {
-                                x: 270,
-                                y: 340
-                            },
-                            skinSource: "./img/cenario/animados/gatinho",
-                            rate: 10,
-                            frames: 2
-                        })
-                    ]
-
-                    portas = []
-                    dialogo = []
-                    pessoa = []
-                }
-            }
-        }
-
         function verificacolisao(caso, obj1, obj2) {
             switch (caso) {
                 case 1:
@@ -229,7 +32,6 @@
                         obj2.posicao.x + obj2.largura <= obj1.posicao.x + obj1.largura)
                         return true
                     else return false
-                    break;
                 case 2:
                     if (obj1.posicao.x + obj1.largura >= obj2.posicao.x &&
                         obj1.posicao.x <= obj2.posicao.x + obj2.largura &&
@@ -237,122 +39,13 @@
                         obj1.posicao.y + obj1.altura >= obj2.posicao.y)
                         return true
                     else return false
-                    break;
                 case 3:
                     if (obj1.posicao.x + obj1.largura >= obj2.posicao.x &&
                         obj1.posicao.x <= obj2.posicao.x + obj2.largura)
                         return true
                     else return false
-                    break;
             }
         }
-
-        function gerarInimigo(sprite) {
-            let altura
-            let largura;
-            let lado;
-            switch (sprite) {
-                case 1:
-                    largura = 80;
-                    altura = 100;
-                    lado = 0;
-                    break;
-                case 2:
-                    largura = 60;
-                    altura = 80;
-                    lado = 0;
-                    break;
-                case 3:
-                    largura = 70;
-                    altura = 100;
-                    lado = 1;
-                    break;
-                case 4:
-                    largura = 60;
-                    altura = 80;
-                    lado = 1;
-                    break;
-            }
-            return new Inimigo({
-                skinSource: "./img/inimigos/inimigo" + sprite,
-                largura,
-                altura,
-                frames: 1,
-                direcao: "d",
-                lado,
-				y: -140
-            });
-        }
-
-
-        var inimigos = []
-        function gerarInimigos() {
-            for (let i = 1; i < 5; i++) {
-                inimigos.push(gerarInimigo(i))
-            }
-        }
-
-        var locVidas = [];
-        const vidaImagem = new Image();
-        vidaImagem.src = "./img/inimigos/vidainimigodrop.png";
-        let balanco = .5
-        setInterval(() => {
-            balanco = -balanco
-        }, 300);
-        function exibirVidas() {
-            locVidas.forEach((lVida) => {
-                ctx.drawImage(
-                    vidaImagem,
-                    lVida.x,
-                    lVida.y,
-                    lVida.largura,
-                    lVida.altura
-                );
-                lVida.y += balanco
-            });
-        }
-
-
-        let colisaocomobjeto = false
-        let indiceobjcolidido
-        function exibirInfo() {
-            portas.forEach(porta => {
-                if (verificacolisao(1, porta, max)) {
-                    const w = new Image()
-                    w.src = "./img/info/teclaw.png"
-                    ctx.drawImage(w, porta.posicao.x + (porta.largura / 2) - 25, porta.posicao.y - 60, 50, 50)
-                }
-            })
-
-            if (colisaocomobjeto) {
-                if (objetos[indiceobjcolidido].skinSource == "./img/cenario/animados/gatinho") {
-                    var coracao = new Image()
-                    coracao.src = "./img/info/coracao.png"
-                    ctx.drawImage(coracao, objetos[indiceobjcolidido].posicao.x + objetos[indiceobjcolidido].largura / 4, objetos[indiceobjcolidido].posicao.y - 45, 32, 32)
-                } else if (objetos[indiceobjcolidido].skinSource == "./img/cenario/animados/marciel") {
-                    dialogo = ["O que você está fazendo aqui ainda?", "*encara fixamente"]
-                    pessoa = ["Marciel", "Marciel"]
-                    if (guardadial > dialogo.length) guardadial = 0
-                    //colisaocomobjeto = false
-                }
-            }
-            const balas = new Image()
-            balas.src = "./img/info/balas/" + limitetiros + " balas.png"
-            ctx.drawImage(balas, 900, 0, 150, 80)
-        }
-
-        function removerVidaAnimada(vidaAnimada) {
-            locVidas = locVidas.filter((lV) => lV != vidaAnimada);
-        }
-
-        function removerInimigo(inimigo) {
-            inimigos = inimigos.filter((i) => i != inimigo);
-        }
-
-        function removerTiro(tiro) {
-            tiros = tiros.filter((t) => tiro != t);
-        }
-
 
         const teclas = {
             direita: {
@@ -369,8 +62,52 @@
             }
         }
 
+        function exibirInfo() {
+            cenarioManager.cenario.portas.forEach(porta => {
+                if (verificacolisao(1, porta, max)) {
+                    const w = new Image()
+                    w.src = "./img/info/teclaw.png"
+                    ctx.drawImage(w, porta.posicao.x + (porta.largura / 2) - 25, porta.posicao.y - 60, 50, 50)
+                }
+            });
 
-        let limitetiros = 10
+            if (max.algumaEntidadeColidida) {
+                const eColidida = max.entidadesColididas[0];
+                if(!eColidida.temInteracao) return;
+                if (eColidida.skinSource == "./img/cenario/animados/gatinho") {
+                    
+                    ctx.drawImage(coracao, eColidida.posicao.x + eColidida.largura /
+                        4, eColidida.posicao.y - 45, 32, 32)
+                } else if (eColidida.skinSource == "./img/cenario/animados/marciel") {
+                    eColidida.temInteracao = false;
+                    cenarioManager.cenario.adicionarDialogo([
+                        new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
+                        new Dialogo("Marciel", "*encara fixamente")
+                ]);
+                    cenarioManager.cenario.exibirDialogo(true);
+
+                    //colisaocomobjeto = false
+                }
+            }
+            const balas = new Image()
+            balas.src = "./img/info/balas/" + limiteTiros + " balas.png"
+            ctx.drawImage(balas, 900, 0, 150, 80)
+        }
+
+        var coracao = new Image()
+        coracao.src = "./img/info/coracao.png"
+        const canvas = document.querySelector('canvas')
+        const ctx = canvas.getContext('2d')
+        const cenarioManager = new CenarioManager();
+        var gameframe = 1;
+        var gravidade = 0.6;
+        var primeirotexto = false;
+        var limiteTiros = 10;
+
+
+
+        const max = new Jogador({});
+
         window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case "a":
@@ -386,39 +123,31 @@
                 case "w":
                 case "W":
                 case "ArrowUp":
-                    if (naoclica) return
-                    portas.forEach(porta => {
+                    cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
-                            porta.autoplay = true
-                            max.vetorVelocidade.y = -10
-                            max.vetorVelocidade.x = 0
-                            naoclica = true
-                            transicao()
+                            porta.abrir(() => cenarioManager.proximoCenario())
                         }
                     })
                     teclas.cima.press = true
                     break
                 case " ":
-                    if (max.vetorVelocidade.x != 0 || max.vetorVelocidade.y != 0 || max.vida <= 0 || limitetiros == 0) return
-                    tiros.push(new Projetil({
-                        skinSource: "img/tiromax/TiroMandioca",
-                        rate: 6,
-                        frames: 4
-                    }))
+                    if (max.vetorVelocidade.x != 0 || max.vetorVelocidade.y != 0 || max.vida <= 0 ||
+                        limiteTiros == 0) return
+                    cenarioManager.cenario.novoTiro();
                     teclas.espaco.press = true
-                    limitetiros--
+                    limiteTiros--
                     break
                 case "e":
                 case "E":
-                    if (colisaocomobjeto) return
-                    objetos.forEach(objeto => {
-                        if (verificacolisao(3, objeto, max)) {
-                            indiceobjcolidido = objetos.indexOf(objeto)
-                            colisaocomobjeto = true
+                    if (max.algumaEntidadeColidida) return
+                    cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
+                        if (verificacolisao(3, entidade, max))  {
+                            max.entidadesColididas.push(entidade);
                             setTimeout(() => {
-                                colisaocomobjeto = false
+                                max.entidadesColididas = []
                             }, 2200);
                         }
+                        
                     })
                     break
 
@@ -446,49 +175,42 @@
                     break
                 case " ":
                     if (max.vida <= 0) return
-                    limitetiros = 10
+                    limiteTiros = 10
                     max.mudarEstado("pararAtirar")
                     teclas.espaco.press = false
                     break
             }
         })
 
+
         function animate() {
             requestAnimationFrame(animate)
-            if (level > 0) bg.renderizar()
-            else if (dialogo.length == guardadial && !primeirotexto) {
-                transicao()
-                primeirotexto = true
+            if (cenarioManager.posicao > 0) cenarioManager.cenario.renderizar()
+            else if (cenarioManager.cenario.dialogos.length == cenarioManager.cenario.dialogoPos && cenarioManager.posicao == 0) {
+                cenarioManager.proximoCenario()
             }
-			
-			if(dialogo.length == guardadial && level == 1){
-				bg.autoplay = true
-			}
-            objetos.forEach(objeto => {
-                objeto.renderizar()
-            })
-            portas.forEach(porta => {
-                porta.renderizar()
-            })
-            tiros.forEach(tiro => {
-                tiro.dinamica(removerTiro)
-            })
-            inimigos.forEach(inimigo => {
-                inimigo.dinamica(removerInimigo)
-            })
 
-            exibirVidas()
+            if (cenarioManager.cenario.dialogos.length == cenarioManager.cenario.dialogoPos && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
+            
+                cenarioManager.cenario.proximoEstado()
+            }
+
             exibirInfo()
-            max.dinamica(removerVidaAnimada)
+            max.dinamica()
             max.movimentar(teclas)
 
-            transicaoprog()
+            cenarioManager.corrigirBrilho()
+            cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0)
 
-            dialogos(dialogo, pessoa, level == 0 ? false : true)
             gameframe++
         }
-        cenarios[level].iniciar()
         animate()
+
+
+
+
+
+
     </script>
 </body>
 

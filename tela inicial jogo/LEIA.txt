@@ -1,2 +1,0 @@
-Tenta ja conectar a tela inicial ao jogo, falta colocar os créditos e linkar o jogar ao jogo em sí. 
-Depois vamos mudar a arte de fundo então relaxe

@@ -1,11 +1,10 @@
 class Jogador extends EntidadeViva {
-
     constructor({
-        skinSource,
-        rate,
-        frames,
-        estado,
-        direcao
+        skinSource = "./img/max/max",
+        rate = 10,
+        frames = 2,
+        estado = "parado",
+        direcao = "d"
     }) {
         super({
             skinSource,
@@ -19,8 +18,13 @@ class Jogador extends EntidadeViva {
         this.posicao = {
             x: canvas.width / 2 - (140 / 2),
             y: canvas.height - 65 - 140
-        }
+        };
+        this.entidadesColididas = [];
+        
+    }
 
+    get algumaEntidadeColidida() {
+        return this.entidadesColididas.length > 0;
     }
 
     exibirVida() {
@@ -36,21 +40,21 @@ class Jogador extends EntidadeViva {
         ctx.drawImage(life, 50, 22, 210, 50);
     }
 
-    dinamica(removerVidaAnimada) {
+    dinamica() {
         this.exibirVida()
         this.renderizar()
 
-        const vidasTocadas = locVidas.filter(
+        const vidasTocadas = cenarioManager.cenario.vidas.filter(
             (locVida) =>
 
-            locVida.x + locVida.largura >= this.posicao.x &&
-            locVida.x <= this.posicao.x + this.largura &&
-            locVida.y <= this.posicao.y + this.altura &&
-            locVida.y + locVida.altura >= this.posicao.y
+            locVida.posicao.x + locVida.largura >= this.posicao.x &&
+            locVida.posicao.x <= this.posicao.x + this.largura &&
+            locVida.posicao.y <= this.posicao.y + this.altura &&
+            locVida.posicao.y + locVida.altura >= this.posicao.y
         );
         if (vidasTocadas.length > 0) {
             vidasTocadas.forEach((locVida) => {
-                removerVidaAnimada(locVida);
+                cenarioManager.cenario.removerEntidade(locVida);
                 this.vida = Math.min(100, this.vida + 5);
             });
         }
@@ -88,9 +92,9 @@ class Jogador extends EntidadeViva {
             this.mudarEstado("andando")
             this.vetorVelocidade.x = -7
         }
-        if (teclas.cima.press && this.vetorVelocidade.y == 0) 
+        if (teclas.cima.press && this.vetorVelocidade.y == 0)
             this.vetorVelocidade.y = -15
-        if (teclas.espaco.press) 
+        if (teclas.espaco.press)
             this.mudarEstado("atirando")
         if (this.vetorVelocidade.y != 0) this.mudarEstado("pulando")
 

@@ -7,12 +7,13 @@ class Entidade {
         skinSource = "./img/erro/erro.png",
         largura = 240,
         altura = 100,
-        rate,
+        rate = 1,
         frames = 1,
         loop = true,
         autoplay = true,
         estado = "",
-        direcao = ""
+        direcao = "",
+        temInteracao = false
     }) {
         this.posicao = posicao;
         this.skinSource = skinSource;
@@ -24,6 +25,7 @@ class Entidade {
             dir: direcao
         }
 
+        this.temInteracao = temInteracao;
         this.frameatual = 1
         this.rate = rate
         this.frames = frames
@@ -100,5 +102,9 @@ class Entidade {
                 return
         }
         this.estado = estado
+    }
+
+    getClassName() {
+        return this.constructor.name;
     }
 }

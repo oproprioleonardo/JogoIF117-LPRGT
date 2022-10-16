@@ -23,9 +23,9 @@ class Inimigo extends EntidadeViva {
 
     }
 
-    dinamica(removerInimigo) {
+    renderizar() {
         if (this.vida <= 0) {
-            removerInimigo(this);
+            cenarioManager.cenario.removerEntidade(this);
             this.matar();
             return;
         }
@@ -42,7 +42,7 @@ class Inimigo extends EntidadeViva {
             )
                 max.aplicarDano(0.5);
         } else {
-            if (guardadial < dialogo.length) return
+            if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
             this.vetorVelocidade.x = max.posicao.x < this.posicao.x ? -4 : 4;
             // muda a direção da imagem
             this.vetorVelocidade.dir = this.vetorVelocidade.x > 0 ? "d" : "e";
@@ -61,7 +61,16 @@ class Inimigo extends EntidadeViva {
         }
 
         this.exibirVida();
-        this.renderizar();
+
+        ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
+
+        if (!this.autoplay) return;
+
+        if (gameframe % this.rate == 0) {
+            if (this.frameatual == this.frames && !this.loop) return
+            this.carregarNovaImagem();
+        }
+
     }
 
 

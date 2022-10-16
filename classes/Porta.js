@@ -4,17 +4,18 @@ class Porta extends Entidade {
 // e montar relação CENARIO-PORTA-TRANSICAO
 
     constructor({ largura = 140, altura, skinSource, posicao, rate = 8, frames }) {
-        super({ largura, posicao, altura, skinSource, rate, frames, autoplay: false, loop: false })
-        this.aberta = false;
+        super({ largura, posicao, altura, skinSource, rate, frames, temInteracao: true, autoplay: false, loop: false })
+
     }
 
     // Quando é aberta uma porta, ocorre a transição para o novo cenário
-    abrir() {
-        if (this.aberta) return
+    abrir(callback) {
+        if (!this.temInteracao) return
         this.autoplay = true;
+        this.temInteracao = false;
         max.vetorVelocidade.y = -10
         max.vetorVelocidade.x = 0
-
+        callback();
     }
 
     // retorna um novo objeto de Porta Tipo 0
