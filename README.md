@@ -12,9 +12,8 @@ Jogo de plataforma realizado por alunos da turma CTII 117  do IFSP - Campus Cuba
 
 ## Contribuidores
 
-- sans_l (Leonardo)
-- gu (Gustavo)
-- cat (Pedro)
+- [sans_l](https://github.com/oproprioleonardo) (Leonardo)
+- [gu](https://github.com/gustavofg1pontes) (Gustavo)
+- [cat](https://github.com/Cat-07) (Pedro)
 - reis (Thiago)
-- raff (Rafael)
-- Levi
+- [raff](https://github.com/frae15/) (Rafael)
