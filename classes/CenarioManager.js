@@ -1,3 +1,16 @@
+const perri = new Entidade({
+    largura: 80,
+    altura: 200,
+    posicao: {
+        x: 700,
+        y: 270
+    },
+    skinSource: "./img/perri/perriparadoe",
+    rate: 15,
+    frames: 1
+})
+
+
 class CenarioManager {
 
     constructor() {
@@ -17,15 +30,14 @@ class CenarioManager {
         else if (this.brilho >= 0) this.brilho -= .1
     }
 
-    proximoCenario() {
-        this.posicao++;
+    proximoCenario(passaCenario = true) {
+        if(passaCenario) this.posicao++;
         setTimeout(() => {
             this.transicionando = true
         }, 400);
         setTimeout(() => {
             max.entidadesColididas = []
-            this.cenario = this.cenarios[this.posicao];
-            
+            this.cenario = this.cenarios[this.posicao];  
         }, 1100);
         setTimeout(() => {
             this.transicionando = false
@@ -119,11 +131,11 @@ class CenarioManager {
                 ]
             }),
 
-
             //cenario na sala de aula
             new Cenario({
                 imgsrc: "./img/cenario/cenario1",
                 entidades: [
+                    perri,
                     Porta.portaTipo1(),
                     new Entidade({
                         largura: 220,
@@ -147,7 +159,11 @@ class CenarioManager {
                         temInteracao: true,
                         rate: 10,
                         frames: 2
-                    })
+                    }),
+                ],
+                dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
+                    new Dialogo("Perri", "morre diabo"),
+                    new Dialogo("Perri", "...")
                 ],
                 iniciar: (cenario) => {
                     for (let i = 1; i < 5; i++) {

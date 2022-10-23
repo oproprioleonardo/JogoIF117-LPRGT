@@ -28,6 +28,5 @@ class Dialogo {
         ctx.fillText(this.pessoa, canvas.width / 9, caixa ? 39 : canvas.height / 2 - 60, canvas.width - 30);
         ctx.font = "10pt sans-serif";
         ctx.fillText("E", (canvas.width / 17) * 14, caixa ? 160 : canvas.height / 2 + 70, canvas.width - 30);
-
     }
 }

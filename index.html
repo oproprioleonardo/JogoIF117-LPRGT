@@ -194,6 +194,14 @@
             
                 cenarioManager.cenario.proximoEstado()
             }
+            if(cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario.dialogoPos){
+                cenarioManager.proximoCenario(false)
+                if(cenarioManager.cenario.entidades.length == 8){
+                    setTimeout(() => {
+                        cenarioManager.cenario.removerEntidade(perri)        
+                    }, 700);
+                }
+            }
 
             exibirInfo()
             max.dinamica()
@@ -204,13 +212,8 @@
 
             gameframe++
         }
+        
         animate()
-
-
-
-
-
-
     </script>
 </body>
 

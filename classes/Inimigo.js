@@ -44,14 +44,14 @@ class Inimigo extends EntidadeViva {
         } else {
             if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
             this.vetorVelocidade.x = max.posicao.x < this.posicao.x ? -4 : 4;
+
             // muda a direção da imagem
             this.vetorVelocidade.dir = this.vetorVelocidade.x > 0 ? "d" : "e";
 
             this.posicao.x += this.vetorVelocidade.x;
         }
-
-
-        this.posicao.y += this.vetorVelocidade.y;
+        if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
+        this.posicao.y += this.vetorVelocidade.y;    
         this.vetorVelocidade.y += gravidade;
 
         if (this.posicao.y + this.altura + 70 >= canvas.height) {

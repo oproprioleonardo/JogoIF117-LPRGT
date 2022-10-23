@@ -53,7 +53,6 @@ class Entidade {
         this.posicao.y = y;
     }
 
-
     // Esta função apenas define internamente a imagem que vai ser renderizada
     carregarNovaImagem(first) {
         if (!first) this.frameatual == this.frames ? this.frameatual = 1 : this.frameatual++

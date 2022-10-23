@@ -73,7 +73,4 @@ class EntidadeViva extends Entidade {
         this.vivo = false;
         if (this.dropaVida) this.droparVida();
     }
-
-
-
 }
