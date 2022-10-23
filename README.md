@@ -1,5 +1,5 @@
 # JogoIF117-LPRGT
-Jogo de plataforma realizado por alunos da turma CTII 117  do IFSP - Campus Cubatão.
+Jogo de plataforma realizado por alunos da turma CTII 117 (2022) do IFSP - Campus Cubatão.
 
 ### Controles
 
