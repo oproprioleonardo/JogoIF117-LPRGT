@@ -16,7 +16,7 @@ class EntidadeViva extends Entidade {
         direcao,
         imortal = false,
         resistencia = 0,
-        dropaVida = true
+        dropaVida = true,
     }) {
         super({
             posicao,

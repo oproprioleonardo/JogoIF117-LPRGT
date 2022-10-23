@@ -40,7 +40,7 @@ class Inimigo extends EntidadeViva {
                 max.posicao.y + max.altura >= this.posicao.y &&
                 max.posicao.y <= this.posicao.y + this.altura
             )
-                max.aplicarDano(0.5);
+                max.aplicarDano(0.2);
         } else {
             if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
             this.vetorVelocidade.x = max.posicao.x < this.posicao.x ? -4 : 4;

@@ -159,7 +159,7 @@ class CenarioManager {
                         temInteracao: true,
                         rate: 10,
                         frames: 2
-                    }),
+                    })
                 ],
                 dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
                     new Dialogo("Perri", "morre diabo"),
@@ -187,8 +187,20 @@ class CenarioManager {
                         temInteracao: true,
                         rate: 10,
                         frames: 2
+                    }),
+                    new Perri({
+                        skinSource: "./img/perri/perri",
+                        frames: 1,
+                        largura: 80,
+                        altura: 200,
+                        direcao: "e"
                     })
-                ]
+                ],
+            dialogos: [
+                    new Dialogo("Max", "NOAOAOAOA"),
+                    new Dialogo("Perri", "OIIII"),
+                    new Dialogo("Perri", "morre")
+                ],
             })
         ];
     }

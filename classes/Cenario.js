@@ -27,7 +27,7 @@ class Cenario {
         this.entidades = this.entidades.filter(ent => ent != entidade);
     }
 
-    get acabouDialogo() {
+    acabouDialogo() {
         return this.dialogoPos == this.dialogos.length;
     }
 
