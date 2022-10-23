@@ -85,8 +85,6 @@
                         new Dialogo("Marciel", "*encara fixamente")
                 ]);
                     cenarioManager.cenario.exibirDialogo(true);
-
-                    //colisaocomobjeto = false
                 }
             }
             const balas = new Image()
@@ -186,11 +184,11 @@
         function animate() {
             requestAnimationFrame(animate)
             if (cenarioManager.posicao > 0) cenarioManager.cenario.renderizar()
-            else if (cenarioManager.cenario.dialogos.length == cenarioManager.cenario.dialogoPos && cenarioManager.posicao == 0) {
+            else if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) {
                 cenarioManager.proximoCenario()
             }
 
-            if (cenarioManager.cenario.dialogos.length == cenarioManager.cenario.dialogoPos && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
+            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
             
                 cenarioManager.cenario.proximoEstado()
             }

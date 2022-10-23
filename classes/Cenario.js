@@ -27,6 +27,10 @@ class Cenario {
         this.entidades = this.entidades.filter(ent => ent != entidade);
     }
 
+    get acabouDialogo() {
+        return this.dialogoPos == this.dialogos.length;
+    }
+
     get entidadesComInteracao() {
         return this.entidades.filter(entidade => entidade.temInteracao);
     }
