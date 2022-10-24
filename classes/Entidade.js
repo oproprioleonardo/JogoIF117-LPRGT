@@ -5,6 +5,7 @@ class Entidade {
             y: 0
         },
         skinSource = "./img/erro/erro.png",
+        frameatual = 1,
         largura = 240,
         altura = 100,
         rate = 1,
@@ -26,7 +27,7 @@ class Entidade {
         }
 
         this.temInteracao = temInteracao;
-        this.frameatual = 1
+        this.frameatual = frameatual;
         this.rate = rate
         this.frames = frames
 

@@ -1,19 +1,14 @@
 class Perri extends EntidadeViva {
     constructor({
-        skinSource,
-        frames,
-        largura,
-        altura,
-        direcao = "d",
         estado = "parado",
         rate = 6
     }) {
         super({
-            skinSource,
-            frames,
-            direcao,
-            largura,
-            altura,
+            skinSource: "./img/perri/perri",
+            frames: 1,
+            direcao: "e",
+            largura: 80,
+            altura: 200,
             estado,
             rate
         })
@@ -66,7 +61,6 @@ class Perri extends EntidadeViva {
                 max.aplicarDano(1.5);
         } else {
             if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
-            this.ataqueProva()
             // muda a direção da imagem
             this.vetorVelocidade.dir = this.vetorVelocidade.x > 0 ? "d" : "e";
 
@@ -80,9 +74,9 @@ class Perri extends EntidadeViva {
             if (this.posicao.y + this.altura > canvas.height)
                 this.posicao.y = canvas.height - this.altura;
         }
+        if (this.estado == "prova") this.renderizarPergunta();
 
         this.exibirVida();
-
 
 
         if (!this.autoplay) return;
@@ -93,41 +87,53 @@ class Perri extends EntidadeViva {
         }
     }
 
-    responderPergunta(resposta) {
+    responderPergunta() {
+        let resposta = this.perguntas[this.perguntaAtual].resposta;
         let evento = e => {
             if (e.key != 'q' && e.key != 'r') return
             if (e.key == resposta) {
                 console.log('acertou')
-                window.removeEventListener('keydown', evento)
             }
             else {
                 console.log('errou')
-                this.ataqueCanetas()
-                window.removeEventListener('keydown', evento)
+                for (let i = 0; i < 10; i++) {
+                    cenarioManager.cenario.novoTiro(Projetil.caneta())
+                }
             }
+            window.removeEventListener('keydown', evento)
+            this.mudarEstado("parado");
+            this.imortal = false;
             this.perguntando = false
         }
         window.addEventListener('keydown', evento)
     }
 
-    ataqueProva(pergunta = this.perguntas[this.perguntaAtual]) {
+    ataqueProva() {
         if (!this.perguntando) return
-        this.mudaEstado('prova')
+        this.mudarEstado('prova')
+        this.imortal = true;
+        this.responderPergunta()
+    }
+
+    renderizarPergunta() {
+        let pergunta = this.perguntas[this.perguntaAtual];
         ctx.fillStyle = 'black';
         ctx.fillText(pergunta.pergunta, canvas.width / 2, 80, 100)
         ctx.fillText(pergunta.resposta == 'q' ?
             "q-" + pergunta.correta + ' r-' + pergunta.errada :
             "q-" + pergunta.errada + ' r-' + pergunta.correta, canvas.width / 2, 100, 100)
         max.vetorVelocidade.x = 0
-        this.responderPergunta(pergunta.resposta)
     }
 
-    ataqueCanetas() {
-        //adicionar ataque das canetas
-    }
-
-    mudaEstado(estado) {
+    mudarEstado(estado) {
         this.estado = estado;
-        this.frames = 20;
+        this.frameatual = 1;
+        if (estado == "prova") {
+
+            this.frames = 20;
+        } else if (estado == "parado") {
+            this.frames = 1;
+
+        }
     }
 }

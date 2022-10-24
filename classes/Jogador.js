@@ -20,7 +20,7 @@ class Jogador extends EntidadeViva {
             y: canvas.height - 65 - 140
         };
         this.entidadesColididas = [];
-        
+
     }
 
     get algumaEntidadeColidida() {
@@ -40,17 +40,27 @@ class Jogador extends EntidadeViva {
         ctx.drawImage(life, 50, 22, 210, 50);
     }
 
-    dinamica() {
+    renderizar() {
         this.exibirVida()
-        this.renderizar()
+        ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
 
+        if (!this.autoplay) return;
+
+        if (gameframe % this.rate == 0) {
+            if (this.frameatual == this.frames && !this.loop) return
+            this.carregarNovaImagem();
+        }
+        this.dinamica()
+    }
+
+    dinamica() {
         const vidasTocadas = cenarioManager.cenario.vidas.filter(
             (locVida) =>
 
-            locVida.posicao.x + locVida.largura >= this.posicao.x &&
-            locVida.posicao.x <= this.posicao.x + this.largura &&
-            locVida.posicao.y <= this.posicao.y + this.altura &&
-            locVida.posicao.y + locVida.altura >= this.posicao.y
+                locVida.posicao.x + locVida.largura >= this.posicao.x &&
+                locVida.posicao.x <= this.posicao.x + this.largura &&
+                locVida.posicao.y <= this.posicao.y + this.altura &&
+                locVida.posicao.y + locVida.altura >= this.posicao.y
         );
         if (vidasTocadas.length > 0) {
             vidasTocadas.forEach((locVida) => {

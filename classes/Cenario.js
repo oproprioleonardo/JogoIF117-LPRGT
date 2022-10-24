@@ -27,6 +27,10 @@ class Cenario {
         this.entidades = this.entidades.filter(ent => ent != entidade);
     }
 
+    removerEntidadeByImg(endereco) {
+        this.entidades = this.entidades.filter(ent => !ent.skinSource.includes(endereco));
+    }
+
     acabouDialogo() {
         return this.dialogoPos == this.dialogos.length;
     }
@@ -59,6 +63,14 @@ class Cenario {
         return this.dialogos[this.dialogoPos];
     }
 
+    get max() {
+        return this.entidades.find(entidade => entidade.getClassName() == "Jogador");
+    }
+
+    getEntidadeByName(nome) {
+        return this.entidades.find(entidade => entidade.skinSource.includes(nome));
+    }
+
     adicionarDialogo(dialogos) {
         dialogos.forEach(d => this.dialogos.push(d));
     }
@@ -78,8 +90,8 @@ class Cenario {
 
     }
 
-    novoTiro() {
-        this.entidades.push(new Projetil({}));
+    novoTiro(tiro = new Projetil({})) {
+        this.entidades.push(tiro);
     }
 
     gerarInimigo(sprite = 1) {
@@ -128,6 +140,7 @@ class Cenario {
             ctx.drawImage(this.image, 0, 0, this.largura, this.altura)
             this.vidas.forEach(vida => vida.aplicarBalanco());
             this.entidades.forEach(entidade => entidade.renderizar());
+            this.max.movimentar(teclas)
         } 
     }
 

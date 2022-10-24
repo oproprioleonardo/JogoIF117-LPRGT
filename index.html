@@ -98,14 +98,11 @@
         const canvas = document.querySelector('canvas')
         const ctx = canvas.getContext('2d')
         const cenarioManager = new CenarioManager();
+        const max = cenarioManager.max;
         var gameframe = 1;
         var gravidade = 0.6;
         var primeirotexto = false;
         var limiteTiros = 10;
-
-
-
-        const max = new Jogador({});
 
         window.addEventListener('keydown', (e) => {
             switch (e.key) {
@@ -124,7 +121,7 @@
                 case "ArrowUp":
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
-                            porta.abrir(() => cenarioManager.proximoCenario())
+                            porta.abrir(() => cenarioManager.transicaoCenario())
                         }
                     })
                     teclas.cima.press = true
@@ -186,7 +183,7 @@
             requestAnimationFrame(animate)
             if (cenarioManager.posicao > 0) cenarioManager.cenario.renderizar()
             else if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) {
-                cenarioManager.proximoCenario()
+                cenarioManager.transicaoCenario()
             }
 
             if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
@@ -194,17 +191,11 @@
                 cenarioManager.cenario.proximoEstado()
             }
             if(cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario.dialogoPos){
-                cenarioManager.proximoCenario(false)
-                if(cenarioManager.cenario.entidades.length == 8){
-                    setTimeout(() => {
-                        cenarioManager.cenario.removerEntidade(perri)        
-                    }, 700);
-                }
+                cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri") )
+                
             }
 
             exibirInfo()
-            max.dinamica()
-            max.movimentar(teclas)
 
             cenarioManager.corrigirBrilho()
             cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0)
