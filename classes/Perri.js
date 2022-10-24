@@ -1,4 +1,4 @@
-class Perri extends EntidadeViva {
+class Perri extends Inimigo {
     constructor({
         estado = "parado",
         rate = 6
@@ -13,26 +13,22 @@ class Perri extends EntidadeViva {
             rate
         })
 
+        this.loop = true
+        this.resistencia = 0.9
         this.perguntaAtual = 0
-        this.perguntando = true
+        this.perguntando = false
         this.perguntas = [
-            {
-                pergunta: "rafael é gay?",
-                correta: "sim",
-                errada: "não",
-                resposta: 'q'
-            },
-            {
-                pergunta: "thiago é gay?",
-                correta: "sim",
-                errada: "não",
-                resposta: 'q'
-            }
+            new Pergunta("Um dois tressssssssssssssss\nssssssssssssssssssss dsadsa\noii", ["um", "dois", "123"], "123"),
+
         ]
         this.posicao = {
             x: 900,
             y: canvas.height - 65 - 200
         };
+    }
+
+    get pergunta() {
+        return this.perguntas[this.perguntaAtual];
     }
 
     renderizar() {
@@ -42,6 +38,8 @@ class Perri extends EntidadeViva {
             this.posicao.y,
             this.largura,
             this.altura)
+
+        if (this.perguntando) this.pergunta.exibirPergunta()
         if (this.vida <= 0) {
             cenarioManager.cenario.removerEntidade(this);
             this.matar();
@@ -74,7 +72,6 @@ class Perri extends EntidadeViva {
             if (this.posicao.y + this.altura > canvas.height)
                 this.posicao.y = canvas.height - this.altura;
         }
-        if (this.estado == "prova") this.renderizarPergunta();
 
         this.exibirVida();
 
@@ -87,11 +84,17 @@ class Perri extends EntidadeViva {
         }
     }
 
-    responderPergunta() {
-        let resposta = this.perguntas[this.perguntaAtual].resposta;
+    ataqueProva() {
+        if (this.perguntando) return
+        this.perguntando = true;
+        this.mudarEstado('prova')
+        this.imortal = true;
         let evento = e => {
-            if (e.key != 'q' && e.key != 'r') return
-            if (e.key == resposta) {
+            const key = e.key.toUpperCase();
+            if (key != 'A' && key != 'B' && key != "C") return
+
+            const alternativa = this.pergunta.alternativas.find(alt => alt.letra == key)
+            if (this.pergunta.resposta == alternativa.descricao) {
                 console.log('acertou')
             }
             else {
@@ -104,36 +107,19 @@ class Perri extends EntidadeViva {
             this.mudarEstado("parado");
             this.imortal = false;
             this.perguntando = false
+            this.perguntaAtual++
         }
         window.addEventListener('keydown', evento)
-    }
-
-    ataqueProva() {
-        if (!this.perguntando) return
-        this.mudarEstado('prova')
-        this.imortal = true;
-        this.responderPergunta()
-    }
-
-    renderizarPergunta() {
-        let pergunta = this.perguntas[this.perguntaAtual];
-        ctx.fillStyle = 'black';
-        ctx.fillText(pergunta.pergunta, canvas.width / 2, 80, 100)
-        ctx.fillText(pergunta.resposta == 'q' ?
-            "q-" + pergunta.correta + ' r-' + pergunta.errada :
-            "q-" + pergunta.errada + ' r-' + pergunta.correta, canvas.width / 2, 100, 100)
-        max.vetorVelocidade.x = 0
     }
 
     mudarEstado(estado) {
         this.estado = estado;
         this.frameatual = 1;
         if (estado == "prova") {
-
             this.frames = 20;
+            this.loop = false
         } else if (estado == "parado") {
             this.frames = 1;
-
         }
     }
 }

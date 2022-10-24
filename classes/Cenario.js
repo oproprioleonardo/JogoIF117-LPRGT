@@ -14,13 +14,13 @@ class Cenario {
         this.dialogos = dialogos;
         this.podeAvancarDialogo = true;
         this.dialogoPos = 0;
-
+        this.iniciar = iniciar
         if (imgsrc.length > 0) {
             this.image = new Image();
             this.carregarNovaImagem()
         }
 
-        iniciar(this);
+
     }
 
     removerEntidade(entidade) {
@@ -48,7 +48,7 @@ class Cenario {
     }
 
     get inimigos() {
-        return this.entidades.filter(entidade => entidade.getClassName() == "Inimigo");
+        return this.entidades.filter(entidade => entidade.getClassName() == "Inimigo" || entidade.getClassName() == "Perri");
     }
 
     get tiros() {
@@ -77,10 +77,10 @@ class Cenario {
 
     exibirDialogo(caixa = true) {
         if (this.dialogoPos == this.dialogos.length) {
-            document.onkeypress = function (){}
+            document.onkeypress = function () { }
             return;
         }
-        
+
         this.dialogoAtual.exibirDialogo(caixa);
         document.onkeypress = function (e) {
             if (e.key !== "e" && e.key !== "E") return;
@@ -141,7 +141,7 @@ class Cenario {
             this.vidas.forEach(vida => vida.aplicarBalanco());
             this.entidades.forEach(entidade => entidade.renderizar());
             this.max.movimentar(teclas)
-        } 
+        }
     }
 
 }

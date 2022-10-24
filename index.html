@@ -17,6 +17,7 @@
     <script src="classes/Cenario.js"></script>
     <script src="classes/CenarioManager.js"></script>
     <script src="classes/VidaE.js"></script>
+    <script src="classes/Pergunta.js"></script>
     <title>Ivaldo's fight</title>
 </head>
 
@@ -26,6 +27,20 @@
     </div>
 
     <script>
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+
+                // Generate random number
+                var j = Math.floor(Math.random() * (i + 1));
+
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+
+            return array;
+        }
+
         function verificacolisao(caso, obj1, obj2) {
             switch (caso) {
                 case 1:
@@ -74,9 +89,9 @@
 
             if (max.algumaEntidadeColidida) {
                 const eColidida = max.entidadesColididas[0];
-                if(!eColidida.temInteracao) return;
+                if (!eColidida.temInteracao) return;
                 if (eColidida.skinSource == "./img/cenario/animados/gatinho") {
-                    
+
                     ctx.drawImage(coracao, eColidida.posicao.x + eColidida.largura /
                         4, eColidida.posicao.y - 45, 32, 32)
                 } else if (eColidida.skinSource == "./img/cenario/animados/marciel") {
@@ -84,7 +99,7 @@
                     cenarioManager.cenario.adicionarDialogo([
                         new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
                         new Dialogo("Marciel", "*encara fixamente")
-                ]);
+                    ]);
                     cenarioManager.cenario.exibirDialogo(true);
                 }
             }
@@ -104,6 +119,7 @@
         var primeirotexto = false;
         var limiteTiros = 10;
 
+      
         window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case "a":
@@ -137,13 +153,13 @@
                 case "E":
                     if (max.algumaEntidadeColidida) return
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
-                        if (verificacolisao(3, entidade, max))  {
+                        if (verificacolisao(3, entidade, max)) {
                             max.entidadesColididas.push(entidade);
                             setTimeout(() => {
                                 max.entidadesColididas = []
                             }, 2200);
                         }
-                        
+
                     })
                     break
 
@@ -178,7 +194,8 @@
             }
         })
 
-
+        
+    
         function animate() {
             requestAnimationFrame(animate)
             if (cenarioManager.posicao > 0) cenarioManager.cenario.renderizar()
@@ -187,21 +204,21 @@
             }
 
             if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
-            
+
                 cenarioManager.cenario.proximoEstado()
             }
-            if(cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario.dialogoPos){
-                cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri") )
-                
+            if (cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario.dialogoPos) {
+                cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri"))
+
             }
 
             exibirInfo()
-
             cenarioManager.corrigirBrilho()
             cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0)
+            
             gameframe++
         }
-        
+
         animate()
     </script>
 </body>

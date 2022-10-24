@@ -24,8 +24,11 @@ class CenarioManager {
             this.transicionando = true
         }, 400);
         setTimeout(() => {
-            this.max.entidadesColididas = []
-            this.cenario = this.cenarios[this.posicao];
+            if (passaCenario) {
+                this.max.entidadesColididas = []
+                this.cenario = this.cenarios[this.posicao];
+                this.cenario.iniciar(this.cenario);
+            }
         }, 1100);
         setTimeout(() => {
             this.transicionando = false
@@ -173,7 +176,7 @@ class CenarioManager {
                 }
             }
         }),
-
+        
         //cenario no corredor
         new Cenario({
             imgsrc: "./img/cenario/cenario2",
