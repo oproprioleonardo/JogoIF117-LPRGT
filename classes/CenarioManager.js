@@ -9,6 +9,12 @@ class CenarioManager {
         this.max = new Jogador({});
         this.registrarCenarios();
         this.cenario = this.cenarios[this.posicao];
+
+        this.wImg = new Image()
+        this.wImg.src = "./img/info/teclaw.png"
+        this.balasInfoImg = new Image();
+        this.coracaoImg = new Image()
+        this.coracaoImg.src = "./img/info/coracao.png"
     }
 
     corrigirBrilho() {
@@ -16,6 +22,33 @@ class CenarioManager {
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         if (this.transicionando && this.brilho <= 1.5) this.brilho += .1
         else if (this.brilho >= 0) this.brilho -= .1
+    }
+
+    exibirInfo() {
+        this.cenario.portas.forEach(porta => {
+            if (verificacolisao(1, porta, this.max)) {
+                ctx.drawImage(this.wImg, porta.posicao.x + (porta.largura / 2) - 25, porta.posicao.y - 60, 50, 50)
+            }
+        });
+
+        if (this.max.algumaEntidadeColidida) {
+            const eColidida = this.max.entidadesColididas[0];
+            if (!eColidida.temInteracao) return;
+            if (eColidida.skinSource == "./img/cenario/animados/gatinho") {
+                ctx.drawImage(this.coracaoImg, eColidida.posicao.x + eColidida.largura /
+                    4, eColidida.posicao.y - 45, 32, 32)
+            } else if (eColidida.skinSource == "./img/cenario/animados/marciel") {
+                eColidida.temInteracao = false;
+                this.cenario.adicionarDialogo([
+                    new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
+                    new Dialogo("Marciel", "*encara fixamente")
+                ]);
+                this.cenario.iniciarDialogos();
+            }
+        }
+        
+        this.balasInfoImg.src = "./img/info/balas/" + limiteTiros + " balas.png"
+        ctx.drawImage(this.balasInfoImg, 900, 0, 150, 80)
     }
 
     transicaoCenario(passaCenario = true, callback = () => { }) {
@@ -27,7 +60,7 @@ class CenarioManager {
             if (passaCenario) {
                 this.max.entidadesColididas = []
                 this.cenario = this.cenarios[this.posicao];
-                this.cenario.iniciar(this.cenario);
+                this.cenario.iniciarDialogos();
             }
         }, 1100);
         setTimeout(() => {
@@ -199,7 +232,7 @@ class CenarioManager {
             dialogos: [
                 new Dialogo("Max", "NOAOAOAOA"),
                 new Dialogo("Perri", "OIIII"),
-                new Dialogo("Perri", "morre")
+                new Dialogo("Perri", "Bem-vindo à recuperação, Max")
             ],
             iniciar: (cenario) => {
                 cenario.getEntidadeByName("perri").ataqueProva();

@@ -29,8 +29,6 @@
     <script>
         function shuffleArray(array) {
             for (var i = array.length - 1; i > 0; i--) {
-
-                // Generate random number
                 var j = Math.floor(Math.random() * (i + 1));
 
                 var temp = array[i];
@@ -78,38 +76,6 @@
             }
         }
 
-        function exibirInfo() {
-            cenarioManager.cenario.portas.forEach(porta => {
-                if (verificacolisao(1, porta, max)) {
-                    const w = new Image()
-                    w.src = "./img/info/teclaw.png"
-                    ctx.drawImage(w, porta.posicao.x + (porta.largura / 2) - 25, porta.posicao.y - 60, 50, 50)
-                }
-            });
-
-            if (max.algumaEntidadeColidida) {
-                const eColidida = max.entidadesColididas[0];
-                if (!eColidida.temInteracao) return;
-                if (eColidida.skinSource == "./img/cenario/animados/gatinho") {
-
-                    ctx.drawImage(coracao, eColidida.posicao.x + eColidida.largura /
-                        4, eColidida.posicao.y - 45, 32, 32)
-                } else if (eColidida.skinSource == "./img/cenario/animados/marciel") {
-                    eColidida.temInteracao = false;
-                    cenarioManager.cenario.adicionarDialogo([
-                        new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
-                        new Dialogo("Marciel", "*encara fixamente")
-                    ]);
-                    cenarioManager.cenario.exibirDialogo(true);
-                }
-            }
-            const balas = new Image()
-            balas.src = "./img/info/balas/" + limiteTiros + " balas.png"
-            ctx.drawImage(balas, 900, 0, 150, 80)
-        }
-
-        var coracao = new Image()
-        coracao.src = "./img/info/coracao.png"
         const canvas = document.querySelector('canvas')
         const ctx = canvas.getContext('2d')
         const cenarioManager = new CenarioManager();
@@ -119,7 +85,7 @@
         var primeirotexto = false;
         var limiteTiros = 10;
 
-      
+
         window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case "a":
@@ -162,9 +128,6 @@
 
                     })
                     break
-
-
-                //console.log(verificacolisao(3, objetos[0], max))
             }
         })
 
@@ -194,29 +157,30 @@
             }
         })
 
-        
-    
+
+        cenarioManager.cenario.iniciarDialogos();
+
         function animate() {
             requestAnimationFrame(animate)
-            if (cenarioManager.posicao > 0) cenarioManager.cenario.renderizar()
-            else if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) {
-                cenarioManager.transicaoCenario()
+
+            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario();
+
+            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario
+                .estado != 2) {
+
+                cenarioManager.cenario.proximoEstado();
+            }
+            if (cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario
+                .dialogoPos) {
+                cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri"));
+
             }
 
-            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario.estado != 2) {
-
-                cenarioManager.cenario.proximoEstado()
-            }
-            if (cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario.dialogoPos) {
-                cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri"))
-
-            }
-
-            exibirInfo()
-            cenarioManager.corrigirBrilho()
-            cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0)
-            
-            gameframe++
+            cenarioManager.cenario.renderizar();
+            cenarioManager.exibirInfo();
+            cenarioManager.corrigirBrilho();
+            cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0);
+            gameframe++;
         }
 
         animate()
