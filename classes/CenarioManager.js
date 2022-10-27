@@ -162,7 +162,7 @@ class CenarioManager {
             imgsrc: "./img/cenario/cenario1",
             entidades: [
                 new Entidade({
-                    largura: 80,
+                    largura: 110,
                     altura: 200,
                     posicao: {
                         x: 700,
@@ -199,8 +199,17 @@ class CenarioManager {
                 this.max
             ],
             dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
-            new Dialogo("Perri", "morre diabo"),
-            new Dialogo("Perri", "...")
+            new Dialogo("Perri", "Eu estava te esperando. Marciel me disse que você queria falar comigo."),
+            new Dialogo("Max", "Eu preciso que você altere minha nota, eu não sou capaz de recuperar..."),
+            new Dialogo("Perri", "Não posso fazer isso, Max. Essas notas não dizem nada sobre você."),
+            new Dialogo("Max", "Dizem sim, dizem que eu não sou bom o suficiente."),
+            new Dialogo("Max", "Eu não consigo acreditar que sou capaz..."),
+            new Dialogo("Perri", "Se você não acredita em você, acredite em mim que acredito em você"),
+            new Dialogo("Perri", "Nota se recupera, Max. Eu sei que você é capaz."),
+            new Dialogo("Max", "Eu quero acreditar em mim, como você acredita..."),
+            new Dialogo("Perri", "Max, você é capaz, eu terei que te testar pra você cair na real."),
+            new Dialogo("Perri", "Feche os olhos."),
+            new Dialogo("Perri", "Agora batalhe com meus discipulos, você é capaz de ganhar. Te vejo na outra sala")
             ],
             iniciar: (cenario) => {
                 for (let i = 1; i < 5; i++) {
@@ -230,9 +239,30 @@ class CenarioManager {
                 this.max
             ],
             dialogos: [
-                new Dialogo("Max", "NOAOAOAOA"),
-                new Dialogo("Perri", "OIIII"),
-                new Dialogo("Perri", "Bem-vindo à recuperação, Max")
+                new Dialogo("Perri", "Você conseguiu chegar aqui, parabéns."),
+                new Dialogo("Perri", "Eu sabia que você conseguiria, Max."),
+                new Dialogo("Perri", "Alterarei sua nota, mas você terá que provar seu valor para você mesmo."),
+                new Dialogo("Perri", "Passe pela prova e pelos seus obstacúlos, você é capaz."),
+                new Dialogo("Max", "..."),
+                new Dialogo("Max", "Não tem como você me dar a nota magicamente?"),
+                new Dialogo("Perri", "Sim, só você acreditar em você mesmo e tentar fazer a prova. Você consegue"),
+                new Dialogo("Max", "Ok, eu vou tentar."),
+                new Dialogo("Max", "Como vai funcionar essa prova?"),
+                new Dialogo("Perri", "Serão questões de alternativa."),
+                new Dialogo("Perri", "A cada questão que você acertar, você podera jogar mandioca em mim."),
+                new Dialogo("Perri", "Você vai ter 3 segundos para jogar mandioca em mim quando acertar,"),
+                new Dialogo("Perri", "após acabar o tempo, farei outras questões."),
+                new Dialogo("Max", "O que acontece se eu errar as questões?"),
+                new Dialogo("Perri", "Você acerta a questão e me joga mandioca, você erra e eu jogo caneta em você"),
+                new Dialogo("Max", "Justo."),
+                new Dialogo("Perri", "Se você errar muito em sequência, tocarei uma música para te acalmar."),
+                new Dialogo("Perri", "Tome cuidado com as notas musicais que sairem da minha música."),
+                new Dialogo("Max", "Isso foi estranho mas tudo bem."),
+                new Dialogo("Max", "Só mais uma coisa, professor. Quando acaba a prova?"),
+                new Dialogo("Perri", "Quando eu ficar de buchin chei"),
+                new Dialogo("Max", "Ok, pode lançar as questões.")
+
+ 
             ],
             iniciar: (cenario) => {
                 cenario.getEntidadeByName("perri").ataqueProva();

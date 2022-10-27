@@ -7,7 +7,7 @@ class Perri extends Inimigo {
             skinSource: "./img/perri/perri",
             frames: 1,
             direcao: "e",
-            largura: 80,
+            largura: 110,
             altura: 200,
             estado,
             rate
@@ -18,8 +18,7 @@ class Perri extends Inimigo {
         this.perguntaAtual = 0
         this.perguntando = false
         this.perguntas = [
-            new Pergunta("Um dois tressssssssssssssss\nssssssssssssssssssss dsadsa\noii", ["um", "dois", "123"], "123"),
-
+            new Pergunta("1 - O que acontece se\nvocê transferir R$3,14", ["Não Sei", "Uma transferência né", "Você vai ter feito um πx"], "Você vai ter feito um πx"),
         ]
         this.posicao = {
             x: 900,

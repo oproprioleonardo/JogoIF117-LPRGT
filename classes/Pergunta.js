@@ -29,7 +29,7 @@ class Pergunta {
         ctx.drawImage(folha, xInicial, yInicial, 330, 430)
         const lineHeight = 25;
         const lines = this.pergunta.split("\n");
-        ctx.fillStyle = "lightblue";
+        ctx.fillStyle = "black";
         for (let i = 0; i < lines.length; i++) {
             
             ctx.fillText(
