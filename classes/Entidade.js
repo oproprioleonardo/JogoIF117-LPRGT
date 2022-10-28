@@ -4,7 +4,7 @@ class Entidade {
             x: 0,
             y: 0
         },
-        skinSource = "./img/erro/erro.png",
+        skinSource = "./assets/imgs/erro/erro.png",
         frameatual = 1,
         largura = 240,
         altura = 100,

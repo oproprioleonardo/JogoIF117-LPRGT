@@ -1,6 +1,6 @@
 class Jogador extends EntidadeViva {
     constructor({
-        skinSource = "./img/max/max",
+        skinSource = "./assets/imgs/max/max",
         rate = 10,
         frames = 2,
         estado = "parado",
@@ -30,7 +30,7 @@ class Jogador extends EntidadeViva {
     exibirVida() {
         ctx.beginPath();
         const life = new Image()
-        life.src = "./img/info/vida.png"
+        life.src = "./assets/imgs/info/vida.png"
         var degrade = ctx.createLinearGradient(0, 0, 200, 0);
         degrade.addColorStop(0, "DarkRed");
         degrade.addColorStop(1, "red");

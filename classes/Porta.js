@@ -26,7 +26,7 @@ class Porta extends Entidade {
                 x: 95,
                 y: 280
             },
-            skinSource: "./img/cenario/salvar/Porta0",
+            skinSource: "./assets/imgs/cenario/salvar/Porta0",
             frames: 4
         })
 
@@ -40,7 +40,7 @@ class Porta extends Entidade {
                 x: 0,
                 y: 200
             },
-            skinSource: "./img/cenario/animados/porta",
+            skinSource: "./assets/imgs/cenario/animados/porta",
             frames: 2
         })
 

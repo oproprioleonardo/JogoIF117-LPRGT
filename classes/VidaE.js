@@ -5,7 +5,7 @@ class VidaE extends Entidade {
         super({
             largura: 25,
             altura: 25,
-            skinSource: "./img/inimigos/vidainimigodrop",
+            skinSource: "./assets/imgs/inimigos/vidainimigodrop",
             posicao: {
                 x,
                 y: 435

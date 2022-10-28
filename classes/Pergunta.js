@@ -20,7 +20,7 @@ class Pergunta {
     exibirPergunta() {
 
         const folha = new Image();
-        folha.src = "./img/perri/Prova.png"
+        folha.src = "./assets/imgs/perri/Prova.png"
         const xInicial = canvas.width / 2 - 165;
         const yInicial = canvas.height / 2 - 215;
         let acumulador = yInicial + 325;

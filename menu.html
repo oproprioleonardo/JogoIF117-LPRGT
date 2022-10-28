@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela inicial</title>
+    <link rel="stylesheet" href="./styles/menustyle.css">
+    
+</head>
+<body>
+
+    <div class="pagina">
+
+        <div class="telamenu">
+            <audio src="./assets/sounds/MenuInicial.mp4" id="musicatema" loop="-1"></audio>
+            <div class="musicas">
+                <div class="musicadiv" onclick="musica()">
+                </div>
+                <input type="range" min="0" max="100" value="100" class="volumemusica" onclick="volmusica()">
+            </div>
+
+
+            <div class="todosbotoes">
+                <button class="botaoiniciar botao" onclick="iniciarjogo()" >Iniciar</button>
+                <button class="botaocréditos botao" onclick="creditos()" >Créditos</button>
+                <button class="botaosair botao" onclick="window.close()" >Sair</button>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="./classes/Menu.js"></script>
+</body>
+</html>

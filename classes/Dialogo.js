@@ -1,5 +1,5 @@
 const balao = new Image();
-balao.src = "./img/info/dialogo.png";
+balao.src = "./assets/imgs/info/dialogo.png";
 
 class Dialogo {
     constructor(pessoa, fala) {

@@ -4,7 +4,7 @@ class Perri extends Inimigo {
         rate = 6
     }) {
         super({
-            skinSource: "./img/perri/perri",
+            skinSource: "./assets/imgs/perri/perri",
             frames: 1,
             direcao: "e",
             largura: 110,

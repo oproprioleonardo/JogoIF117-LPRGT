@@ -11,10 +11,10 @@ class CenarioManager {
         this.cenario = this.cenarios[this.posicao];
 
         this.wImg = new Image()
-        this.wImg.src = "./img/info/teclaw.png"
+        this.wImg.src = "./assets/imgs/info/teclaw.png"
         this.balasInfoImg = new Image();
         this.coracaoImg = new Image()
-        this.coracaoImg.src = "./img/info/coracao.png"
+        this.coracaoImg.src = "./assets/imgs/info/coracao.png"
     }
 
     corrigirBrilho() {
@@ -34,10 +34,10 @@ class CenarioManager {
         if (this.max.algumaEntidadeColidida) {
             const eColidida = this.max.entidadesColididas[0];
             if (!eColidida.temInteracao) return;
-            if (eColidida.skinSource == "./img/cenario/animados/gatinho") {
+            if (eColidida.skinSource == "./assets/imgs/cenario/animados/gatinho") {
                 ctx.drawImage(this.coracaoImg, eColidida.posicao.x + eColidida.largura /
                     4, eColidida.posicao.y - 45, 32, 32)
-            } else if (eColidida.skinSource == "./img/cenario/animados/marciel") {
+            } else if (eColidida.skinSource == "./assets/imgs/cenario/animados/marciel") {
                 eColidida.temInteracao = false;
                 this.cenario.adicionarDialogo([
                     new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
@@ -47,7 +47,7 @@ class CenarioManager {
             }
         }
         
-        this.balasInfoImg.src = "./img/info/balas/" + limiteTiros + " balas.png"
+        this.balasInfoImg.src = "./assets/imgs/info/balas/" + limiteTiros + " balas.png"
         ctx.drawImage(this.balasInfoImg, 900, 0, 150, 80)
     }
 
@@ -83,7 +83,7 @@ class CenarioManager {
 
         // cenario inicial
         new Cenario({
-            imgsrc: "./img/cenario/cenario0",
+            imgsrc: "./assets/imgs/cenario/cenario0",
             entidades: [
                 Porta.portaTipo0(),
                 new Entidade({
@@ -93,7 +93,7 @@ class CenarioManager {
                         x: 960,
                         y: 128
                     },
-                    skinSource: "./img/cenario/animados/bolhas",
+                    skinSource: "./assets/imgs/cenario/animados/bolhas",
                     rate: 8,
                     frames: 4
                 }),
@@ -104,7 +104,7 @@ class CenarioManager {
                         x: 700,
                         y: 270
                     },
-                    skinSource: "./img/cenario/animados/marciel",
+                    skinSource: "./assets/imgs/cenario/animados/marciel",
                     temInteracao: true,
                     rate: 15,
                     frames: 2
@@ -116,13 +116,13 @@ class CenarioManager {
                         x: 840,
                         y: canvas.height - 130
                     },
-                    skinSource: "./img/cenario/animados/gatinho",
+                    skinSource: "./assets/imgs/cenario/animados/gatinho",
                     temInteracao: true,
                     rate: 10,
                     frames: 2
                 }),
                 new Inimigo({
-                    skinSource: "./img/cenario/animados/espantalho/robo",
+                    skinSource: "./assets/imgs/cenario/animados/espantalho/robo",
                     largura: 70,
                     altura: 150,
                     frames: 1,
@@ -159,7 +159,7 @@ class CenarioManager {
 
         //cenario na sala de aula
         new Cenario({
-            imgsrc: "./img/cenario/cenario1",
+            imgsrc: "./assets/imgs/cenario/cenario1",
             entidades: [
                 new Entidade({
                     largura: 110,
@@ -168,7 +168,7 @@ class CenarioManager {
                         x: 700,
                         y: 270
                     },
-                    skinSource: "./img/perri/perriparadoe",
+                    skinSource: "./assets/imgs/perri/perriparadoe",
                     rate: 15,
                     frames: 1
                 }),
@@ -180,7 +180,7 @@ class CenarioManager {
                         x: 760,
                         y: -50
                     },
-                    skinSource: "./img/cenario/animados/ventilador",
+                    skinSource: "./assets/imgs/cenario/animados/ventilador",
                     rate: 7,
                     frames: 2
                 }),
@@ -191,7 +191,7 @@ class CenarioManager {
                         x: 230,
                         y: canvas.height - 220
                     },
-                    skinSource: "./img/cenario/animados/gatinho",
+                    skinSource: "./assets/imgs/cenario/animados/gatinho",
                     temInteracao: true,
                     rate: 10,
                     frames: 2
@@ -221,7 +221,7 @@ class CenarioManager {
         
         //cenario no corredor
         new Cenario({
-            imgsrc: "./img/cenario/cenario2",
+            imgsrc: "./assets/imgs/cenario/cenario2",
             entidades: [
                 new Entidade({
                     largura: 60,
@@ -230,7 +230,7 @@ class CenarioManager {
                         x: 270,
                         y: 340
                     },
-                    skinSource: "./img/cenario/animados/gatinho",
+                    skinSource: "./assets/imgs/cenario/animados/gatinho",
                     temInteracao: true,
                     rate: 10,
                     frames: 2

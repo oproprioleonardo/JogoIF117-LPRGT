@@ -1,5 +1,5 @@
 class Projetil extends Entidade {
-    constructor({ frameatual, atinge, vetorVelocidade, posicao, skinSource = "img/tiromax/TiroMandioca", rate = 6, frames = 4, largura, altura }) {
+    constructor({ frameatual, atinge, vetorVelocidade, posicao, skinSource = "./assets/imgs/tiromax/TiroMandioca", rate = 6, frames = 4, largura, altura }) {
         super({ skinSource, rate, frames, frameatual })
         this.posicao = posicao || {
             x: max.vetorVelocidade.dir == "e" ? max.posicao.x : max.posicao.x + max.largura,
@@ -27,7 +27,7 @@ class Projetil extends Entidade {
                 x: Math.floor(Math.random() * 670),
                 y: -100
             },
-            skinSource: `./img/perri/Especiais/Canetada/caneta`,
+            skinSource: `./assets/imgs/perri/Especiais/Canetada/caneta`,
             frameatual: Math.floor(Math.random() * 2) + 1,
             frames: 3,
             loop: false,

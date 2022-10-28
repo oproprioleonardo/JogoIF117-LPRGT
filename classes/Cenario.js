@@ -133,7 +133,7 @@ class Cenario {
                 break;
         }
         let inimigo = new Inimigo({
-            skinSource: "./img/inimigos/inimigo" + sprite,
+            skinSource: "./assets/imgs/inimigos/inimigo" + sprite,
             largura,
             altura,
             direcao: "d",

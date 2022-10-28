@@ -1,5 +1,5 @@
 const imgVidaEntidade = new Image();
-imgVidaEntidade.src = "./img/info/vidainimigo.png";
+imgVidaEntidade.src = "./assets/imgs/info/vidainimigo.png";
 
 class EntidadeViva extends Entidade {
 

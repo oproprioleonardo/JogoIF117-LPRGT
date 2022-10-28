@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,300&family=Libre+Baskerville&display=swap');
+
+body {
+    margin: 0;
+    background: rgb(57, 209, 110);
+}
+
+.pagina {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.telamenu {
+    width: 1080px;
+    height: 540px;
+    background-image: url("../assets/imgs/menuinicial/sala de aula.png");
+    background-size: 100% 100%;
+    text-align: center;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+.todosbotoes {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80;
+    margin-left: 30;
+}
+
+.botao {
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 30px;
+    font-family: 'Libre Baskerville', serif;
+    background: transparent;
+    position: relative;
+    border: none;
+    padding: 10px;
+}
+
+.botao:hover:enabled {
+    cursor: pointer;
+    color: white;
+    background: rgb(105, 217, 73);
+    background: linear-gradient(90deg, rgba(105, 217, 73, 1) 48%, rgba(105, 217, 73, 0.14359247116815477) 100%);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.botao:hover:enabled:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgb(12, 169, 6), rgba(140, 0, 255, 0));
+    z-index: -1;
+    margin: -3px;
+    border-radius: 10px;
+}
+
+.musicas {
+    display: flex;
+    margin-bottom: auto;
+}
+
+.musicadiv {
+    width: 4vw;
+    height: 6vh;
+    margin-left: 2vw;
+    background-image: url("../assets/imgs/menuinicial/musicadesligada.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+}
