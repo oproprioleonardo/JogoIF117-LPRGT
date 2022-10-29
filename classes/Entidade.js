@@ -14,7 +14,7 @@ class Entidade {
         autoplay = true,
         estado = "",
         direcao = "",
-        temInteracao = false
+        temInteracao = false,
     }) {
         this.posicao = posicao;
         this.skinSource = skinSource;
@@ -62,6 +62,8 @@ class Entidade {
 
     renderizar() {
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
+        this.posicao.x += this.vetorVelocidade.x;
+        this.posicao.y += this.vetorVelocidade.y;
 
         if (!this.autoplay) return;
 

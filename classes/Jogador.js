@@ -87,6 +87,7 @@ class Jogador extends EntidadeViva {
         this.mudarEstado("morto");
     }
 
+
     movimentar(teclas) {
         this.vetorVelocidade.x = 0;
         if (this.estado == "morto") return;

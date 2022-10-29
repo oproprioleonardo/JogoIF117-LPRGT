@@ -17,6 +17,7 @@ class EntidadeViva extends Entidade {
         imortal = false,
         resistencia = 0,
         dropaVida = true,
+
     }) {
         super({
             posicao,
@@ -73,4 +74,6 @@ class EntidadeViva extends Entidade {
         this.vivo = false;
         if (this.dropaVida) this.droparVida();
     }
+
+
 }

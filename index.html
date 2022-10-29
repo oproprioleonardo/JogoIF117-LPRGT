@@ -159,27 +159,32 @@
 
 
         cenarioManager.cenario.iniciarDialogos();
-
+        let telaDerrota = new Image()
+        telaDerrota.src = './assets/imgs/info/telas/perdeu.png'
+    
         function animate() {
             requestAnimationFrame(animate)
-
+            
             if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario();
 
-            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 && cenarioManager.cenario
-                .estado != 2) {
+            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
+                cenarioManager.cenario.estado != 2) {
 
                 cenarioManager.cenario.proximoEstado();
             }
             if (cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario
                 .dialogoPos) {
                 cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri"));
-
             }
 
             cenarioManager.cenario.renderizar();
             cenarioManager.exibirInfo();
             cenarioManager.corrigirBrilho();
             cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0);
+            
+            if(max.vida == 0){
+                ctx.drawImage(telaDerrota, 0, 0, canvas.width, canvas.height)
+            }
             gameframe++;
         }
 

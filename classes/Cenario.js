@@ -4,7 +4,7 @@ class Cenario {
         imgsrc = "",
         estado = 1,
         dialogos = [],
-        iniciar = () => {}
+        iniciar = () => { }
     }) {
         this.largura = canvas.width;
         this.altura = canvas.height;
@@ -23,6 +23,10 @@ class Cenario {
         }
 
 
+    }
+
+    adicionarEntidade(entidade) {
+        this.entidades.push(entidade)
     }
 
     removerEntidade(entidade) {
@@ -93,7 +97,7 @@ class Cenario {
                 if (e.key.toLocaleUpperCase() !== "E") return;
                 cen.dialogoPos++;
                 if (cen.dialogoPos == cen.dialogos.length) {
-                    document.onkeypress = function () {}
+                    document.onkeypress = function () { }
                     cen.dialogando = false;
                     cen.iniciar()
                     return;
@@ -103,9 +107,9 @@ class Cenario {
     }
 
     exibirDialogo(caixa = true) {
-        if (this.dialogoAtual != undefined && this.dialogando) 
+        if (this.dialogoAtual != undefined && this.dialogando)
             this.dialogoAtual.exibirDialogo(caixa);
-   
+
     }
 
     novoTiro(tiro = new Projetil({})) {
@@ -160,7 +164,6 @@ class Cenario {
             this.entidades.forEach(entidade => entidade.renderizar());
             this.max.movimentar(teclas)
         }
-        
-    }
 
+    }
 }

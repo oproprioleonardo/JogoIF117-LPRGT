@@ -44,9 +44,22 @@ class CenarioManager {
                     new Dialogo("Marciel", "*encara fixamente")
                 ]);
                 this.cenario.iniciarDialogos();
-            }
+            } /* else if(eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldoe"){
+                eColidida.temInteracao = false;
+                this.cenario.adicionarDialogo([
+                    new Dialogo("Ivaldo", "Caramba, você venceu"),
+                ]);
+                this.cenario.iniciarDialogos();
+            } */
         }
-        
+
+        //switch caso seja necessario tratamentos especiais com entidades
+        switch (this.posicao) {
+            case 3:
+                this.IvaldoMovimentação()
+                break
+        }
+
         this.balasInfoImg.src = "./assets/imgs/info/balas/" + limiteTiros + " balas.png"
         ctx.drawImage(this.balasInfoImg, 900, 0, 150, 80)
     }
@@ -154,7 +167,10 @@ class CenarioManager {
             new Dialogo("Marciel", "LUTE COM O ROBÔ"),
             new Dialogo("Marciel", "PS: Espaço atira"),
             new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
-            ]
+            ],
+            iniciar: (cenario) => {
+
+            }
         }),
 
         //cenario na sala de aula
@@ -218,7 +234,7 @@ class CenarioManager {
                 }
             }
         }),
-        
+
         //cenario no corredor
         new Cenario({
             imgsrc: "./assets/imgs/cenario/cenario2",
@@ -234,6 +250,18 @@ class CenarioManager {
                     temInteracao: true,
                     rate: 10,
                     frames: 2
+                }),
+                new Entidade({
+                    largura: 80,
+                    altura: 120,
+                    posicao: {
+                        x: 1100,
+                        y: canvas.height - 185
+                    },
+                    skinSource: "./assets/imgs/Ivaldo/ivaldoe",
+                    temInteracao: true,
+                    rate: 15,
+                    frames: 1
                 }),
                 new Perri({}),
                 this.max
@@ -262,7 +290,7 @@ class CenarioManager {
                 new Dialogo("Perri", "Quando eu ficar de buchin chei"),
                 new Dialogo("Max", "Ok, pode lançar as questões.")
 
- 
+
             ],
             iniciar: (cenario) => {
                 cenario.getEntidadeByName("perri").ataqueProva();
@@ -270,5 +298,14 @@ class CenarioManager {
         })
 
         ];
+    }
+
+    IvaldoMovimentação() {
+        try {
+            if (this.cenario.getEntidadeByName('ivaldo').posicao.x <= 780)
+                this.cenario.getEntidadeByName('ivaldo').vetorVelocidade.x = 0
+        } catch (er){/* 
+            console.log(er) */
+        }
     }
 }

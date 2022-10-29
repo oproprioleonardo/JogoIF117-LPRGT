@@ -33,7 +33,7 @@ class Projetil extends Entidade {
             loop: false,
             autoplay: false,
             largura: 20,
-            altura: 70,
+            altura: 40,
             atinge: "max"
         });
     }
@@ -65,7 +65,7 @@ class Projetil extends Entidade {
 
         if (atingidos.length > 0) {
             cenarioManager.cenario.removerEntidade(this);
-            atingidos.forEach((entidade) => entidade.aplicarDano(10));
+            atingidos.forEach((entidade) => (entidade == max) ? entidade.aplicarDano(4) : entidade.aplicarDano(10));
         }
 
         if (

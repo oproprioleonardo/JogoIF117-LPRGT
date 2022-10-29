@@ -18,7 +18,6 @@ class Pergunta {
     }
 
     exibirPergunta() {
-
         const folha = new Image();
         folha.src = "./assets/imgs/perri/Prova.png"
         const xInicial = canvas.width / 2 - 165;

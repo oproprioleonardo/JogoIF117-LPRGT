@@ -14,11 +14,16 @@ class Perri extends Inimigo {
         })
 
         this.loop = true
-        this.resistencia = 0.9
+        this.resistencia = 0
         this.perguntaAtual = 0
         this.perguntando = false
         this.perguntas = [
             new Pergunta("1 - O que acontece se\nvocê transferir R$3,14", ["Não Sei", "Uma transferência né", "Você vai ter feito um πx"], "Você vai ter feito um πx"),
+            new Pergunta("2 - Quanto é 1 + 1?", ["3", "11", "2"], "2"),
+            new Pergunta("3 - Quanto é 30 x 30", ["900", "600", "300"], "900"),
+            new Pergunta("4 - Quanto é 2 + 2", ["4", "22", "Não sei"], "4"),
+            new Pergunta("5 - Quanto é 60 x 9", ["540", "480", "600"], "540"),
+            new Pergunta("6 - Quanto é 20 x 80", ["1400", "1620", "1600"], "1600")
         ]
         this.posicao = {
             x: 900,
@@ -38,10 +43,18 @@ class Perri extends Inimigo {
             this.largura,
             this.altura)
 
-        if (this.perguntando) this.pergunta.exibirPergunta()
+        if (this.perguntando) {
+            this.pergunta.exibirPergunta()
+            this.provaVoando();
+        }
         if (this.vida <= 0) {
             cenarioManager.cenario.removerEntidade(this);
             this.matar();
+            cenarioManager.cenario.getEntidadeByName('ivaldo').vetorVelocidade.x = -2
+            cenarioManager.cenario.adicionarDialogo([
+                new Dialogo("Ivaldo", "Caramba, você venceu")
+            ]);
+            cenarioManager.cenario.iniciarDialogos();
             return;
         }
 
@@ -84,38 +97,57 @@ class Perri extends Inimigo {
     }
 
     ataqueProva() {
-        if (this.perguntando) return
+        if (this.perguntando || this.vida <= 0) return
         this.perguntando = true;
         this.mudarEstado('prova')
         this.imortal = true;
         let evento = e => {
             const key = e.key.toUpperCase();
             if (key != 'A' && key != 'B' && key != "C") return
-
             const alternativa = this.pergunta.alternativas.find(alt => alt.letra == key)
             if (this.pergunta.resposta == alternativa.descricao) {
-                console.log('acertou')
+                cenarioManager.cenario.adicionarDialogo([
+                    new Dialogo("Perri", "Jogue toda essa mandioca em mim...")
+                ]);
+                cenarioManager.cenario.iniciarDialogos();
+                this.imortal = false;
+                setTimeout(() => {
+                    this.ataqueProva()
+                }, 4000);
             }
             else {
-                console.log('errou')
-                for (let i = 0; i < 10; i++) {
-                    cenarioManager.cenario.novoTiro(Projetil.caneta())
-                }
+                cenarioManager.cenario.adicionarDialogo([
+                    new Dialogo("Perri", "CANETADAAAAA!")
+                ]);
+                cenarioManager.cenario.iniciarDialogos();
+                setTimeout(() => {
+                    for (let i = 0; i < 15; i++) {
+                        cenarioManager.cenario.novoTiro(Projetil.caneta())
+                    }
+                }, 1000);
+                setTimeout(() => {
+                    this.ataqueProva();
+                }, 3500);
             }
             window.removeEventListener('keydown', evento)
             this.mudarEstado("parado");
-            this.imortal = false;
             this.perguntando = false
-            this.perguntaAtual++
+            this.perguntaAtual == this.perguntas.length - 1 ? this.perguntaAtual = 0 : this.perguntaAtual++
+            this.mudarEstado('parado')
         }
         window.addEventListener('keydown', evento)
+    }
+
+    //sincronizar sprite da prova com o Perri atacando prova
+    provaVoando() {
+
     }
 
     mudarEstado(estado) {
         this.estado = estado;
         this.frameatual = 1;
         if (estado == "prova") {
-            this.frames = 20;
+            this.frames = 15;
             this.loop = false
         } else if (estado == "parado") {
             this.frames = 1;
