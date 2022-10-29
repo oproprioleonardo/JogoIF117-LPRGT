@@ -14,7 +14,7 @@ class Perri extends Inimigo {
         })
 
         this.loop = true
-        this.resistencia = 0
+        this.resistencia = 0.7
         this.perguntaAtual = 0
         this.perguntando = false
         this.perguntas = [
@@ -52,7 +52,28 @@ class Perri extends Inimigo {
             this.matar();
             cenarioManager.cenario.getEntidadeByName('ivaldo').vetorVelocidade.x = -2
             cenarioManager.cenario.adicionarDialogo([
-                new Dialogo("Ivaldo", "Caramba, você venceu")
+                new Dialogo("Ivaldo", "Caramba, você venceu"),
+                new Dialogo("Ivaldo", "Estava aguardando a sua chegada."),
+                new Dialogo("Ivaldo", "Fiquei sabendo, que você quer sua nota alterada"),
+                new Dialogo("Ivaldo", "Você provou para mim, que é capacitado"),
+                new Dialogo("Ivaldo", "Você é uma boa pessoa."),
+                new Dialogo("Ivaldo", "Você ultrapassou seus limites, como sempre."),
+                new Dialogo("Ivaldo", "Não sinta raiva de mim ou do Perri, pela sua nota."),
+                new Dialogo("Ivaldo", "As vezes, a vida da um golpe tão forte"),
+                new Dialogo("Ivaldo", "que achamos que não conseguimos continuar"),
+                new Dialogo("Ivaldo", "Você provou para si mesmo que consegue."),
+                new Dialogo("Ivaldo", "Seu inimigo nessa jornada, não somos nós."),
+                new Dialogo("Ivaldo", "Eu vou alterar sua nota, porém terá que realizar 2 coisas."),
+                new Dialogo("Max", "Quais?"),
+                new Dialogo("Ivaldo", "1 - Não usar Go Two, por ter usado você ficou com 5 na minha matéria."),
+                new Dialogo("Ivaldo", "2 - Lutar contra você mesmo, sempre."),
+                new Dialogo("Ivaldo", "Você vai ser sempre seu maior inimigo"),
+                new Dialogo("Max", "De agora em diante não usarei Go Two e"),
+                new Dialogo("Max", "sempre vencerei de mim mesmo."),
+                new Dialogo("Ivaldo", "Maravilhoso. Então vai lutar agora, boa sorte."),
+                new Dialogo("Max", "Agora???"),
+                new Dialogo("Ivaldo", "Sim, ou fica com 5 na média. Você consegue."),
+                new Dialogo("Max", "Eu consigo, essa é minha última luta.")
             ]);
             cenarioManager.cenario.iniciarDialogos();
             return;
