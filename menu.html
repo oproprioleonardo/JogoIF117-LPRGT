@@ -1,33 +1,79 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela inicial</title>
     <link rel="stylesheet" href="./styles/menustyle.css">
-    
+
 </head>
+
 <body>
 
     <div class="pagina">
+        <div class="middle">
+            <div class="creditos">
+                
+                    <div class="txt">
+                        <h1> Créditos</h1>
 
-        <div class="telamenu">
-            <audio src="./assets/sounds/MenuInicial.mp4" id="musicatema" loop="-1"></audio>
-            <div class="musicas">
-                <div class="musicadiv" onclick="musica()">
+                        <h3>Desenvolvedores</h3>
+                        <p>
+                            Gustavo André Pontes de Faria <br>
+                            Leonardo da Silva
+                        </p>
+
+                        <h3>Designers Gráficos e Animadores</h3>
+                        <p>
+                            Pedro Henrique de Lima Santos <br>
+                            Rafael Dias Machado <br>
+                            Thiago dos Reis Lacerda Araújo
+                        </p>
+
+                        <h3>Outros Contribuidores</h3>
+                        <p>
+                            Ivaldo Marques Batista <br>
+                            Levi Sales <br>
+                            Marciel Silva Santos <br>
+                            Paulo Vitor de Souza Perri
+
+
+                        </p>
+                    </div>
+                    <button class="voltar" onclick="voltar()">Voltar</button>
+             
+            </div>
+
+            <div class="carregamento">
+                <div class="img">
+                    <img src="./assets/imgs/menuinicial/tela de carregamento.gif" alt="">
                 </div>
-                <input type="range" min="0" max="100" value="100" class="volumemusica" onclick="volmusica()">
+                
+                <h2>Carregando...</h2>
             </div>
 
-            <div class="todosbotoes">
-                <button class="botaoiniciar botao" onclick="iniciarjogo()" >Iniciar</button>
-                <button class="botaocréditos botao" onclick="creditos()" >Créditos</button>
-                <button class="botaosair botao" onclick="window.close()" >Sair</button>
-            </div>
 
+
+            <div class="telamenu">
+                <audio src="./assets/sounds/MenuInicial.mp4" id="musicatema" loop="-1"></audio>
+                <div class="musicas">
+                    <div class="musicadiv" onclick="musica()">
+                    </div>
+                    <input type="range" min="0" max="100" value="0" class="volumemusica" oninput="volmusica()">
+                </div>
+
+                <div class="todosbotoes">
+                    <button class="botaoiniciar botao" onclick="iniciarJogo()">Iniciar</button>
+                    <button class="botaocreditos botao" onclick="mostrarCreditos()">Créditos</button>
+                    <button class="botaosair botao" onclick="window.close()">Sair</button>
+                </div>
+
+            </div>
         </div>
     </div>
-    
+
     <script src="./classes/Menu.js"></script>
 </body>
+
 </html>

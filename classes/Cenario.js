@@ -21,6 +21,7 @@ class Cenario {
             this.image = new Image();
             this.carregarNovaImagem()
         }
+        
 
 
     }

@@ -3,6 +3,7 @@
 body {
     margin: 0;
     background: rgb(57, 209, 110);
+    font-family: 'Libre Baskerville', serif;
 }
 
 .pagina {
@@ -12,6 +13,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.middle {
+    position: relative;
+    overflow: hidden;
 }
 
 .telamenu {
@@ -63,6 +69,93 @@ body {
     margin: -3px;
     border-radius: 10px;
 }
+
+.creditos {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.9;
+    background-color: black;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%);
+    transition: 1s;
+}
+
+.creditosativado {
+    transform: translateY(0%);
+    z-index: 100;
+}
+
+.conteudo {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+}
+
+.txt {
+    text-align: center;
+    color: beige;
+    font-size: 1.2em;
+}
+
+.voltar {
+    position: absolute;
+    right: 100px;
+    bottom: 20px;
+    padding: 20px 45px;
+    outline: none;
+    border: none;
+    background-color: greenyellow;
+    border-radius: 1.1rem;
+    font-size: 1.4em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.voltar:hover {
+    background-color: gray;
+    color: greenyellow;
+}
+
+.carregamento {
+    color: #fff;
+    text-align: right;
+    background-color: black;
+    position: absolute;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%); 
+    width: 100%;
+    height: 100%;
+    transition: .5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 40%;
+}
+
+h2 {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
 
 .musicas {
     display: flex;

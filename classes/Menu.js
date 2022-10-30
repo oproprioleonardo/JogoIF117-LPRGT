@@ -4,58 +4,42 @@ var musicadiv = document.querySelector(".musicadiv");
 var volumemusica = document.querySelector(".volumemusica");
 let todosbotoes = document.querySelectorAll(`.botao`)
 let telacreditos = document.querySelector(`.creditos`)
-volumemusica.value = 0;
-var guardamusica;
+var guardamusica = 40;
 
 function musica() {
     if (!mscfundo) {
         musicadiv.style.backgroundImage = 'url("./assets/imgs/menuinicial/musicaligada.png")';
         musicafundo.play();
+        musicafundo.volume = guardamusica / 100;
         volumemusica.value = guardamusica;
     }
     else {
         musicadiv.style.backgroundImage = 'url("./assets/imgs/menuinicial/musicadesligada.png")';
-        musicafundo.pause();
+        musicafundo.volume = 0;
         volumemusica.value = 0;
     }
-
     mscfundo = !mscfundo
-
 }
 
 function volmusica() {
-    musicafundo.volume = volumemusica.value / 100;
     guardamusica = volumemusica.value;
-
+    musicafundo.volume = guardamusica / 100;
 }
 
-function iniciarjogo() {
+function iniciarJogo() {
     let carregamento = document.querySelector('.carregamento');
     carregamento.style.transform = "translateY(0%)"
-    todosbotoes.forEach(botao => {
-        botao.disabled = true
-    })
     setTimeout(() => {
-        window.location.href = "./index.html";
+        window.location.replace("./index.html");
     }, 5000);
 }
 
-function creditos() {
-    telacreditos.style.transform = `translateY(0%)`
-
-
-    todosbotoes.forEach(botao => {
-        botao.disabled = true
-    })
+function mostrarCreditos() {
+    telacreditos.classList.add("creditosativado")
+    
 }
 
-
-function voltarmenu() {
-    todosbotoes.forEach(botao => {
-        botao.disabled = false
-    })
-
-
-    telacreditos.style.transform = `translateY(-100%)`
+function voltar() {
+    telacreditos.classList.remove("creditosativado")
 }
 
