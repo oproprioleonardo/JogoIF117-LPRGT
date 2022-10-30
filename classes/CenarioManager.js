@@ -169,7 +169,7 @@ class CenarioManager {
             new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
             ],
             iniciar: (cenario) => {
-
+                
             }
         }),
 

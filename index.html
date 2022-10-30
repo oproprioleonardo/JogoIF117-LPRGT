@@ -23,10 +23,39 @@
 
 <body>
     <div class="pagina">
+         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
+         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
+         <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio>
         <canvas width="1080" height="540"></canvas>
     </div>
 
     <script>
+        const musicas = ["cutsceneinicial", "labsound", "fightsound"];
+        let musica = 0;
+        let musicaTocando = false;
+        let podePassarMusica = false;
+
+        function playMusic() {
+            if (musicaTocando) return;
+            musicaTocando = true;
+            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).play();
+        }
+
+        function stopMusic() {
+            if (!musicaTocando) return;
+            musicaTocando = false;
+            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).pause();
+            
+        }
+
+        function nextMusic() {
+            podePassarMusica = false;
+            stopMusic()
+            musica++;
+            playMusic()
+        }
+
+
         function shuffleArray(array) {
             for (var i = array.length - 1; i > 0; i--) {
                 var j = Math.floor(Math.random() * (i + 1));
@@ -82,7 +111,6 @@
         const max = cenarioManager.max;
         var gameframe = 1;
         var gravidade = 0.6;
-        var primeirotexto = false;
         var limiteTiros = 10;
 
 
@@ -103,7 +131,7 @@
                 case "ArrowUp":
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
-                            porta.abrir(() => cenarioManager.transicaoCenario())
+                            porta.abrir(() => cenarioManager.transicaoCenario(true, () => podePassarMusica = true))
                         }
                     })
                     teclas.cima.press = true
@@ -117,6 +145,8 @@
                     break
                 case "e":
                 case "E":
+                    if (cenarioManager.posicao == 0) playMusic();
+                    else if (podePassarMusica) nextMusic();
                     if (max.algumaEntidadeColidida) return
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
                         if (verificacolisao(3, entidade, max)) {
@@ -164,23 +194,22 @@
     
         function animate() {
             requestAnimationFrame(animate)
-            
-            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario();
+            const cenario = cenarioManager.cenario;
+            if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () => podePassarMusica = true);
 
-            if (cenarioManager.cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
-                cenarioManager.cenario.estado != 2) {
+            if (cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
+                cenario.estado != 2) {
 
-                cenarioManager.cenario.proximoEstado();
+                cenario.proximoEstado();
             }
-            if (cenarioManager.posicao == 2 && cenarioManager.cenario.dialogos.length - 1 == cenarioManager.cenario
-                .dialogoPos) {
+            if (cenarioManager.posicao == 2 && cenario.dialogos.length - 1 == cenario.dialogoPos) {
                 cenarioManager.transicaoCenario(false, (cenario) => cenario.removerEntidadeByImg("perri"));
             }
 
-            cenarioManager.cenario.renderizar();
+            cenario.renderizar();
             cenarioManager.exibirInfo();
             cenarioManager.corrigirBrilho();
-            cenarioManager.cenario.exibirDialogo(cenarioManager.posicao != 0);
+            cenario.exibirDialogo(cenarioManager.posicao != 0);
             
             if(max.vida == 0){
                 ctx.drawImage(telaDerrota, 0, 0, canvas.width, canvas.height)
