@@ -1,16 +1,13 @@
 class Perri extends Inimigo {
-    constructor({
-        estado = "parado",
-        rate = 6
-    }) {
+    constructor({ }) {
         super({
             skinSource: "./assets/imgs/perri/perri",
             frames: 1,
             direcao: "e",
             largura: 110,
             altura: 200,
-            estado,
-            rate
+            estado: 'parado',
+            rate: 6
         })
 
         this.loop = true

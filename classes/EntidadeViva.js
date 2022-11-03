@@ -17,7 +17,7 @@ class EntidadeViva extends Entidade {
         imortal = false,
         resistencia = 0,
         dropaVida = true,
-
+        temInteracao
     }) {
         super({
             posicao,
@@ -29,7 +29,8 @@ class EntidadeViva extends Entidade {
             loop,
             autoplay,
             estado,
-            direcao
+            direcao,
+            temInteracao
         })
 
         this.imortal = imortal;

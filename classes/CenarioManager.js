@@ -44,13 +44,13 @@ class CenarioManager {
                     new Dialogo("Marciel", "*encara fixamente")
                 ]);
                 this.cenario.iniciarDialogos();
-            } /* else if(eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldoe"){
+            } else if(eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldo"){
                 eColidida.temInteracao = false;
                 this.cenario.adicionarDialogo([
-                    new Dialogo("Ivaldo", "Caramba, você venceu"),
+                    new Dialogo("Ivaldo", "VAI LOGO!"),
                 ]);
                 this.cenario.iniciarDialogos();
-            } */
+            }
         }
 
         this.balasInfoImg.src = "./assets/imgs/info/balas/" + limiteTiros + " balas.png"
@@ -244,7 +244,7 @@ class CenarioManager {
                     rate: 10,
                     frames: 2
                 }),
-                new Ivaldo(),
+                new Ivaldo({}),
                 this.max,
                 new Perri({}),
             ],

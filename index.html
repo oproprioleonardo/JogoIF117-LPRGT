@@ -24,9 +24,9 @@
 
 <body>
     <div class="pagina">
-         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
-         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
-         <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio>
         <canvas width="1080" height="540"></canvas>
     </div>
 
@@ -102,7 +102,7 @@
             },
             espaco: {
                 press: false
-            } 
+            }
         }
 
         const canvas = document.querySelector('canvas')
@@ -191,7 +191,7 @@
         cenarioManager.cenario.iniciarDialogos();
         let telaDerrota = new Image()
         telaDerrota.src = './assets/imgs/info/telas/perdeu.png'
-    
+
         function animate() {
             requestAnimationFrame(animate)
             const cenario = cenarioManager.cenario;
@@ -209,8 +209,8 @@
             cenarioManager.exibirInfo();
             cenarioManager.corrigirBrilho();
             cenario.exibirDialogo(cenarioManager.posicao != 0);
-            
-            if(max.vida == 0){
+
+            if (max.vida == 0) {
                 ctx.drawImage(telaDerrota, 0, 0, canvas.width, canvas.height)
             }
             gameframe++;

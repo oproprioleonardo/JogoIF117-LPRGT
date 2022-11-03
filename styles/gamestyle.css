@@ -10,5 +10,6 @@ body {
 
 canvas{
     border: 2px solid black;
-    image-rendering: pixelated;
+    image-rendering: pixelated;/* 
+    transform: scale(1.2); */
 }
