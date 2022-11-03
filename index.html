@@ -12,6 +12,7 @@
     <script src="classes/Projetil.js"></script>
     <script src="classes/Inimigo.js"></script>
     <script src="classes/Perri.js"></script>
+    <script src="classes/Ivaldo.js"></script>
     <script src="classes/Dialogo.js"></script>
     <script src="classes/Porta.js"></script>
     <script src="classes/Cenario.js"></script>
@@ -45,7 +46,6 @@
             if (!musicaTocando) return;
             musicaTocando = false;
             document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).pause();
-            
         }
 
         function nextMusic() {
@@ -102,7 +102,7 @@
             },
             espaco: {
                 press: false
-            }
+            } 
         }
 
         const canvas = document.querySelector('canvas')
@@ -199,7 +199,6 @@
 
             if (cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
                 cenario.estado != 2) {
-
                 cenario.proximoEstado();
             }
             if (cenarioManager.posicao == 2 && cenario.dialogos.length - 1 == cenario.dialogoPos) {

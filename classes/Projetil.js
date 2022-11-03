@@ -9,7 +9,7 @@ class Projetil extends Entidade {
             x: max.vetorVelocidade.dir == "e" ? -8 : 8,
             y: 0,
             dir: ""
-            
+
         };
         this.largura = largura || 30;
         this.altura = altura || 30;
@@ -48,12 +48,12 @@ class Projetil extends Entidade {
                     entidade.posicao.y <= this.posicao.y + this.altura &&
                     entidade.posicao.y + entidade.altura >= this.posicao.y
             ));
-            
-        } catch  {
-            
+
+        } catch {
+
             const entidade = cenarioManager.cenario[entidadeViva];
 
-            
+
             if (entidade.posicao.x + entidade.largura >= this.posicao.x &&
                 entidade.posicao.x <= this.posicao.x + this.largura &&
                 entidade.posicao.y <= this.posicao.y + this.altura &&
@@ -65,12 +65,15 @@ class Projetil extends Entidade {
 
         if (atingidos.length > 0) {
             cenarioManager.cenario.removerEntidade(this);
-            atingidos.forEach((entidade) => (entidade == max) ? entidade.aplicarDano(4) : entidade.aplicarDano(10));
-        }
+            atingidos.forEach((entidade) => {
+                if(entidade.imortal) return
+                entidade == max ? entidade.aplicarDano(4) : entidade.aplicarDano(10);
+            })
+    }
 
         if (
             (this.posicao.x + this.largura >= canvas.width ||
-            this.posicao.x <= 0) || (this.posicao.y + this.altura >= canvas.height)
+                this.posicao.x <= 0) || (this.posicao.y + this.altura >= canvas.height)
         ) {
             cenarioManager.cenario.removerEntidade(this);
         }

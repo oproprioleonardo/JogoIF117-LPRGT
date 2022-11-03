@@ -50,7 +50,7 @@ class Perri extends Inimigo {
         if (this.vida <= 0) {
             cenarioManager.cenario.removerEntidade(this);
             this.matar();
-            cenarioManager.cenario.getEntidadeByName('ivaldo').vetorVelocidade.x = -2
+            cenarioManager.cenario.getEntidadeByName('ivaldo').andar()
             cenarioManager.cenario.adicionarDialogo([
                 new Dialogo("Ivaldo", "Caramba, você venceu"),
                 new Dialogo("Ivaldo", "Estava aguardando a sua chegada."),
@@ -68,7 +68,7 @@ class Perri extends Inimigo {
                 new Dialogo("Ivaldo", "1 - Não usar Go Two, por ter usado você ficou com 5 na minha matéria."),
                 new Dialogo("Ivaldo", "2 - Lutar contra você mesmo, sempre."),
                 new Dialogo("Ivaldo", "Você vai ser sempre seu maior inimigo"),
-                new Dialogo("Max", "De agora em diante não usarei Go Two e"),
+                new Dialogo("Max", "De agora em diante não usarei Go To e"),
                 new Dialogo("Max", "sempre vencerei de mim mesmo."),
                 new Dialogo("Ivaldo", "Maravilhoso. Então vai lutar agora, boa sorte."),
                 new Dialogo("Max", "Agora???"),

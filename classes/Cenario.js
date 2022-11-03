@@ -4,7 +4,8 @@ class Cenario {
         imgsrc = "",
         estado = 1,
         dialogos = [],
-        iniciar = () => { }
+        iniciar = () => { },
+        funcaoRecursiva
     }) {
         this.largura = canvas.width;
         this.altura = canvas.height;
@@ -21,9 +22,6 @@ class Cenario {
             this.image = new Image();
             this.carregarNovaImagem()
         }
-        
-
-
     }
 
     adicionarEntidade(entidade) {
@@ -165,6 +163,5 @@ class Cenario {
             this.entidades.forEach(entidade => entidade.renderizar());
             this.max.movimentar(teclas)
         }
-
     }
 }

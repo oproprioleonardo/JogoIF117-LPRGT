@@ -10,4 +10,5 @@ body {
 
 canvas{
     border: 2px solid black;
+    image-rendering: pixelated;
 }

@@ -53,13 +53,6 @@ class CenarioManager {
             } */
         }
 
-        //switch caso seja necessario tratamentos especiais com entidades
-        switch (this.posicao) {
-            case 3:
-                this.IvaldoMovimentação()
-                break
-        }
-
         this.balasInfoImg.src = "./assets/imgs/info/balas/" + limiteTiros + " balas.png"
         ctx.drawImage(this.balasInfoImg, 900, 0, 150, 80)
     }
@@ -143,7 +136,7 @@ class CenarioManager {
                     lado: 1,
                     y: 250
                 }),
-                this.max
+                this.max,
             ],
             dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
             new Dialogo("Marciel",
@@ -169,7 +162,7 @@ class CenarioManager {
             new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
             ],
             iniciar: (cenario) => {
-                
+
             }
         }),
 
@@ -251,20 +244,9 @@ class CenarioManager {
                     rate: 10,
                     frames: 2
                 }),
-                new Entidade({
-                    largura: 80,
-                    altura: 120,
-                    posicao: {
-                        x: 1100,
-                        y: canvas.height - 185
-                    },
-                    skinSource: "./assets/imgs/Ivaldo/ivaldoe",
-                    temInteracao: true,
-                    rate: 15,
-                    frames: 1
-                }),
+                new Ivaldo(),
+                this.max,
                 new Perri({}),
-                this.max
             ],
             dialogos: [
                 new Dialogo("Perri", "Você conseguiu chegar aqui, parabéns."),
@@ -298,14 +280,5 @@ class CenarioManager {
         })
 
         ];
-    }
-
-    IvaldoMovimentação() {
-        try {
-            if (this.cenario.getEntidadeByName('ivaldo').posicao.x <= 780)
-                this.cenario.getEntidadeByName('ivaldo').vetorVelocidade.x = 0
-        } catch (er){/* 
-            console.log(er) */
-        }
     }
 }
