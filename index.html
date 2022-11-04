@@ -26,12 +26,14 @@
     <div class="pagina">
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
-        <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/SalaDeAula.mp4" id="saladeaula" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/BatalhaDiscipulos.mp4" id="batalhadiscipulos" loop="-1" volume="0.8"></audio>
+       <!--  <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio> -->
         <canvas width="1080" height="540"></canvas>
     </div>
 
     <script>
-        const musicas = ["cutsceneinicial", "labsound", "fightsound"];
+        const musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos"/* , "fightsound" */];
         let musica = 0;
         let musicaTocando = false;
         let podePassarMusica = false;

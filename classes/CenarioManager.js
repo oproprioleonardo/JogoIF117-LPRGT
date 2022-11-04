@@ -44,7 +44,7 @@ class CenarioManager {
                     new Dialogo("Marciel", "*encara fixamente")
                 ]);
                 this.cenario.iniciarDialogos();
-            } else if(eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldo"){
+            } else if (eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldo") {
                 eColidida.temInteracao = false;
                 this.cenario.adicionarDialogo([
                     new Dialogo("Ivaldo", "VAI LOGO!"),
@@ -221,9 +221,9 @@ class CenarioManager {
             new Dialogo("Perri", "Agora batalhe com meus discipulos, você é capaz de ganhar. Te vejo na outra sala")
             ],
             iniciar: (cenario) => {
+                nextMusic();
                 for (let i = 1; i < 5; i++) {
                     cenario.gerarInimigo(i);
-
                 }
             }
         }),
