@@ -243,6 +243,7 @@ class CenarioManager {
                     frames: 2
                 }),
                 new Ivaldo({}),
+                Porta.portaTipo2(),
                 this.max,
                 new Perri({}),
             ],
@@ -270,7 +271,8 @@ class CenarioManager {
             iniciar: (cenario) => {
                 cenario.getEntidadeByName("perri").ataqueProva();
             }
-        })
+        }),
+        
 
         ];
     }

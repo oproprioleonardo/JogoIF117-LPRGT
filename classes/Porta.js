@@ -1,10 +1,10 @@
 class Porta extends Entidade {
 
-// terminar a parte das portas
-// e montar relação CENARIO-PORTA-TRANSICAO
+    // terminar a parte das portas
+    // e montar relação CENARIO-PORTA-TRANSICAO
 
-    constructor({ largura = 140, altura, skinSource, posicao, rate = 8, frames }) {
-        super({ largura, posicao, altura, skinSource, rate, frames, temInteracao: true, autoplay: false, loop: false })
+    constructor({ largura = 140, altura, skinSource, posicao, rate = 8, frames, temSprite }) {
+        super({ largura, posicao, altura, skinSource, rate, frames, temInteracao: true, autoplay: false, loop: false, temSprite })
 
     }
 
@@ -43,7 +43,16 @@ class Porta extends Entidade {
             skinSource: "./assets/imgs/cenario/animados/porta",
             frames: 2
         })
-
     }
 
+    static portaTipo2() {
+        return new Porta({
+            altura: 320,
+            posicao: {
+                x: canvas.width - 120,
+                y: 200
+            },
+            temSprite: false
+        })
+    }
 }

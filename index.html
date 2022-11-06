@@ -144,7 +144,10 @@
                 case "ArrowUp":
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
-                            porta.abrir(() => cenarioManager.transicaoCenario(true, () => podePassarMusica = true))
+                            porta.abrir(() => cenarioManager.transicaoCenario(true, () => {
+                                podePassarMusica = true
+                                if (porta.posicao.x >= canvas.width - 120) max.posicao.x = 20
+                            }))
                         }
                     })
                     teclas.cima.press = true

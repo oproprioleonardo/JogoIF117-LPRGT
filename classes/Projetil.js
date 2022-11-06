@@ -24,7 +24,7 @@ class Projetil extends Entidade {
                 dir: ``
             },
             posicao: {
-                x: Math.floor(Math.random() * 670),
+                x: Math.floor(Math.random() * canvas.width),
                 y: -100
             },
             skinSource: `./assets/imgs/perri/Especiais/Canetada/caneta`,
@@ -66,10 +66,10 @@ class Projetil extends Entidade {
         if (atingidos.length > 0) {
             cenarioManager.cenario.removerEntidade(this);
             atingidos.forEach((entidade) => {
-                if(entidade.imortal) return
+                if (entidade.imortal) return
                 entidade == max ? entidade.aplicarDano(4) : entidade.aplicarDano(10);
             })
-    }
+        }
 
         if (
             (this.posicao.x + this.largura >= canvas.width ||

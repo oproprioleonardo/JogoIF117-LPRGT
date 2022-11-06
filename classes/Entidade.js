@@ -4,7 +4,7 @@ class Entidade {
             x: 0,
             y: 0
         },
-        skinSource = "./assets/imgs/erro/erro.png",
+        skinSource = "",
         frameatual = 1,
         largura = 240,
         altura = 100,
@@ -15,6 +15,7 @@ class Entidade {
         estado = "",
         direcao = "",
         temInteracao = false,
+        temSprite = true
     }) {
         this.posicao = posicao;
         this.skinSource = skinSource;
@@ -33,10 +34,11 @@ class Entidade {
 
         this.loop = loop
         this.autoplay = autoplay
-
+        this.temSprite = temSprite
         this.estado = estado
 
         this.image = new Image();
+        
         this.carregarNovaImagem(true);
 
     }
@@ -56,11 +58,13 @@ class Entidade {
 
     // Esta função apenas define internamente a imagem que vai ser renderizada
     carregarNovaImagem(first) {
+        if (!this.temSprite) return
         if (!first) this.frameatual == this.frames ? this.frameatual = 1 : this.frameatual++
         this.image.src = this.skinSource + this.estado + this.vetorVelocidade.dir + this.frameatual + ".png"
     }
 
     renderizar() {
+        if (!this.temSprite) return
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
         this.posicao.x += this.vetorVelocidade.x;
         this.posicao.y += this.vetorVelocidade.y;
