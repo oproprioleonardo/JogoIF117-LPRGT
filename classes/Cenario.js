@@ -5,7 +5,6 @@ class Cenario {
         estado = 1,
         dialogos = [],
         iniciar = () => { },
-        funcaoRecursiva
     }) {
         this.largura = canvas.width;
         this.altura = canvas.height;
@@ -13,7 +12,7 @@ class Cenario {
         this.imgsrc = imgsrc;
         this.estado = estado;
         this.dialogos = dialogos;
-        this.podeAvancarDialogo = true;
+        this.podeAvancarDialogo = false;
         this.dialogoPos = 0;
         this.dialogando = false;
         this.callback = iniciar;
@@ -93,8 +92,10 @@ class Cenario {
             this.dialogando = true;
             document.onkeypress = function (e) {
                 let cen = cenarioManager.cenario;
-                if (e.key.toLocaleUpperCase() !== "E") return;
+                cen.dialogoAtual.caractere = cen.dialogoAtual.fala.length
+                if (e.key.toLocaleUpperCase() !== "E" || !cen.podeAvancarDialogo) return;
                 cen.dialogoPos++;
+                cen.podeAvancarDialogo = false
                 if (cen.dialogoPos == cen.dialogos.length) {
                     document.onkeypress = function () { }
                     cen.dialogando = false;
@@ -140,7 +141,7 @@ class Cenario {
             largura,
             altura,
             direcao: "d",
-            lado,
+            lado,     
             y: -140
         });
         this.entidades.push(inimigo)

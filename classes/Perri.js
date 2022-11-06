@@ -7,18 +7,20 @@ class Perri extends Inimigo {
             largura: 110,
             altura: 200,
             estado: 'parado',
-            rate: 6
+            rate: 15
         })
 
+        this.prova = new Image()
+        this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
         this.loop = true
         this.resistencia = 0.7
         this.perguntaAtual = 0
         this.perguntando = false
         this.perguntas = [
             new Pergunta("1 - O que acontece se\nvocê transferir R$3,14", ["Não Sei", "Uma transferência né", "Você vai ter feito um πx"], "Você vai ter feito um πx"),
-            new Pergunta("2 - Quanto é 1 + 1?", ["3", "11", "2"], "2"),
-            new Pergunta("3 - Quanto é 30 x 30", ["900", "600", "300"], "900"),
-            new Pergunta("4 - Quanto é 2 + 2", ["4", "22", "Não sei"], "4"),
+            new Pergunta("2 - Se x representa um \ndígito na base 10: \nquem é x?\n x11 + 11x + 1x1", ["3", "5", "2"], "5"),
+            new Pergunta("3 - Quando somamos um \nmúltiplo de 4 com um \nmúltiplo de 6, \nobtemos necessariamente \num múltiplo de:", ["2", "6", "8"], "2"),
+            new Pergunta("4 - Quanto é 30 x 30?", ["900", "1150", "Não sei"], "900"),
             new Pergunta("5 - Quanto é 60 x 9", ["540", "480", "600"], "540"),
             new Pergunta("6 - Quanto é 20 x 80", ["1400", "1620", "1600"], "1600")
         ]
@@ -49,20 +51,15 @@ class Perri extends Inimigo {
             this.matar();
             cenarioManager.cenario.getEntidadeByName('ivaldo').andar()
             cenarioManager.cenario.adicionarDialogo([
-                new Dialogo("Ivaldo", "Caramba, você venceu"),
-                new Dialogo("Ivaldo", "Estava aguardando a sua chegada."),
-                new Dialogo("Ivaldo", "Fiquei sabendo, que você quer sua nota alterada"),
-                new Dialogo("Ivaldo", "Você provou para mim, que é capacitado"),
+                new Dialogo("Ivaldo", "Caramba, cara, você venceu"),
+                new Dialogo("Ivaldo", "Você provou para mim que é capacitado"),
                 new Dialogo("Ivaldo", "Você é uma boa pessoa."),
                 new Dialogo("Ivaldo", "Você ultrapassou seus limites, como sempre."),
                 new Dialogo("Ivaldo", "Não sinta raiva de mim ou do Perri, pela sua nota."),
-                new Dialogo("Ivaldo", "As vezes, a vida da um golpe tão forte"),
-                new Dialogo("Ivaldo", "que achamos que não conseguimos continuar"),
                 new Dialogo("Ivaldo", "Você provou para si mesmo que consegue."),
-                new Dialogo("Ivaldo", "Seu inimigo nessa jornada, não somos nós."),
                 new Dialogo("Ivaldo", "Eu vou alterar sua nota, porém terá que realizar 2 coisas."),
                 new Dialogo("Max", "Quais?"),
-                new Dialogo("Ivaldo", "1 - Não usar Go Two, por ter usado você ficou com 5 na minha matéria."),
+                new Dialogo("Ivaldo", "1 - Não usar Go To, por ter usado você ficou com 5 na minha matéria."),
                 new Dialogo("Ivaldo", "2 - Lutar contra você mesmo, sempre."),
                 new Dialogo("Ivaldo", "Você vai ser sempre seu maior inimigo"),
                 new Dialogo("Max", "De agora em diante não usarei Go To e"),
@@ -151,14 +148,13 @@ class Perri extends Inimigo {
             this.mudarEstado("parado");
             this.perguntando = false
             this.perguntaAtual == this.perguntas.length - 1 ? this.perguntaAtual = 0 : this.perguntaAtual++
-            this.mudarEstado('parado')
         }
         window.addEventListener('keydown', evento)
     }
 
-    //sincronizar sprite da prova com o Perri atacando prova
     provaVoando() {
-
+        ctx.drawImage(this.prova, this.posicao.x - 100, this.posicao.y - 10, this.largura, this.altura)
+        this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
     }
 
     mudarEstado(estado) {

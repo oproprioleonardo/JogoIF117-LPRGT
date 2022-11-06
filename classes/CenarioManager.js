@@ -78,7 +78,6 @@ class CenarioManager {
     registrarCenarios() {
         this.cenarios = [new Cenario({
             dialogos: [new Dialogo("...", "..."),
-            new Dialogo("...", "..."),
             new Dialogo("Max", "Que sonho doido..."),
             new Dialogo("Max", "O que foi tudo isso?"),
             new Dialogo("Voz desconhecida", "Max, acorda!"),
@@ -127,20 +126,11 @@ class CenarioManager {
                     rate: 10,
                     frames: 2
                 }),
-                new Inimigo({
-                    skinSource: "./assets/imgs/cenario/animados/espantalho/robo",
-                    largura: 70,
-                    altura: 150,
-                    frames: 1,
-                    direcao: "e",
-                    lado: 1,
-                    y: 250
-                }),
                 this.max,
             ],
             dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
             new Dialogo("Marciel",
-                "Você ficou com notas ruins em matemática e prática de laboratório"),
+                "Você ficou com notas ruins em matemática e linguagem de programação"),
             new Dialogo("Marciel", "Precisa compensar isso"),
             new Dialogo("Max", "Mas você deveria mesmo ta aqui?"),
             new Dialogo("Max", "Você é professor de física, afinal"),
@@ -150,7 +140,6 @@ class CenarioManager {
             new Dialogo("Max", "Não faça isso."),
             new Dialogo("Max", "Por favor."),
             new Dialogo("Marciel", "De qualquer forma, você precisa lutar"),
-            new Dialogo("Marciel", "Não será fácil ganhar essa nota"),
             new Dialogo("Marciel", "Procure pelo Perri e Ivaldo e salve seu boletim!"),
             new Dialogo("Marciel", "Vai ser moleza!"),
             new Dialogo("Max", "..."),
@@ -162,7 +151,16 @@ class CenarioManager {
             new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
             ],
             iniciar: (cenario) => {
-
+                cenario.entidades.push(
+                    new Inimigo({
+                        skinSource: "./assets/imgs/cenario/animados/espantalho/robo",
+                        largura: 70,
+                        altura: 150,
+                        frames: 1,
+                        direcao: "e",
+                        lado: 1,
+                        y: 250
+                    }))
             }
         }),
 
@@ -265,14 +263,9 @@ class CenarioManager {
                 new Dialogo("Max", "O que acontece se eu errar as questões?"),
                 new Dialogo("Perri", "Você acerta a questão e me joga mandioca, você erra e eu jogo caneta em você"),
                 new Dialogo("Max", "Justo."),
-                new Dialogo("Perri", "Se você errar muito em sequência, tocarei uma música para te acalmar."),
-                new Dialogo("Perri", "Tome cuidado com as notas musicais que sairem da minha música."),
-                new Dialogo("Max", "Isso foi estranho mas tudo bem."),
                 new Dialogo("Max", "Só mais uma coisa, professor. Quando acaba a prova?"),
                 new Dialogo("Perri", "Quando eu ficar de buchin chei"),
-                new Dialogo("Max", "Ok, pode lançar as questões.")
-
-
+                new Dialogo("Perri", "Agora quieto e responda!")
             ],
             iniciar: (cenario) => {
                 cenario.getEntidadeByName("perri").ataqueProva();

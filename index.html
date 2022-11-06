@@ -24,11 +24,14 @@
 
 <body>
     <div class="pagina">
+        <div class="musicas">
+            Volume música: <input type="range" min="0" max="100" value="0" class="volumemusica" oninput="volmusica()">
+        </div>
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/SalaDeAula.mp4" id="saladeaula" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/BatalhaDiscipulos.mp4" id="batalhadiscipulos" loop="-1" volume="0.8"></audio>
-       <!--  <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio> -->
+        <!--  <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio> -->
         <canvas width="1080" height="540"></canvas>
     </div>
 
@@ -37,6 +40,13 @@
         let musica = 0;
         let musicaTocando = false;
         let podePassarMusica = false;
+        let volumemusica = document.querySelector('.volumemusica')
+        volumemusica.value = 100
+
+
+        function volmusica() {
+            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).volume = volumemusica.value / 100;
+        }
 
         function playMusic() {
             if (musicaTocando) return;
@@ -54,6 +64,7 @@
             podePassarMusica = false;
             stopMusic()
             musica++;
+            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).volume = volumemusica.value / 100;
             playMusic()
         }
 
@@ -211,6 +222,7 @@
             cenarioManager.exibirInfo();
             cenarioManager.corrigirBrilho();
             cenario.exibirDialogo(cenarioManager.posicao != 0);
+
 
             if (max.vida == 0) {
                 ctx.drawImage(telaDerrota, 0, 0, canvas.width, canvas.height)
