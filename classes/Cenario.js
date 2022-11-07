@@ -52,7 +52,7 @@ class Cenario {
     }
 
     get inimigos() {
-        return this.entidades.filter(entidade => entidade.getClassName() == "Inimigo" || entidade.getClassName() == "Perri");
+        return this.entidades.filter(entidade => entidade.getClassName() == "Inimigo" || entidade.getClassName() == "Perri" || entidade.getClassName() == "MaxInimigo");
     }
 
     get tiros() {
@@ -69,6 +69,10 @@ class Cenario {
 
     get max() {
         return this.entidades.find(entidade => entidade.getClassName() == "Jogador");
+    }
+
+    get maxInimigo() {
+        return this.entidades.find(entidade => entidade.getClassName() == "MaxInimigo");
     }
 
     getEntidadeByName(nome) {
@@ -141,7 +145,7 @@ class Cenario {
             largura,
             altura,
             direcao: "d",
-            lado,     
+            lado,
             y: -140
         });
         this.entidades.push(inimigo)
@@ -163,6 +167,7 @@ class Cenario {
             this.vidas.forEach(vida => vida.aplicarBalanco());
             this.entidades.forEach(entidade => entidade.renderizar());
             this.max.movimentar(teclas)
+            if (this.maxInimigo) this.maxInimigo.movimentar(teclas)
         }
     }
 }

@@ -272,7 +272,34 @@ class CenarioManager {
                 cenario.getEntidadeByName("perri").ataqueProva();
             }
         }),
-        
+        //cenario max vs max
+        new Cenario({
+            imgsrc: "./assets/imgs/cenario/cenario2",
+            entidades: [
+                new Entidade({
+                    largura: 60,
+                    altura: 60,
+                    posicao: {
+                        x: 270,
+                        y: 340
+                    },
+                    skinSource: "./assets/imgs/cenario/animados/gatinho",
+                    temInteracao: true,
+                    rate: 10,
+                    frames: 2
+                }),
+                new MaxInimigo({}),
+                this.max,
+            ],
+            dialogos: [
+                new Dialogo("Max", "Que mer..."),
+                new Dialogo("Max Cruel", "OLA EU")
+            ],
+            iniciar: (cenario) => {
+                cenario.maxInimigo.imortal = false
+            }
+        })
+
 
         ];
     }

@@ -14,6 +14,7 @@ class Dialogo {
 
         ctx.font = '25px Georgia'
         max.vetorVelocidade.x = 0
+        if(cenarioManager.cenario.maxInimigo) cenarioManager.cenario.maxInimigo.vetorVelocidade.x = 0
 
         if (caixa) ctx.drawImage(balao, 30, 10, canvas.width - 170, 165);
         ctx.fillStyle = "white";

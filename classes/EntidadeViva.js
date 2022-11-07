@@ -48,13 +48,13 @@ class EntidadeViva extends Entidade {
         degrade.addColorStop(1, "red");
         ctx.fillStyle = degrade;
         ctx.fillRect(
-            this.posicao.x - 10,
+            this.posicao.x + this.largura / 2 - 38,
             this.posicao.y - 15,
             Math.max(0, ((75 * this.vida) / 100)),
             10
         );
         ctx.closePath();
-        ctx.drawImage(imgVidaEntidade, this.posicao.x - 10, this.posicao.y - 15, 75, 10);
+        ctx.drawImage(imgVidaEntidade, this.posicao.x + this.largura / 2 - 37.5, this.posicao.y - 15, 75, 10);
     }
 
     aplicarDano(dano) {

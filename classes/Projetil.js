@@ -50,9 +50,7 @@ class Projetil extends Entidade {
             ));
 
         } catch {
-
             const entidade = cenarioManager.cenario[entidadeViva];
-
 
             if (entidade.posicao.x + entidade.largura >= this.posicao.x &&
                 entidade.posicao.x <= this.posicao.x + this.largura &&

@@ -17,7 +17,7 @@ class Jogador extends EntidadeViva {
         })
         this.posicao = {
             x: canvas.width / 2 - (140 / 2),
-            y: canvas.height - 65 - 140
+            y: canvas.height - 65 - this.altura
         };
         this.entidadesColididas = [];
 

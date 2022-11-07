@@ -7,7 +7,7 @@ class Perri extends Inimigo {
             largura: 110,
             altura: 200,
             estado: 'parado',
-            rate: 15
+            rate: 4
         })
 
         this.prova = new Image()

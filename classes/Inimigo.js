@@ -9,7 +9,9 @@ class Inimigo extends EntidadeViva {
         y,
         estado = "",
         loop = true,
-        resistencia = 0
+        resistencia = 0,
+        rate = 1,
+        imortal = false
     }) {
         super({
             skinSource,
@@ -19,7 +21,9 @@ class Inimigo extends EntidadeViva {
             altura,
             estado,
             loop,
-            resistencia
+            resistencia,
+            rate,
+            imortal
         })
 
         this.posicao = {
