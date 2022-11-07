@@ -33,7 +33,7 @@ class Ivaldo extends EntidadeViva {
             new Dialogo("Max", "De agora em diante não usarei Go To e"),
             new Dialogo("Max", "sempre vencerei de mim mesmo."),
             new Dialogo("Ivaldo", "Maravilhoso. Então vai lutar agora, boa sorte."),
-            new Dialogo("Ivaldo", "Siga adiante no corredor"),
+            new Dialogo("Ivaldo", "Continue andando pelo corredor. Siga a direita."),
             new Dialogo("Max", "Agora???"),
             new Dialogo("Ivaldo", "Sim, ou fica com 5 na média. Você consegue."),
             new Dialogo("Max", "Eu consigo, essa é minha última luta.")
