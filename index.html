@@ -21,13 +21,15 @@
     <script src="classes/VidaE.js"></script>
     <script src="classes/Pergunta.js"></script>
     <script src="classes/MusicaManager.js"></script>
+    <script src="classes/Prova.js"></script>
     <title>Ivaldo's fight</title>
 </head>
 
 <body>
     <div class="pagina">
         <div class="musicas">
-            Volume música: <input type="range" min="0" max="100" value="100" class="volumemusica" oninput="volmusica()">
+            Volume música: <input type="range" min="0" max="100" value="100" class="volumemusica"
+                oninput="musicaManager.volmusica()">
         </div>
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
@@ -38,7 +40,6 @@
     </div>
 
     <script>
-
         function shuffleArray(array) {
             for (var i = array.length - 1; i > 0; i--) {
                 var j = Math.floor(Math.random() * (i + 1));
@@ -88,9 +89,9 @@
             }
         }
 
-        const musicaManager = new MusicaManager();
         const canvas = document.querySelector('canvas')
         const ctx = canvas.getContext('2d')
+        const musicaManager = new MusicaManager();
         const cenarioManager = new CenarioManager();
         const max = cenarioManager.max;
         var gameframe = 1;
@@ -99,42 +100,36 @@
 
 
         window.addEventListener('keydown', (e) => {
-            switch (e.key) {
+            switch (e.key.toLowerCase()) {
                 case "a":
-                case "A":
-                case "ArrowLeft":
-                    teclas.esquerda.press = true
-                    break
+                    teclas.esquerda.press = true;
+                    break;
                 case "d":
-                case "D":
-                case "ArrowRight":
-                    teclas.direita.press = true
-                    break
+                    teclas.direita.press = true;
+                    break;
                 case "w":
-                case "W":
-                case "ArrowUp":
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
                             porta.abrir(() => cenarioManager.transicaoCenario(true, () => {
                                 musicaManager.podePassar = true
-                                if (porta.posicao.x >= canvas.width - 120) max.posicao.x = 20
+                                if (porta.posicao.x >= canvas.width - 120) max.posicao.x =
+                                    20
                             }))
                         }
-                    })
-                    teclas.cima.press = true
-                    break
+                    });
+                    teclas.cima.press = true;
+                    break;
                 case " ":
                     if (max.vetorVelocidade.x != 0 || max.vetorVelocidade.y != 0 || max.vida <= 0 ||
                         limiteTiros == 0) return
                     cenarioManager.cenario.novoTiro();
-                    teclas.espaco.press = true
-                    limiteTiros--
-                    break
+                    teclas.espaco.press = true;
+                    limiteTiros--;
+                    break;
                 case "e":
-                case "E":
                     if (cenarioManager.posicao == 0) musicaManager.playMusic();
                     else if (musicaManager.podePassar) musicaManager.nextMusic();
-                    if (max.algumaEntidadeColidida) return
+                    if (max.algumaEntidadeColidida) return;
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
                         if (verificacolisao(3, entidade, max)) {
                             max.entidadesColididas.push(entidade);
@@ -143,26 +138,20 @@
                             }, 2200);
                         }
 
-                    })
-                    break
+                    });
+                    break;
             }
         })
 
         window.addEventListener('keyup', (e) => {
-            switch (e.key) {
+            switch (e.key.toLowerCase()) {
                 case "a":
-                case "A":
-                case "ArrowLeft":
                     teclas.esquerda.press = false
                     break
                 case "d":
-                case "D":
-                case "ArrowRight":
                     teclas.direita.press = false
                     break
                 case "w":
-                case "W":
-                case "ArrowUp":
                     teclas.cima.press = false
                     break
                 case " ":
@@ -182,7 +171,8 @@
         function animate() {
             requestAnimationFrame(animate)
             const cenario = cenarioManager.cenario;
-            if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () => musicaManager.podePassar = true);
+            if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () =>
+                musicaManager.podePassar = true);
 
             if (cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
                 cenario.estado != 2) {
@@ -196,7 +186,6 @@
             cenarioManager.exibirInfo();
             cenarioManager.corrigirBrilho();
             cenario.exibirDialogo(cenarioManager.posicao != 0);
-
 
             if (max.vida == 0) {
                 ctx.drawImage(telaDerrota, 0, 0, canvas.width, canvas.height)

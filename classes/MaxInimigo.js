@@ -5,7 +5,7 @@ class MaxInimigo extends Inimigo {
         frames = 2,
         estado = "parado",
         direcao = "e",
-        resistencia = 10,
+        resistencia = 90,
         imortal = true
     }) {
         super({

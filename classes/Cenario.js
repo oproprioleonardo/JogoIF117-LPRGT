@@ -4,7 +4,7 @@ class Cenario {
         imgsrc = "",
         estado = 1,
         dialogos = [],
-        iniciar = () => { },
+        iniciar = () => {},
     }) {
         this.largura = canvas.width;
         this.altura = canvas.height;
@@ -79,8 +79,9 @@ class Cenario {
         return this.entidades.find(entidade => entidade.skinSource.includes(nome));
     }
 
-    adicionarDialogo(dialogos) {
+    adicionarDialogo(dialogos, inicia) {
         dialogos.forEach(d => this.dialogos.push(d));
+        if (inicia) this.iniciarDialogos();
     }
 
     iniciar() {
@@ -101,7 +102,7 @@ class Cenario {
                 cen.dialogoPos++;
                 cen.podeAvancarDialogo = false
                 if (cen.dialogoPos == cen.dialogos.length) {
-                    document.onkeypress = function () { }
+                    document.onkeypress = function () {}
                     cen.dialogando = false;
                     cen.iniciar()
                     return;

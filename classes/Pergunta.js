@@ -8,50 +8,57 @@ class Alternativa {
 
 class Pergunta {
     constructor(pergunta, alternativas, resposta) {
+        let alts = shuffleArray(alternativas);
         this.pergunta = pergunta;
-        let alt = shuffleArray(alternativas);
-
-        this.alternativas = alt.map(descricao => new Alternativa(alt.indexOf(descricao), descricao));
-
+        this.alternativas = alts.map(descricao => new Alternativa(alts.indexOf(descricao), descricao));
+        this.selecionada = 0;
         this.resposta = resposta;
 
     }
 
-    exibirPergunta() {
-        const folha = new Image();
-        folha.src = "./assets/imgs/perri/Prova.png"
-        const xInicial = canvas.width / 2 - 165;
-        const yInicial = canvas.height / 2 - 215;
-        let acumulador = yInicial + 325;
+    get altSelected() {
+        return this.alternativas[this.selecionada];
+    }
+
+    get lines() {
+        return this.pergunta.split("\n");
+    }
+
+    exibirPergunta(x, y, lineHeight) {
         ctx.font = '600 20px Georgia'
-        max.vetorVelocidade.x = 0
-        ctx.drawImage(folha, xInicial, yInicial, 330, 430)
-        const lineHeight = 25;
-        const lines = this.pergunta.split("\n");
         ctx.fillStyle = "black";
-        for (let i = 0; i < lines.length; i++) {
-            
+        for (let i = 0; i < this.lines.length; i++) {
             ctx.fillText(
-                lines[i],
-                xInicial + 30,
-                yInicial + 100 + i*lineHeight,
+                this.lines[i],
+                x + 30,
+                y + 100 + i * lineHeight,
                 240
             );
         }
 
-        ctx.fillStyle = "black";
+        let acumulador = y + 325;
+
         this.alternativas.forEach(alt => {
+            if (alt == this.altSelected) ctx.fillStyle = "green"
             ctx.fillText(
                 alt.letra + ") " + alt.descricao,
-                xInicial + 40,
+                x + 40,
                 acumulador,
                 canvas.width - 250
             );
-
+            ctx.fillStyle = "black"
             acumulador += lineHeight
         });
 
     }
 
-  
+    upAlt() {
+        this.selecionada = (this.selecionada == 0) ? this.alternativas.length - 1 : this.selecionada - 1
+    }
+
+    downAlt() {
+        this.selecionada = (this.selecionada == this.alternativas.length - 1) ? 0 : this.selecionada + 1
+    }
+
+
 }
