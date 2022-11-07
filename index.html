@@ -20,13 +20,14 @@
     <script src="classes/CenarioManager.js"></script>
     <script src="classes/VidaE.js"></script>
     <script src="classes/Pergunta.js"></script>
+    <script src="classes/MusicaManager.js"></script>
     <title>Ivaldo's fight</title>
 </head>
 
 <body>
     <div class="pagina">
         <div class="musicas">
-            Volume música: <input type="range" min="0" max="100" value="0" class="volumemusica" oninput="volmusica()">
+            Volume música: <input type="range" min="0" max="100" value="100" class="volumemusica" oninput="volmusica()">
         </div>
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
@@ -37,38 +38,6 @@
     </div>
 
     <script>
-        const musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos"/* , "fightsound" */];
-        let musica = 0;
-        let musicaTocando = false;
-        let podePassarMusica = false;
-        let volumemusica = document.querySelector('.volumemusica')
-        volumemusica.value = 100
-
-
-        function volmusica() {
-            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).volume = volumemusica.value / 100;
-        }
-
-        function playMusic() {
-            if (musicaTocando) return;
-            musicaTocando = true;
-            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).play();
-        }
-
-        function stopMusic() {
-            if (!musicaTocando) return;
-            musicaTocando = false;
-            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).pause();
-        }
-
-        function nextMusic() {
-            podePassarMusica = false;
-            stopMusic()
-            musica++;
-            document.getElementById(musicas[Math.min(musica, musicas.length - 1)]).volume = volumemusica.value / 100;
-            playMusic()
-        }
-
 
         function shuffleArray(array) {
             for (var i = array.length - 1; i > 0; i--) {
@@ -119,6 +88,7 @@
             }
         }
 
+        const musicaManager = new MusicaManager();
         const canvas = document.querySelector('canvas')
         const ctx = canvas.getContext('2d')
         const cenarioManager = new CenarioManager();
@@ -146,7 +116,7 @@
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
                             porta.abrir(() => cenarioManager.transicaoCenario(true, () => {
-                                podePassarMusica = true
+                                musicaManager.podePassar = true
                                 if (porta.posicao.x >= canvas.width - 120) max.posicao.x = 20
                             }))
                         }
@@ -162,8 +132,8 @@
                     break
                 case "e":
                 case "E":
-                    if (cenarioManager.posicao == 0) playMusic();
-                    else if (podePassarMusica) nextMusic();
+                    if (cenarioManager.posicao == 0) musicaManager.playMusic();
+                    else if (musicaManager.podePassar) musicaManager.nextMusic();
                     if (max.algumaEntidadeColidida) return
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
                         if (verificacolisao(3, entidade, max)) {
@@ -212,7 +182,7 @@
         function animate() {
             requestAnimationFrame(animate)
             const cenario = cenarioManager.cenario;
-            if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () => podePassarMusica = true);
+            if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () => musicaManager.podePassar = true);
 
             if (cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
                 cenario.estado != 2) {
