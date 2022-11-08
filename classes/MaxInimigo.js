@@ -1,6 +1,6 @@
 class MaxInimigo extends Inimigo {
     constructor({
-        skinSource = "./assets/imgs/max/max",
+        skinSource = "./assets/imgs/max/maxinimigo/max",
         rate = 10,
         frames = 2,
         estado = "parado",
@@ -20,11 +20,37 @@ class MaxInimigo extends Inimigo {
             imortal
         })
         this.loop = true
-        this.resistencia = 0.7
+        this.resistencia = 0.9
         this.posicao = {
             x: 900,
             y: canvas.height - 65 - 200
         };
+
+        this.barraPoder = 100
+    }
+
+    exibirVida() {
+        ctx.beginPath();
+        const life = new Image()
+        life.src = "./assets/imgs/info/vidamax2.png"
+        var degrade = ctx.createLinearGradient(0, 0, 200, 0);
+        degrade.addColorStop(0, "purple");
+        ctx.fillStyle = degrade;
+        ctx.fillRect(710, 29, Math.max(0, (180 * this.vida) / 100), 33);
+        ctx.closePath();
+        ctx.drawImage(life, 684, 22, 210, 50);
+    }
+
+    exibirBarraPoder() {
+        ctx.beginPath();
+        const barra = new Image()
+        barra.src = "./assets/imgs/info/barrapodermax2.png"
+        var degrade = ctx.createLinearGradient(0, 0, 200, 0);
+        degrade.addColorStop(0, "purple");
+        ctx.fillStyle = degrade;
+        ctx.fillRect(710, 90, 180 * this.barraPoder / 100, 20);
+        ctx.closePath();
+        ctx.drawImage(barra, 684, 73, 210, 50);
     }
 
     renderizar() {
@@ -35,14 +61,18 @@ class MaxInimigo extends Inimigo {
         }
 
         this.exibirVida()
+        this.exibirBarraPoder()
+        this.recuperaPoder()
 
         if (
             max.posicao.x + max.largura >= this.posicao.x &&
             max.posicao.x <= this.posicao.x + this.largura &&
             max.posicao.y + max.altura >= this.posicao.y &&
             max.posicao.y <= this.posicao.y + this.altura
-        ) max.aplicarDano(0.2);
-
+        ) {
+            max.aplicarDano(0.2);
+            if(this.barraPoder != 100) this.barraPoder += 5
+        }
 
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
 
@@ -64,6 +94,30 @@ class MaxInimigo extends Inimigo {
         }
         if (this.posicao.y + this.altura >= canvas.height - 65) {
             this.vetorVelocidade.y = 0
+        }
+
+        this.ataqueChuva()
+        this.ataqueNormal()
+    }
+
+
+    recuperaPoder() {
+        if (this.barraPoder == 100 || gameframe % 60 != 0) return
+        this.barraPoder += 5
+    }
+
+    ataqueChuva() {
+        if (gameframe % 500 == 0 && cenarioManager.cenario.acabouDialogo() && this.barraPoder == 100) {
+            this.barraPoder = 0
+            for (let i = 0; i < 25; i++) {
+                cenarioManager.cenario.novoTiro(Projetil.chuvaMandiocaVermelha())
+            }
+        }
+    }
+
+    ataqueNormal() {
+        if (gameframe % 100 == 0 && cenarioManager.cenario.acabouDialogo()) {
+            cenarioManager.cenario.novoTiro(Projetil.tiroMaxInimigo())
         }
     }
 

@@ -1,5 +1,5 @@
 class Perri extends Inimigo {
-    constructor({}) {
+    constructor({ }) {
         super({
             skinSource: "./assets/imgs/perri/perri",
             frames: 1,
@@ -13,7 +13,7 @@ class Perri extends Inimigo {
         this.prova = new Image()
         this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
         this.loop = true
-        this.resistencia = 0.7
+        this.resistencia = 0
         this.atividade = new Prova();
         this.posicao = {
             x: 900,
@@ -41,24 +41,15 @@ class Perri extends Inimigo {
             return;
         }
 
+
         if (
             max.posicao.x + max.largura >= this.posicao.x &&
-            max.posicao.x <= this.posicao.x + this.largura
-        ) {
-            this.vetorVelocidade.x = 0;
+            max.posicao.x <= this.posicao.x + this.largura &&
+            max.posicao.y + max.altura >= this.posicao.y &&
+            max.posicao.y <= this.posicao.y + this.altura
+        )
+            max.aplicarDano(100);
 
-            if (
-                max.posicao.y + max.altura >= this.posicao.y &&
-                max.posicao.y <= this.posicao.y + this.altura
-            )
-                max.aplicarDano(1.5);
-        } else {
-            if (cenarioManager.cenario.dialogoPos < cenarioManager.cenario.dialogos.length) return
-            // muda a direção da imagem
-            this.vetorVelocidade.dir = this.vetorVelocidade.x > 0 ? "d" : "e";
-
-            this.posicao.x += this.vetorVelocidade.x;
-        }
         this.posicao.y += this.vetorVelocidade.y;
         this.vetorVelocidade.y += gravidade;
 
@@ -107,9 +98,7 @@ class Perri extends Inimigo {
                             new Dialogo("Perri", "CANETADAAAAA!")
                         ], true);
                         setTimeout(() => {
-                            for (let i = 0; i < 25; i++) {
-                                cenarioManager.cenario.novoTiro(Projetil.caneta())
-                            }
+                            this.ataqueCaneta()
                         }, 1000);
                         setTimeout(() => {
                             this.ataqueProva();
@@ -123,6 +112,12 @@ class Perri extends Inimigo {
         }
 
         window.addEventListener('keydown', respondendo)
+    }
+
+    ataqueCaneta(){
+        for (let i = 0; i < 25; i++) {
+            cenarioManager.cenario.novoTiro(Projetil.caneta())
+        }
     }
 
     provaVoando() {

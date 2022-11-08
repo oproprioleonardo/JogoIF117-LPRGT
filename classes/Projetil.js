@@ -1,5 +1,5 @@
 class Projetil extends Entidade {
-    constructor({ frameatual, atinge, vetorVelocidade, posicao, skinSource = "./assets/imgs/tiromax/TiroMandioca", rate = 6, frames = 4, largura, altura }) {
+    constructor({ frameatual, atinge, vetorVelocidade, posicao, dano = 10, skinSource = "./assets/imgs/tiromax/TiroMandioca", rate = 6, frames = 4, largura, altura }) {
         super({ skinSource, rate, frames, frameatual })
         this.posicao = posicao || {
             x: max.vetorVelocidade.dir == "e" ? max.posicao.x : max.posicao.x + max.largura,
@@ -11,9 +11,50 @@ class Projetil extends Entidade {
             dir: ""
 
         };
+        this.dano = dano
         this.largura = largura || 30;
         this.altura = altura || 30;
         this.atinge = atinge || "inimigos"
+    }
+
+    static novoTiroEspecial1() {
+        return new Projetil({
+            vetorVelocidade: {
+                x: 0,
+                y: Math.floor(Math.random() * 5) + 5,
+                dir: ``
+            },
+            posicao: {
+                x: Math.floor(Math.random() * canvas.width),
+                y: -100
+            },
+            skinSource: `./assets/imgs/tiromax/TiroMandioca`,
+            frames: 4,
+            largura: 30,
+            altura: 30,
+            atinge: "inimigos",
+            dano: 20
+        })
+    }
+
+    static novoTiroEspecial2() {
+        return new Projetil({
+            vetorVelocidade: {
+                x: max.vetorVelocidade.dir == "e" ? -2 : 2,
+                y: 0,
+                dir: ``
+            },
+            posicao: {
+                x: max.vetorVelocidade.dir == "e" ? max.posicao.x : max.posicao.x + max.largura,
+                y: max.posicao.y - 200
+            },
+            skinSource: `./assets/imgs/tiromax/TiroMandioca`,
+            frames: 4,
+            largura: 400,
+            altura: 400,
+            atinge: "inimigos",
+            dano: 220
+        })
     }
 
     static caneta() {
@@ -34,7 +75,52 @@ class Projetil extends Entidade {
             autoplay: false,
             largura: 20,
             altura: 40,
-            atinge: "max"
+            atinge: "max",
+            dano: 4
+        });
+    }
+
+    static chuvaMandiocaVermelha() {
+        return new Projetil({
+            vetorVelocidade: {
+                x: 0,
+                y: Math.floor(Math.random() * 5) + 5,
+                dir: ``
+            },
+            posicao: {
+                x: Math.floor(Math.random() * canvas.width),
+                y: -100
+            },
+            skinSource: `./assets/imgs/max/maxinimigo/tiro/TiroMandioca`,
+            frameatual: Math.floor(Math.random() * 2) + 1,
+            frames: 3,
+            loop: false,
+            autoplay: false,
+            largura: 40,
+            altura: 40,
+            atinge: "max",
+            dano: 4
+        });
+    }
+
+    static tiroMaxInimigo() {
+        return new Projetil({
+            vetorVelocidade: {
+                x: cenarioManager.cenario.maxInimigo.vetorVelocidade.dir == "e" ? -8 : 8,
+                y: 0,
+                dir: ``
+            },
+            posicao: {
+                x: cenarioManager.cenario.maxInimigo.posicao.x,
+                y: cenarioManager.cenario.maxInimigo.posicao.y + 60,
+            },
+            skinSource: `./assets/imgs/max/maxinimigo/tiro/TiroMandioca`,
+            frameatual: 1,
+            frames: 4,
+            largura: 40,
+            altura: 40,
+            atinge: "max",
+            dano: 30
         });
     }
 
@@ -65,7 +151,7 @@ class Projetil extends Entidade {
             cenarioManager.cenario.removerEntidade(this);
             atingidos.forEach((entidade) => {
                 if (entidade.imortal) return
-                entidade == max ? entidade.aplicarDano(4) : entidade.aplicarDano(10);
+                entidade.aplicarDano(this.dano)
             })
         }
 

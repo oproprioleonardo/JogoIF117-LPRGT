@@ -35,7 +35,7 @@
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/SalaDeAula.mp4" id="saladeaula" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/BatalhaDiscipulos.mp4" id="batalhadiscipulos" loop="-1" volume="0.8"></audio>
-        <!--  <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio> -->
+        <audio src="./assets/sounds/FightSound.mp4" id="fightsound" loop="-1" volume="0.8"></audio>
         <canvas width="1080" height="540"></canvas>
     </div>
 
@@ -128,7 +128,7 @@
                     break;
                 case "e":
                     if (cenarioManager.posicao == 0) musicaManager.playMusic();
-                    else if (musicaManager.podePassar) musicaManager.nextMusic();
+                    else if (musicaManager.podePassar && cenarioManager.posicao != 3) musicaManager.nextMusic();
                     if (max.algumaEntidadeColidida) return;
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
                         if (verificacolisao(3, entidade, max)) {
@@ -137,8 +137,21 @@
                                 max.entidadesColididas = []
                             }, 2200);
                         }
-
                     });
+                    break;
+                case "g":
+                    if (max.barraPoder < 50 || max.vetorVelocidade.x != 0 ||
+                        max.vetorVelocidade.y != 0 || max.vida <= 0) return
+                    if (max.barraPoder == 100) {
+                        cenarioManager.cenario.novoTiro(Projetil.novoTiroEspecial2())
+                        max.barraPoder = 0
+                    } else {
+                        for (let i = 0; i < 45; i++) {
+                            cenarioManager.cenario.novoTiro(Projetil.novoTiroEspecial1())
+                        }
+                        max.barraPoder -= 50
+                    }
+                    teclas.espaco.press = true;
                     break;
             }
         })
@@ -160,6 +173,11 @@
                     max.mudarEstado("pararAtirar")
                     teclas.espaco.press = false
                     break
+                case "g":
+                    if (max.vida <= 0) return
+                    max.mudarEstado("pararAtirar")
+                    teclas.espaco.press = false
+                    break;
             }
         })
 

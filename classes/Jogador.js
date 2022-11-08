@@ -21,6 +21,7 @@ class Jogador extends EntidadeViva {
         };
         this.entidadesColididas = [];
 
+        this.barraPoder = 0
     }
 
     get algumaEntidadeColidida() {
@@ -40,7 +41,21 @@ class Jogador extends EntidadeViva {
         ctx.drawImage(life, 50, 22, 210, 50);
     }
 
+    exibirBarraPoder() {
+        ctx.beginPath();
+        const barra = new Image()
+        barra.src = "./assets/imgs/info/barrapoder.png"
+        var degrade = ctx.createLinearGradient(0, 0, 200, 0);
+        degrade.addColorStop(0, "black");
+        degrade.addColorStop(1, "#286eff");
+        ctx.fillStyle = degrade;
+        ctx.fillRect(76, 90, 180 * this.barraPoder / 100, 20);
+        ctx.closePath();
+        ctx.drawImage(barra, 50, 73, 210, 50);
+    }
+
     renderizar() {
+        this.exibirBarraPoder()
         this.exibirVida()
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
 

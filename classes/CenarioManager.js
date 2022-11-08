@@ -147,7 +147,7 @@ class CenarioManager {
             new Dialogo("Marciel", "Vou sair de fininho..."),
             new Dialogo("Marciel", "Antes de eu sair..."),
             new Dialogo("Marciel", "LUTE COM O ROBÔ"),
-            new Dialogo("Marciel", "PS: Espaço atira"),
+            new Dialogo("Marciel", "PS: Espaço atira e, caso tenha energia necessária, G para especial"),
             new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
             ],
             iniciar: (cenario) => {
@@ -291,14 +291,14 @@ class CenarioManager {
                     largura: 60,
                     altura: 60,
                     posicao: {
-                        x: 190,
+                        x: 180,
                         y: 147
                     },
-                    skinSource: "./assets/imgs/cenario/animados/gatinho",
+                    skinSource: "./assets/imgs/cenario/animados/gatinhod",
                     temInteracao: true,
                     rate: 10,
                     frames: 2
-                }),new Entidade({
+                }), new Entidade({
                     largura: 70,
                     altura: 70,
                     posicao: {
@@ -314,7 +314,7 @@ class CenarioManager {
             ],
             dialogos: [
                 new Dialogo("Max", "Que mer..."),
-                new Dialogo("Max Cruel", "OLA EU")
+                new Dialogo("Caxumbinha", "hello world!"),
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false

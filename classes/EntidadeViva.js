@@ -59,6 +59,7 @@ class EntidadeViva extends Entidade {
 
     aplicarDano(dano) {
         if (!this.vivo) return;
+        if (this != max && max.barraPoder < 100) max.barraPoder++
         this.vida -= dano - (dano * this.resistencia);
         if (this.vida <= 0) this.matar()
     }
@@ -66,7 +67,7 @@ class EntidadeViva extends Entidade {
     droparVida() {
         cenarioManager.cenario.entidades.push(new VidaE({
             x: this.posicao.x + this.largura / 2,
-            
+
         }));
     }
 

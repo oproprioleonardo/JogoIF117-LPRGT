@@ -4,7 +4,7 @@ class Cenario {
         imgsrc = "",
         estado = 1,
         dialogos = [],
-        iniciar = () => {},
+        iniciar = () => { },
     }) {
         this.largura = canvas.width;
         this.altura = canvas.height;
@@ -102,7 +102,7 @@ class Cenario {
                 cen.dialogoPos++;
                 cen.podeAvancarDialogo = false
                 if (cen.dialogoPos == cen.dialogos.length) {
-                    document.onkeypress = function () {}
+                    document.onkeypress = function () { }
                     cen.dialogando = false;
                     cen.iniciar()
                     return;
@@ -120,6 +120,7 @@ class Cenario {
     novoTiro(tiro = new Projetil({})) {
         this.entidades.push(tiro);
     }
+
 
     gerarInimigo(sprite = 1) {
         let altura = 100;

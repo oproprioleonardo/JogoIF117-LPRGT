@@ -3,7 +3,7 @@ class MusicaManager {
         this.musica = 0;
         this.tocando = false;
         this.podePassar = false;
-        this.musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos"/* , "fightsound" */]
+        this.musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos" , "fightsound" ]
     }
 
     get volumeMusica() {
