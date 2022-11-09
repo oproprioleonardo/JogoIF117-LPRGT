@@ -58,6 +58,7 @@ class MaxInimigo extends Inimigo {
             cenarioManager.cenario.removerEntidade(this);
             this.matar();
             if (cenarioManager.gatinhosAcariciados.length == 0 ) cenarioManager.finalSemCaxumba()
+            else cenarioManager.finalPadrao()
             return;
         }
 

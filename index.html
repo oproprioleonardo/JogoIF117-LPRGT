@@ -108,6 +108,8 @@
                     teclas.direita.press = true;
                     break;
                 case "w":
+                    teclas.cima.press = true;
+                    if(cenarioManager.cenario.inimigos != 0) return
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
                             porta.abrir(() => cenarioManager.transicaoCenario(true, () => {
@@ -117,7 +119,6 @@
                             }))
                         }
                     });
-                    teclas.cima.press = true;
                     break;
                 case " ":
                     if (max.vetorVelocidade.x != 0 || max.vetorVelocidade.y != 0 || max.vida <= 0 ||

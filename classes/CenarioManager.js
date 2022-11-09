@@ -16,6 +16,8 @@ class CenarioManager {
         this.balasInfoImg = new Image();
         this.coracaoImg = new Image()
         this.coracaoImg.src = "./assets/imgs/info/coracao.png"
+        this.coracaoMauImg = new Image()
+        this.coracaoMauImg.src = "./assets/imgs/info/coracaomau.png"
     }
 
     corrigirBrilho() {
@@ -29,7 +31,13 @@ class CenarioManager {
         this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você não fez carinho em mim :(")]);
         this.cenario.iniciarDialogos();
 
-        for (let i = 0; i < 10; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 80, 60, 60, 1))
+        for (let i = 0; i < 40; i++)
+            this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 80, 60, 60, 1))
+    }
+
+    finalPadrao() {
+        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Obrigado pela ajuda!")]);
+        this.cenario.iniciarDialogos();
     }
 
     jaFezCarinhonoGato(gato) {
@@ -50,21 +58,36 @@ class CenarioManager {
         if (this.max.algumaEntidadeColidida) {
             const eColidida = this.max.entidadesColididas[0];
             if (!eColidida.temInteracao) return;
-            if (eColidida.skinSource == "./assets/imgs/cenario/animados/gatinho") {
-                ctx.drawImage(this.coracaoImg, eColidida.posicao.x + eColidida.largura /
-                    4, eColidida.posicao.y - 45, 32, 32)
+            if (eColidida.skinSource.includes("gatinho")) {
+                if (eColidida.skinSource.includes('mal'))
+                    ctx.drawImage(this.coracaoMauImg, eColidida.posicao.x + eColidida.largura /
+                        4, eColidida.posicao.y - 45, 32, 32)
+                else
+                    ctx.drawImage(this.coracaoImg, eColidida.posicao.x + eColidida.largura /
+                        4, eColidida.posicao.y - 45, 32, 32)
                 this.carinhoNoGato(eColidida)
-            } else if (eColidida.skinSource == "./assets/imgs/cenario/animados/marciel") {
+            } else if (eColidida.skinSource.includes("marciel")) {
                 eColidida.temInteracao = false;
-                this.cenario.adicionarDialogo([
+                if (this.posicao == 1) this.cenario.adicionarDialogo([
                     new Dialogo("Marciel", "O que você está fazendo aqui ainda?"),
                     new Dialogo("Marciel", "*encara fixamente")
                 ]);
+                else this.cenario.adicionarDialogo([
+                    new Dialogo("Marciel", "Parabéns, Max"),]);
                 this.cenario.iniciarDialogos();
-            } else if (eColidida.skinSource == "./assets/imgs/Ivaldo/ivaldo") {
+            } else if (eColidida.skinSource.includes("ivaldo")) {
+                eColidida.temInteracao = false;
+                if (this.posicao == 3) this.cenario.adicionarDialogo([
+                    new Dialogo("Ivaldo", "VAI LOGO!"),
+                ]);
+                else this.cenario.adicionarDialogo([
+                    new Dialogo("Ivaldo", "Parabéns, Max"),
+                ]);
+                this.cenario.iniciarDialogos();
+            } else if (eColidida.skinSource.includes('perriparadoe')) {
                 eColidida.temInteracao = false;
                 this.cenario.adicionarDialogo([
-                    new Dialogo("Ivaldo", "VAI LOGO!"),
+                    new Dialogo("Perri", "Você me derrotou de jeito..."),
                 ]);
                 this.cenario.iniciarDialogos();
             }
@@ -147,7 +170,7 @@ class CenarioManager {
             ],
             dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
             new Dialogo("Marciel",
-                "Você ficou com notas ruins em matemática e linguagem de programação"),
+                "Você ficou com notas ruins em matemática e prática de laboratório"),
             new Dialogo("Marciel", "Precisa compensar isso"),
             new Dialogo("Max", "Mas você deveria mesmo ta aqui?"),
             new Dialogo("Max", "Você é professor de física, afinal"),
@@ -193,8 +216,8 @@ class CenarioManager {
                         y: 270
                     },
                     skinSource: "./assets/imgs/perri/perriparadoe",
-                    rate: 15,
-                    frames: 1
+                    rate: 25,
+                    frames: 2
                 }),
                 Porta.portaTipo1(),
                 new Entidade({
@@ -323,9 +346,11 @@ class CenarioManager {
                         y: 210
                     },
                     skinSource: "./assets/imgs/cenario/animados/gatinhomal",
+                    temInteracao: true,
                     rate: 6,
                     frames: 4
                 }),
+                Porta.portaTipo2(),
                 new MaxInimigo({}),
                 this.max,
             ],
@@ -341,13 +366,94 @@ class CenarioManager {
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false
-                this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")]);
-                this.cenario.iniciarDialogos();
                 if (this.gatinhosAcariciados.length >= 3) {
+                    this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")]);
+                    this.cenario.iniciarDialogos();
                     for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 10, 60, 60, 1, "inimigos"))
                 }
             }
-        })
+        }),
+
+
+        new Cenario({
+            imgsrc: "./assets/imgs/cenario/cenario4",
+            entidades: [
+                new Entidade({
+                    largura: 100,
+                    altura: 280,
+                    posicao: {
+                        x: 960,
+                        y: 128
+                    },
+                    skinSource: "./assets/imgs/cenario/animados/bolhas",
+                    rate: 8,
+                    frames: 4
+                }),
+                new Entidade({
+                    largura: 80,
+                    altura: 200,
+                    posicao: {
+                        x: 700,
+                        y: 270
+                    },
+                    skinSource: "./assets/imgs/cenario/animados/marciel",
+                    temInteracao: true,
+                    rate: 15,
+                    frames: 2
+                }),
+                new Entidade({
+                    largura: 110,
+                    altura: 200,
+                    posicao: {
+                        x: 570,
+                        y: 270
+                    },
+                    skinSource: "./assets/imgs/perri/perriparadoe",
+                    rate: 25,
+                    frames: 2,
+                    temInteracao: true
+                }),
+                new Entidade({
+                    largura: 100,
+                    altura: 140,
+                    posicao: {
+                        x: 460,
+                        y: canvas.height - 140 - 65
+                    },
+                    skinSource: "./assets/imgs/Ivaldo/animado/ivaldoe",
+                    rate: 18,
+                    frames: 3,
+                    temInteracao: true
+                }),
+                new Entidade({
+                    altura: 180,
+                    largura: 140,
+                    posicao: {
+                        x: 95,
+                        y: 280
+                    },
+                    skinSource: "./assets/imgs/cenario/salvar/Porta0",
+                    frames: 1
+                }),
+                new Entidade({
+                    largura: 60,
+                    altura: 60,
+                    posicao: {
+                        x: 840,
+                        y: canvas.height - 130
+                    },
+                    skinSource: "./assets/imgs/cenario/animados/gatinho",
+                    temInteracao: true,
+                    rate: 10,
+                    frames: 2
+                }),
+                this.max,
+            ],
+            dialogos: [new Dialogo("Max", "Professor? Acabou?"),],
+            iniciar: (cenario) => {
+
+            }
+        }),
 
 
         ];

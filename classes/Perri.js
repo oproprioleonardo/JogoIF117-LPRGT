@@ -2,12 +2,12 @@ class Perri extends Inimigo {
     constructor({ }) {
         super({
             skinSource: "./assets/imgs/perri/perri",
-            frames: 1,
+            frames: 2,
             direcao: "e",
             largura: 110,
             altura: 200,
             estado: 'parado',
-            rate: 4,
+            rate: 20,
             imortal: true
         })
         this.prova = new Image()
@@ -130,6 +130,7 @@ class Perri extends Inimigo {
         this.estado = estado;
         this.frameatual = 1;
         if (estado == "prova") {
+            this.rate = 4
             this.frames = 15;
             this.loop = false
         } else if (estado == "parado") {
