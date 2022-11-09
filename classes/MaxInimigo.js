@@ -20,7 +20,7 @@ class MaxInimigo extends Inimigo {
             imortal
         })
         this.loop = true
-        this.resistencia = 0
+        this.resistencia = 0.9
         this.posicao = {
             x: 900,
             y: canvas.height - 65 - 200
