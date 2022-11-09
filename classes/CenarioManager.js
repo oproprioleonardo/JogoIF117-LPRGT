@@ -341,7 +341,7 @@ class CenarioManager {
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false
-                this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")]);
+                this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Você fez muito carinho em mim, vou te ajudar!")]);
                 this.cenario.iniciarDialogos();
                 if (this.gatinhosAcariciados.length >= 3) {
                     for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 10, 60, 60, 1, "inimigos"))
