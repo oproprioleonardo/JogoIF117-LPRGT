@@ -331,13 +331,13 @@ class CenarioManager {
             ],
             dialogos: [
                 new Dialogo("Max", "Que mer..."),
-                new Dialogo("Caxumbinha", "Você precisa parar!"),
+                new Dialogo("Caxumbinha", "Miau miau você precisa parar!"),
                 new Dialogo("Caxumbinha", "Desistir ago..."),
-                new Dialogo("Caxumbinha", "Max, você chegou!"),
-                new Dialogo("Caxumbinha", "Você está na sua mente agora"),
-                new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo"),
-                new Dialogo("Caxumbinha", "Derrote-o!"),
-                new Dialogo("Max", "Você precisa parar!"),
+                new Dialogo("Caxumbinha", "Miau miau, Max, você chegou!"),
+                new Dialogo("Caxumbinha", "Você está na sua mente agora, miau."),
+                new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo, miau miau"),
+                new Dialogo("Caxumbinha", "Miau miau, Derrote-o!"),
+                new Dialogo("Max", "Você que manda patrão!"),
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false

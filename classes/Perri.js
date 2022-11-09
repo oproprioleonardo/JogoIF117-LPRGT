@@ -13,7 +13,7 @@ class Perri extends Inimigo {
         this.prova = new Image()
         this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
         this.loop = true
-        this.resistencia = 0
+        this.resistencia = 0.9
         this.atividade = new Prova();
         this.posicao = {
             x: 900,
