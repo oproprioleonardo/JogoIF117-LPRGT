@@ -356,21 +356,16 @@ class CenarioManager {
             ],
             dialogos: [
                 new Dialogo("Max", "Que mer..."),
-                new Dialogo("Caxumbinha", "Miau miau você precisa parar!"),
+                new Dialogo("Caxumbinha", "Você precisa parar!"),
                 new Dialogo("Caxumbinha", "Desistir ago..."),
-                new Dialogo("Caxumbinha", "Miau miau, Max, você chegou!"),
-                new Dialogo("Caxumbinha", "Você está na sua mente agora, miau."),
-                new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo, miau miau"),
-                new Dialogo("Caxumbinha", "Miau miau, Derrote-o!"),
-                new Dialogo("Max", "Você que manda patrão!"),
+                new Dialogo("Caxumbinha", "Max, você chegou!"),
+                new Dialogo("Caxumbinha", "Você está na sua mente agora"),
+                new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo"),
+                new Dialogo("Caxumbinha", "Derrote-o!"),
+                new Dialogo("Max", "Você precisa parar!"),
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false
-<<<<<<< HEAD
-=======
-                this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Você fez muito carinho em mim, vou te ajudar!")]);
-                this.cenario.iniciarDialogos();
->>>>>>> c8b41b95a361fd09697dd1a4f63da1d8c427ec54
                 if (this.gatinhosAcariciados.length >= 3) {
                     this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")]);
                     this.cenario.iniciarDialogos();
