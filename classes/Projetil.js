@@ -57,30 +57,8 @@ class Projetil extends Entidade {
         })
     }
 
-    static caneta() {
-        return new Projetil({
-            vetorVelocidade: {
-                x: 0,
-                y: Math.floor(Math.random() * 5) + 5,
-                dir: ``
-            },
-            posicao: {
-                x: Math.floor(Math.random() * canvas.width),
-                y: -100
-            },
-            skinSource: `./assets/imgs/perri/Especiais/Canetada/caneta`,
-            frameatual: Math.floor(Math.random() * 2) + 1,
-            frames: 3,
-            loop: false,
-            autoplay: false,
-            largura: 20,
-            altura: 40,
-            atinge: "max",
-            dano: 4
-        });
-    }
 
-    static chuvaMandiocaVermelha() {
+    static chuvaInimiga(src, dano, altura, largura, qframes, atinge = "max") {
         return new Projetil({
             vetorVelocidade: {
                 x: 0,
@@ -91,15 +69,15 @@ class Projetil extends Entidade {
                 x: Math.floor(Math.random() * canvas.width),
                 y: -100
             },
-            skinSource: `./assets/imgs/max/maxinimigo/tiro/TiroMandioca`,
-            frameatual: Math.floor(Math.random() * 2) + 1,
-            frames: 3,
+            skinSource: src,
+            frameatual: qframes == 3 ? Math.floor(Math.random() * 2) + 1 : 1,
+            frames: qframes,
             loop: false,
             autoplay: false,
-            largura: 40,
-            altura: 40,
-            atinge: "max",
-            dano: 4
+            largura: largura,
+            altura: altura,
+            atinge: atinge,
+            dano: dano
         });
     }
 

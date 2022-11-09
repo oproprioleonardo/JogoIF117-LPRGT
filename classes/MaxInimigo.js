@@ -20,7 +20,7 @@ class MaxInimigo extends Inimigo {
             imortal
         })
         this.loop = true
-        this.resistencia = 0.9
+        this.resistencia = 0
         this.posicao = {
             x: 900,
             y: canvas.height - 65 - 200
@@ -57,6 +57,7 @@ class MaxInimigo extends Inimigo {
         if (this.vida <= 0) {
             cenarioManager.cenario.removerEntidade(this);
             this.matar();
+            if (cenarioManager.gatinhosAcariciados.length == 0 ) cenarioManager.finalSemCaxumba()
             return;
         }
 
@@ -71,7 +72,7 @@ class MaxInimigo extends Inimigo {
             max.posicao.y <= this.posicao.y + this.altura
         ) {
             max.aplicarDano(0.2);
-            if(this.barraPoder != 100) this.barraPoder += 5
+            if (this.barraPoder != 100) this.barraPoder += 5
         }
 
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)
@@ -109,8 +110,9 @@ class MaxInimigo extends Inimigo {
     ataqueChuva() {
         if (gameframe % 500 == 0 && cenarioManager.cenario.acabouDialogo() && this.barraPoder == 100) {
             this.barraPoder = 0
-            for (let i = 0; i < 25; i++) {
-                cenarioManager.cenario.novoTiro(Projetil.chuvaMandiocaVermelha())
+            for (let i = 0; i < 15; i++) {
+                cenarioManager.cenario.novoTiro(Projetil.chuvaInimiga(`./assets/imgs/max/maxinimigo/tiro/prova`, 8,
+                    40, 30, 1))
             }
         }
     }

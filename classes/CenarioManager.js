@@ -7,6 +7,7 @@ class CenarioManager {
         this.brilho = 1;
 
         this.max = new Jogador({});
+        this.gatinhosAcariciados = []
         this.registrarCenarios();
         this.cenario = this.cenarios[this.posicao];
 
@@ -24,6 +25,21 @@ class CenarioManager {
         else if (this.brilho >= 0) this.brilho -= .1
     }
 
+    finalSemCaxumba() {
+        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você não fez carinho em mim :(")]);
+        this.cenario.iniciarDialogos();
+
+        for (let i = 0; i < 10; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 80, 60, 60, 1))
+    }
+
+    jaFezCarinhonoGato(gato) {
+        return this.gatinhosAcariciados.find(gatinho => gatinho == gato)
+    }
+
+    carinhoNoGato(gato) {
+        if (!this.jaFezCarinhonoGato(gato)) this.gatinhosAcariciados.push(gato)
+    }
+
     exibirInfo() {
         this.cenario.portas.forEach(porta => {
             if (verificacolisao(1, porta, this.max)) {
@@ -37,6 +53,7 @@ class CenarioManager {
             if (eColidida.skinSource == "./assets/imgs/cenario/animados/gatinho") {
                 ctx.drawImage(this.coracaoImg, eColidida.posicao.x + eColidida.largura /
                     4, eColidida.posicao.y - 45, 32, 32)
+                this.carinhoNoGato(eColidida)
             } else if (eColidida.skinSource == "./assets/imgs/cenario/animados/marciel") {
                 eColidida.temInteracao = false;
                 this.cenario.adicionarDialogo([
@@ -314,10 +331,21 @@ class CenarioManager {
             ],
             dialogos: [
                 new Dialogo("Max", "Que mer..."),
-                new Dialogo("Caxumbinha", "hello world!"),
+                new Dialogo("Caxumbinha", "Você precisa parar!"),
+                new Dialogo("Caxumbinha", "Desistir ago..."),
+                new Dialogo("Caxumbinha", "Max, você chegou!"),
+                new Dialogo("Caxumbinha", "Você está na sua mente agora"),
+                new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo"),
+                new Dialogo("Caxumbinha", "Derrote-o!"),
+                new Dialogo("Max", "Você precisa parar!"),
             ],
             iniciar: (cenario) => {
                 cenario.maxInimigo.imortal = false
+                this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")]);
+                this.cenario.iniciarDialogos();
+                if (this.gatinhosAcariciados.length >= 3) {
+                    for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 10, 60, 60, 1, "inimigos"))
+                }
             }
         })
 

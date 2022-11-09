@@ -17,6 +17,8 @@ class Cenario {
         this.dialogando = false;
         this.callback = iniciar;
         this.iniciado = false;
+
+
         if (imgsrc.length > 0) {
             this.image = new Image();
             this.carregarNovaImagem()

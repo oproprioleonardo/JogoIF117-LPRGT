@@ -7,9 +7,9 @@ class Perri extends Inimigo {
             largura: 110,
             altura: 200,
             estado: 'parado',
-            rate: 4
+            rate: 4,
+            imortal: true
         })
-
         this.prova = new Image()
         this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
         this.loop = true
@@ -114,9 +114,10 @@ class Perri extends Inimigo {
         window.addEventListener('keydown', respondendo)
     }
 
-    ataqueCaneta(){
+    ataqueCaneta() {
         for (let i = 0; i < 25; i++) {
-            cenarioManager.cenario.novoTiro(Projetil.caneta())
+            cenarioManager.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/perri/Especiais/Canetada/caneta', 4,
+                40, 20, 3))
         }
     }
 
