@@ -1,9 +1,9 @@
 class Ivaldo extends EntidadeViva {
-    constructor({ }) {
+    constructor() {
         super({
             posicao: {
                 x: canvas.width + 80,
-                y: canvas.height - 140 - 60
+                y: canvas.height - 200
             },
             skinSource: "./assets/imgs/Ivaldo/ivaldo",
             largura: 100,

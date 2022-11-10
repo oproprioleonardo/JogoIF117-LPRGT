@@ -14,10 +14,12 @@ class EntidadeViva extends Entidade {
         autoplay,
         estado,
         direcao,
+        passivo = true,
         imortal = false,
         resistencia = 0,
         dropaVida = true,
-        temInteracao
+        temInteracao,
+        interagir
     }) {
         super({
             posicao,
@@ -30,9 +32,10 @@ class EntidadeViva extends Entidade {
             autoplay,
             estado,
             direcao,
-            temInteracao
+            temInteracao,
+            interagir
         })
-
+        this.passivo = passivo;
         this.imortal = imortal;
         this.vida = 100;
         this.resistencia = resistencia;
@@ -58,10 +61,15 @@ class EntidadeViva extends Entidade {
     }
 
     aplicarDano(dano) {
-        if (!this.vivo) return;
+        if (!this.vivo || this.imortal) return;
         if (this != max && max.barraPoder < 100) max.barraPoder++
         this.vida -= dano - (dano * this.resistencia);
         if (this.vida <= 0) this.matar()
+    }
+
+    ressucitar() {
+        this.vida = 100;
+        this.vivo = true;
     }
 
     droparVida() {
@@ -72,6 +80,7 @@ class EntidadeViva extends Entidade {
     }
 
     matar() {
+        if(!this.vivo) return;
         this.vida = 0;
         this.vivo = false;
         if (this.dropaVida) this.droparVida();

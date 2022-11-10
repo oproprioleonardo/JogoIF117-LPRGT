@@ -28,7 +28,7 @@
 <body>
     <div class="pagina">
         <div class="musicas">
-            Volume música: <input type="range" min="0" max="100" value="100" class="volumemusica"
+            Volume música: <input type="range" min="0" max="100" value="80" class="volumemusica"
                 oninput="musicaManager.volmusica()">
         </div>
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
@@ -182,8 +182,8 @@
             }
         })
 
-
-        cenarioManager.cenario.iniciarDialogos();
+        cenarioManager.cenario.carregar();
+        
         let telaDerrota = new Image()
         telaDerrota.src = './assets/imgs/info/telas/perdeu.png'
 

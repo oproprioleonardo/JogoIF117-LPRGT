@@ -16,6 +16,12 @@ class Pergunta {
 
     }
 
+    reset() {
+        this.selecionada = 0;
+        let alts = shuffleArray(this.alternativas.map(alt => alt.descricao));
+        this.alternativas = alts.map(descricao => new Alternativa(alts.indexOf(descricao), descricao));
+    }
+
     get altSelected() {
         return this.alternativas[this.selecionada];
     }

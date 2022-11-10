@@ -1,26 +1,19 @@
 class MaxInimigo extends Inimigo {
-    constructor({
-        skinSource = "./assets/imgs/max/maxinimigo/max",
-        rate = 10,
-        frames = 2,
-        estado = "parado",
-        direcao = "e",
-        resistencia = 90,
-        imortal = true
-    }) {
+    constructor() {
         super({
-            skinSource,
-            rate,
-            frames,
-            estado,
-            direcao,
+            skinSource: "./assets/imgs/max/maxinimigo/max",
+            rate: 10,
+            frames: 2,
+            estado: "parado",
+            direcao: "e",
             largura: 120,
             altura: 140,
-            resistencia,
-            imortal
+            resistencia: 0,
+            imortal: true,
+            dropaVida: false
         })
         this.loop = true
-        this.resistencia = 0.9
+        this.resistencia = 0.95
         this.posicao = {
             x: 900,
             y: canvas.height - 65 - 200
@@ -54,10 +47,9 @@ class MaxInimigo extends Inimigo {
     }
 
     renderizar() {
-        if (this.vida <= 0) {
+        if (!this.vivo) {
             cenarioManager.cenario.removerEntidade(this);
-            this.matar();
-            if (cenarioManager.gatinhosAcariciados.length == 0 ) cenarioManager.finalSemCaxumba()
+            if (cenarioManager.carrinhos == 0 ) cenarioManager.finalSemCaxumba()
             else cenarioManager.finalPadrao()
             return;
         }
@@ -123,13 +115,6 @@ class MaxInimigo extends Inimigo {
             cenarioManager.cenario.novoTiro(Projetil.tiroMaxInimigo())
         }
     }
-
-    matar() {
-        this.vida = 0;
-        this.vivo = false;
-        this.mudarEstado("morto");
-    }
-
 
     movimentar(teclas) {
         this.vetorVelocidade.x = 0;

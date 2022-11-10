@@ -15,6 +15,7 @@ class Entidade {
         estado = "",
         direcao = "",
         temInteracao = false,
+        interagir = () => {},
         temSprite = true
     }) {
         this.posicao = posicao;
@@ -36,7 +37,7 @@ class Entidade {
         this.autoplay = autoplay
         this.temSprite = temSprite
         this.estado = estado
-
+        this.interagir = interagir;
         this.image = new Image();
         
         this.carregarNovaImagem(true);

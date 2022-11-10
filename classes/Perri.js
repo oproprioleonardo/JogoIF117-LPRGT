@@ -1,5 +1,5 @@
 class Perri extends Inimigo {
-    constructor({ }) {
+    constructor() {
         super({
             skinSource: "./assets/imgs/perri/perri",
             frames: 2,
@@ -8,12 +8,12 @@ class Perri extends Inimigo {
             altura: 200,
             estado: 'parado',
             rate: 20,
-            imortal: true
+            imortal: true,
         })
         this.prova = new Image()
         this.prova.src = './assets/imgs/perri/Especiais/Prova/Provavoando' + this.frameatual + '.png'
         this.loop = true
-        this.resistencia = 0.9
+        this.resistencia = 0.8
         this.atividade = new Prova();
         this.posicao = {
             x: 900,
@@ -33,16 +33,14 @@ class Perri extends Inimigo {
             this.atividade.renderizar();
             this.provaVoando();
         }
-        if (this.vida <= 0) {
+        if (!this.vivo) {
             cenarioManager.cenario.removerEntidade(this);
-            this.matar();
             cenarioManager.cenario.getEntidadeByName('ivaldo').andar()
-
             return;
         }
 
 
-        if (
+        if (!this.passivo &&
             max.posicao.x + max.largura >= this.posicao.x &&
             max.posicao.x <= this.posicao.x + this.largura &&
             max.posicao.y + max.altura >= this.posicao.y &&
@@ -71,7 +69,7 @@ class Perri extends Inimigo {
     }
 
     ataqueProva() {
-        if (this.perguntando || this.vida <= 0) return
+        if (this.perguntando || !this.vivo) return
         this.mudarEstado('prova')
         this.imortal = true;
         this.atividade.exibindo = true;

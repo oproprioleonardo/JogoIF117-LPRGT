@@ -30,6 +30,7 @@ class Prova {
     responderPergunta(callIfRight, callIfWrong) {
         if (this.pergunta.altSelected.descricao == this.pergunta.resposta) callIfRight();
         else callIfWrong();
+        this.pergunta.reset();
         this.exibindo = false;
         this.perguntaAtual == this.perguntas.length - 1 ? this.perguntaAtual = 0 : this.perguntaAtual++;
     }

@@ -4,6 +4,7 @@ class Cenario {
         imgsrc = "",
         estado = 1,
         dialogos = [],
+        carregar = () => this.iniciarDialogos(),
         iniciar = () => { },
     }) {
         this.largura = canvas.width;
@@ -17,7 +18,7 @@ class Cenario {
         this.dialogando = false;
         this.callback = iniciar;
         this.iniciado = false;
-
+        this.carregar = carregar;
 
         if (imgsrc.length > 0) {
             this.image = new Image();

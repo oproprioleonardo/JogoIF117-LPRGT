@@ -11,7 +11,8 @@ class Inimigo extends EntidadeViva {
         loop = true,
         resistencia = 0,
         rate = 1,
-        imortal = false
+        imortal = false,
+        dropaVida = true
     }) {
         super({
             skinSource,
@@ -23,7 +24,9 @@ class Inimigo extends EntidadeViva {
             loop,
             resistencia,
             rate,
-            imortal
+            imortal,
+            passivo: false,
+            dropaVida
         })
 
         this.posicao = {
@@ -34,9 +37,8 @@ class Inimigo extends EntidadeViva {
     }
 
     renderizar() {
-        if (this.vida <= 0) {
+        if (!this.vivo) {
             cenarioManager.cenario.removerEntidade(this);
-            this.matar();
             return;
         }
 

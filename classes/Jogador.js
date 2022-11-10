@@ -1,17 +1,11 @@
 class Jogador extends EntidadeViva {
-    constructor({
-        skinSource = "./assets/imgs/max/max",
-        rate = 10,
-        frames = 2,
-        estado = "parado",
-        direcao = "d"
-    }) {
+    constructor() {
         super({
-            skinSource,
-            rate,
-            frames,
-            estado,
-            direcao,
+            skinSource: "./assets/imgs/max/max",
+            rate: 10,
+            frames: 2,
+            estado: "parado",
+            direcao: "d",
             largura: 120,
             altura: 140
         })
@@ -97,11 +91,11 @@ class Jogador extends EntidadeViva {
     }
 
     matar() {
+        if(!this.vivo) return;
         this.vida = 0;
         this.vivo = false;
         this.mudarEstado("morto");
     }
-
 
     movimentar(teclas) {
         this.vetorVelocidade.x = 0;
