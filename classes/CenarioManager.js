@@ -76,14 +76,14 @@ class CenarioManager {
     }
 
     finalSemCaxumba() {
-        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você não fez carinho em mim :(")], true);
+        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Você não fez carinho em mim, miau :(")], true);
 
         for (let i = 0; i < 40; i++)
             this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 80, 60, 60, 1))
     }
 
     finalPadrao() {
-        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Obrigado pela ajuda!")], true);
+        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Miau miau, obrigado pela ajuda!")], true);
     }
 
     exibirInfo() {
@@ -350,12 +350,12 @@ class CenarioManager {
                 ],
                 dialogos: [
                     new Dialogo("Max", "Que mer..."),
-                    new Dialogo("Caxumbinha", "Você precisa parar!"),
+                    new Dialogo("Caxumbinha", "Miau miau, você precisa parar!"),
                     new Dialogo("Caxumbinha", "Desistir ago..."),
                     new Dialogo("Caxumbinha", "Miau, miau!"),
                     new Dialogo("Caxumbinha", "Max, você chegou!"),
-                    new Dialogo("Caxumbinha", "Você está na sua mente agora"),
-                    new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo"),
+                    new Dialogo("Caxumbinha", "Você está na sua mente agora, miau miau"),
+                    new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo, miau miau"),
                     new Dialogo("Caxumbinha", "Derrote-o!"),
                     new Dialogo("Max", "Você precisa parar!"),
                 ],
@@ -364,8 +364,7 @@ class CenarioManager {
                     if (this.carinhos >= 3) {
                         this.cenario.adicionarDialogo(
                             [
-                                new Dialogo("Caxumbinha", "Miau, miau!"),
-                                new Dialogo("Caxumbinha", "Você fez muito carinho em mim, vou te ajudar!")
+                                new Dialogo("Caxumbinha", "Miau miau, você fez muito carinho em mim, vou te ajudar!")
                             ],
                             true);
                         for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinhod', 10, 60, 60, 1, "inimigos"))
