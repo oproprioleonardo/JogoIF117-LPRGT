@@ -28,10 +28,11 @@
 <body>
     <div class="pagina">
         <div class="musicas">
-            Volume música: <input type="range" min="0" max="100" value="80" class="volumemusica"
-                oninput="musicaManager.volmusica()">
+            Volume da música: <input type="range" min="0" max="100" value="80" class="volumemusica"
+                oninput="musicaManager.changeVolume()">
         </div>
         <audio src="./assets/sounds/LabSound.mp4" id="labsound" loop="-1" volume="0.8"></audio>
+        <audio src="./assets/sounds/Disparo.m4a" id="disparo" volume="0.8"></audio>
         <audio src="./assets/sounds/CutsceneInicial.mp4" id="cutsceneinicial" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/SalaDeAula.mp4" id="saladeaula" loop="-1" volume="0.8"></audio>
         <audio src="./assets/sounds/BatalhaDiscipulos.mp4" id="batalhadiscipulos" loop="-1" volume="0.8"></audio>
@@ -98,7 +99,6 @@
         var gravidade = 0.6;
         var limiteTiros = 10;
 
-
         window.addEventListener('keydown', (e) => {
             switch (e.key.toLowerCase()) {
                 case "a":
@@ -109,11 +109,13 @@
                     break;
                 case "w":
                     teclas.cima.press = true;
-                    if(cenarioManager.cenario.inimigos != 0) return
+                    if (cenarioManager.cenario.inimigos != 0) return
                     cenarioManager.cenario.portas.forEach(porta => {
                         if (verificacolisao(1, porta, max)) {
                             porta.abrir(() => cenarioManager.transicaoCenario(true, () => {
-                                musicaManager.podePassar = true
+                                if (cenarioManager.posicao == 5) musicaManager.changeMusic(
+                                    "saladeaula");
+                                else musicaManager.nextMusic();
                                 if (porta.posicao.x >= canvas.width - 120) max.posicao.x =
                                     20
                             }))
@@ -124,12 +126,17 @@
                     if (max.vetorVelocidade.x != 0 || max.vetorVelocidade.y != 0 || max.vida <= 0 ||
                         limiteTiros == 0) return
                     cenarioManager.cenario.novoTiro();
+                    let audio = document.getElementById("disparo")
+                    audio.volume = musicaManager.volumeMusica.value / 100
+                    if (audio.paused)
+                        audio.play();
+                    else audio.currentTime = 0;
+
                     teclas.espaco.press = true;
                     limiteTiros--;
                     break;
                 case "e":
-                    if (cenarioManager.posicao == 0) musicaManager.playMusic();
-                    else if (musicaManager.podePassar && cenarioManager.posicao != 3) musicaManager.nextMusic();
+                    if (musicaManager.musica == 0) musicaManager.playMusic();
                     if (max.algumaEntidadeColidida) return;
                     cenarioManager.cenario.entidadesComInteracao.forEach(entidade => {
                         if (verificacolisao(3, entidade, max)) {
@@ -183,7 +190,7 @@
         })
 
         cenarioManager.cenario.carregar();
-        
+
         let telaDerrota = new Image()
         telaDerrota.src = './assets/imgs/info/telas/perdeu.png'
 
@@ -191,7 +198,7 @@
             requestAnimationFrame(animate)
             const cenario = cenarioManager.cenario;
             if (cenario.acabouDialogo() && cenarioManager.posicao == 0) cenarioManager.transicaoCenario(true, () =>
-                musicaManager.podePassar = true);
+                musicaManager.nextMusic());
 
             if (cenario.acabouDialogo() && cenarioManager.posicao == 1 &&
                 cenario.estado != 2) {

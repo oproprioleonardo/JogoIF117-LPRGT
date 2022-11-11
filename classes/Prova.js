@@ -25,6 +25,7 @@ class Prova {
         const yInicial = canvas.height / 2 - 215;
         this.desenharFolha(xInicial, yInicial);
         this.pergunta.exibirPergunta(xInicial, yInicial, 25);
+        max.reduzirPoder(0.02);
     }
 
     responderPergunta(callIfRight, callIfWrong) {

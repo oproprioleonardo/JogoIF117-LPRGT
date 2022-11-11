@@ -18,6 +18,12 @@ class Jogador extends EntidadeViva {
         this.barraPoder = 0
     }
 
+    reduzirPoder(a) {
+        if (this.barraPoder <= 0) return;
+        else if (this.barraPoder - a < 0) this.barraPoder = 0;
+        else this.barraPoder -= a;
+    }
+
     get algumaEntidadeColidida() {
         return this.entidadesColididas.length > 0;
     }

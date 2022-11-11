@@ -8,8 +8,7 @@ class CenarioManager {
         this.brilho = 1;
         this.max = new Jogador();
         this.carinhos = 0;
-        this.entidadesPrincipais = [
-            {
+        this.entidadesPrincipais = [{
                 name: "gatinho",
                 ent: new EntidadeViva({
                     largura: 60,
@@ -49,7 +48,7 @@ class CenarioManager {
                 ent: new Perri()
             }
         ];
-        
+
 
         this.registrarCenarios();
         this.cenario = this.cenarios[this.posicao];
@@ -139,6 +138,7 @@ class CenarioManager {
             new Cenario({
                 imgsrc: "./assets/imgs/cenario/cenario0",
                 carregar: () => {
+
                     let marciel = this.pegarEntidadePrincipal("marciel");
                     marciel.teleport(700, 270);
                     marciel.interagir = () => {
@@ -209,6 +209,8 @@ class CenarioManager {
             new Cenario({
                 imgsrc: "./assets/imgs/cenario/cenario1",
                 carregar: () => {
+
+
                     this.pegarEntidadePrincipal("perri").teleport(700, 270);
                     this.pegarEntidadePrincipal("gatinho").teleport(230, canvas.height - 220);
 
@@ -245,7 +247,7 @@ class CenarioManager {
                     new Dialogo("Perri", "Agora batalhe com meus discipulos, você é capaz de ganhar. Te vejo na outra sala")
                 ],
                 iniciar: (cenario) => {
-                    musicaManager.nextMusic();
+
                     for (let i = 1; i < 5; i++) {
                         cenario.gerarInimigo(i);
                     }
@@ -256,6 +258,8 @@ class CenarioManager {
             new Cenario({
                 imgsrc: "./assets/imgs/cenario/cenario2",
                 carregar: () => {
+
+
                     this.pegarEntidadePrincipal("gatinho").teleport(270, 340);
                     this.pegarEntidadePrincipal("perri").teleport(900, canvas.height - 265);
 
@@ -348,6 +352,7 @@ class CenarioManager {
                     new Dialogo("Max", "Que mer..."),
                     new Dialogo("Caxumbinha", "Você precisa parar!"),
                     new Dialogo("Caxumbinha", "Desistir ago..."),
+                    new Dialogo("Caxumbinha", "Miau, miau!"),
                     new Dialogo("Caxumbinha", "Max, você chegou!"),
                     new Dialogo("Caxumbinha", "Você está na sua mente agora"),
                     new Dialogo("Caxumbinha", "E esse é o seu eu que te joga para baixo"),
@@ -357,7 +362,12 @@ class CenarioManager {
                 iniciar: (cenario) => {
                     cenario.maxInimigo.imortal = false
                     if (this.carinhos >= 3) {
-                        this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "você fez muito carinho em mim, vou te ajudar!")], true);
+                        this.cenario.adicionarDialogo(
+                            [
+                                new Dialogo("Caxumbinha", "Miau, miau!"),
+                                new Dialogo("Caxumbinha", "Você fez muito carinho em mim, vou te ajudar!")
+                            ],
+                            true);
                         for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinhod', 10, 60, 60, 1, "inimigos"))
                     }
                 }
@@ -367,6 +377,7 @@ class CenarioManager {
             new Cenario({
                 imgsrc: "./assets/imgs/cenario/cenario4",
                 carregar: () => {
+
                     let marciel = this.pegarEntidadePrincipal("marciel");
                     marciel.temInteracao = true;
                     marciel.interagir = () => {

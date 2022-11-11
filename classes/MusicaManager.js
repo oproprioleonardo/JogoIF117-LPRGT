@@ -2,8 +2,7 @@ class MusicaManager {
     constructor() {
         this.musica = 0;
         this.tocando = false;
-        this.podePassar = false;
-        this.musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos" , "fightsound" ]
+        this.musicas = ["cutsceneinicial", "labsound", "saladeaula", "batalhadiscipulos", "fightsound"]
     }
 
     get volumeMusica() {
@@ -14,14 +13,21 @@ class MusicaManager {
         return document.getElementById(this.musicas[Math.min(this.musica, this.musicas.length - 1)]);
     }
 
-    volmusica() {
+    changeVolume() {
         this.atual.volume = this.volumeMusica.value / 100;
     }
 
     playMusic() {
         if (this.tocando) return;
-        this.tocando = true;
         this.atual.play();
+        this.tocando = true;
+    }
+
+    changeMusic(name) {
+        this.stopMusic()
+        this.musica = this.musicas.indexOf(name);
+        this.atual.volume = this.volumeMusica.value / 100;
+        this.playMusic()
     }
 
     stopMusic() {
@@ -31,7 +37,6 @@ class MusicaManager {
     }
 
     nextMusic() {
-        this.podePassar = false;
         this.stopMusic()
         this.musica++;
         this.atual.volume = this.volumeMusica.value / 100;
