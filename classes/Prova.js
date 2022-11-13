@@ -7,7 +7,7 @@ class Prova {
         this.finalizada = false;
         this.perguntas = [
             new Pergunta("1 - O que acontece se\nvocê transferir R$3,14", ["Não Sei", "Uma transferência né", "Você vai ter feito um πx"], "Você vai ter feito um πx"),
-            new Pergunta("2 - Se x representa um \ndígito na base 10: \nquem é x?\n x11 + 11x + 1x1", ["3", "5", "2"], "5"),
+            new Pergunta("2 - Se x representa um \ndígito na base 10: \nquem é x?\n x11 + 11x + 1x1 = 777", ["3", "5", "2"], "5"),
             new Pergunta("3 - Quando somamos um \nmúltiplo de 4 com um \nmúltiplo de 6, \nobtemos necessariamente \num múltiplo de:", ["2", "6", "8"], "2"),
             new Pergunta("4 - Quanto é 30 x 30?", ["900", "1150", "Não sei"], "900"),
             new Pergunta("5 - Quanto é 60 x 9", ["540", "480", "600"], "540"),

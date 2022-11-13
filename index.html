@@ -150,9 +150,9 @@
                 case "g":
                     if (max.barraPoder < 50 || max.vetorVelocidade.x != 0 ||
                         max.vetorVelocidade.y != 0 || max.vida <= 0) return
-                    if (max.barraPoder == 100) {
+                    if (max.barraPoder >= 100) {
                         cenarioManager.cenario.novoTiro(Projetil.novoTiroEspecial2())
-                        max.barraPoder = 0
+                        max.barraPoder = 0;
                     } else {
                         for (let i = 0; i < 45; i++) {
                             cenarioManager.cenario.novoTiro(Projetil.novoTiroEspecial1())

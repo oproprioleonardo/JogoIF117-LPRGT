@@ -9,44 +9,44 @@ class CenarioManager {
         this.max = new Jogador();
         this.carinhos = 0;
         this.entidadesPrincipais = [{
-                name: "gatinho",
-                ent: new EntidadeViva({
-                    largura: 60,
-                    altura: 60,
-                    skinSource: "./assets/imgs/cenario/animados/gatinho",
-                    temInteracao: true,
-                    direcao: "e",
-                    interagir: (ent) => {
-                        this.carinhos++;
-                        ctx.drawImage(this.coracaoImg, ent.posicao.x + ent.largura /
-                            4, ent.posicao.y - 45, 32, 32);
-                        ent.temInteracao = true
-                    },
-                    imortal: true,
-                    rate: 10,
-                    frames: 2
-                })
-            },
-            {
-                name: "marciel",
-                ent: new EntidadeViva({
-                    largura: 80,
-                    altura: 200,
-                    skinSource: "./assets/imgs/cenario/animados/marciel",
-                    temInteracao: true,
-                    imortal: true,
-                    rate: 15,
-                    frames: 2
-                })
-            },
-            {
-                name: "ivaldo",
-                ent: new Ivaldo()
-            },
-            {
-                name: "perri",
-                ent: new Perri()
-            }
+            name: "gatinho",
+            ent: new EntidadeViva({
+                largura: 60,
+                altura: 60,
+                skinSource: "./assets/imgs/cenario/animados/gatinho",
+                temInteracao: true,
+                direcao: "e",
+                interagir: (ent) => {
+                    this.carinhos++;
+                    ctx.drawImage(this.coracaoImg, ent.posicao.x + ent.largura /
+                        4, ent.posicao.y - 45, 32, 32);
+                    ent.temInteracao = true
+                },
+                imortal: true,
+                rate: 10,
+                frames: 2
+            })
+        },
+        {
+            name: "marciel",
+            ent: new EntidadeViva({
+                largura: 80,
+                altura: 200,
+                skinSource: "./assets/imgs/cenario/animados/marciel",
+                temInteracao: true,
+                imortal: true,
+                rate: 15,
+                frames: 2
+            })
+        },
+        {
+            name: "ivaldo",
+            ent: new Ivaldo()
+        },
+        {
+            name: "perri",
+            ent: new Perri()
+        }
         ];
 
 
@@ -78,8 +78,8 @@ class CenarioManager {
     finalSemCaxumba() {
         this.cenario.adicionarDialogo([new Dialogo("Caxumbinha", "Você não fez carinho em mim, miau :(")], true);
 
-        for (let i = 0; i < 40; i++)
-            this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 80, 60, 60, 1))
+        for (let i = 0; i < 80; i++)
+            this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinho', 90, 60, 60, 1))
     }
 
     finalPadrao() {
@@ -104,7 +104,7 @@ class CenarioManager {
         ctx.drawImage(this.balasInfoImg, 900, 0, 150, 80)
     }
 
-    transicaoCenario(passaCenario = true, callback = () => {}) {
+    transicaoCenario(passaCenario = true, callback = () => { }) {
         if (passaCenario) this.posicao++;
         setTimeout(() => {
             this.transicionando = true
@@ -125,12 +125,11 @@ class CenarioManager {
     registrarCenarios() {
         this.cenarios = [
             new Cenario({
-                dialogos: [new Dialogo("...", "..."),
-                    new Dialogo("Max", "Que sonho doido..."),
-                    new Dialogo("Max", "O que foi tudo isso?"),
-                    new Dialogo("Voz desconhecida", "Max, acorda!"),
-                    new Dialogo("Max", "Alguém ta me chamando.."),
-                    new Dialogo("Max", "Preciso me levantar...")
+                dialogos: [new Dialogo("...", "Olá, pessoal, sou o Max"),
+                new Dialogo("Max", "Vou contar o sonho que tive..."),
+                new Dialogo("Max", "Sempre tive dificuldade com notas :("),
+                new Dialogo("Max", "Agora verão como tudo começou e acabou"),
+                new Dialogo("Max", "Acredite em você mesmo.")
                 ]
             }),
 
@@ -170,26 +169,21 @@ class CenarioManager {
                     this.max,
                 ],
                 dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
-                    new Dialogo("Marciel",
-                        "Você ficou com notas ruins em matemática e prática de laboratório"),
-                    new Dialogo("Marciel", "Precisa compensar isso"),
-                    new Dialogo("Max", "Mas você deveria mesmo ta aqui?"),
-                    new Dialogo("Max", "Você é professor de física, afinal"),
-                    new Dialogo("Marciel", "Continue assim e no próximo bimestre, será em física"),
-                    new Dialogo("Marciel", "Já que com vocês eu posso avançar mais"),
-                    new Dialogo("Max", "..."),
-                    new Dialogo("Max", "Não faça isso."),
-                    new Dialogo("Max", "Por favor."),
-                    new Dialogo("Marciel", "De qualquer forma, você precisa lutar"),
-                    new Dialogo("Marciel", "Procure pelo Perri e Ivaldo e salve seu boletim!"),
-                    new Dialogo("Marciel", "Vai ser moleza!"),
-                    new Dialogo("Max", "..."),
-                    new Dialogo("Marciel", "..."),
-                    new Dialogo("Marciel", "Vou sair de fininho..."),
-                    new Dialogo("Marciel", "Antes de eu sair..."),
-                    new Dialogo("Marciel", "LUTE COM O ROBÔ"),
-                    new Dialogo("Marciel", "PS: Espaço atira e, caso tenha energia necessária, G para especial"),
-                    new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
+                new Dialogo("Marciel",
+                    "Você ficou com notas ruins em matemática e prática de laboratório"),
+                new Dialogo("Marciel", "Precisa compensar isso"),
+                new Dialogo("Marciel", "Já que com vocês eu posso avançar mais"),
+                new Dialogo("Max", "..."),
+                new Dialogo("Max", "Não faça isso."),
+                new Dialogo("Max", "Por favor."),
+                new Dialogo("Marciel", "De qualquer forma, você precisa lutar"),
+                new Dialogo("Marciel", "Procure pelo Perri e Ivaldo e salve seu boletim!"),
+                new Dialogo("Marciel", "..."),
+                new Dialogo("Marciel", "Vou sair de fininho..."),
+                new Dialogo("Marciel", "Antes de eu sair..."),
+                new Dialogo("Marciel", "LUTE COM O ROBÔ"),
+                new Dialogo("Marciel", "PS: Espaço atira e, caso tenha energia necessária, G para especial"),
+                new Dialogo("ROBÔ SHEIPADO", "VOCÊ VAI MORRER!!!")
                 ],
                 iniciar: (cenario) => {
                     cenario.entidades.push(
@@ -234,17 +228,16 @@ class CenarioManager {
                     this.max
                 ],
                 dialogos: [new Dialogo("Max", "Professor? O que você está fazendo aqui?"),
-                    new Dialogo("Perri", "Eu estava te esperando. Marciel me disse que você queria falar comigo."),
-                    new Dialogo("Max", "Eu preciso que você altere minha nota, eu não sou capaz de recuperar..."),
-                    new Dialogo("Perri", "Não posso fazer isso, Max. Essas notas não dizem nada sobre você."),
-                    new Dialogo("Max", "Dizem sim, dizem que eu não sou bom o suficiente."),
-                    new Dialogo("Max", "Eu não consigo acreditar que sou capaz..."),
-                    new Dialogo("Perri", "Se você não acredita em você, acredite em mim que acredito em você"),
-                    new Dialogo("Perri", "Nota se recupera, Max. Eu sei que você é capaz."),
-                    new Dialogo("Max", "Eu quero acreditar em mim, como você acredita..."),
-                    new Dialogo("Perri", "Max, você é capaz, eu terei que te testar pra você cair na real."),
-                    new Dialogo("Perri", "Feche os olhos."),
-                    new Dialogo("Perri", "Agora batalhe com meus discipulos, você é capaz de ganhar. Te vejo na outra sala")
+                new Dialogo("Perri", "Eu estava te esperando. Marciel me disse que você queria falar comigo."),
+                new Dialogo("Max", "Eu preciso que você altere minha nota, eu não sou capaz de recuperar..."),
+                new Dialogo("Perri", "Não posso fazer isso, Max. Essas notas não dizem nada sobre você."),
+                new Dialogo("Max", "Eu não consigo acreditar que sou capaz..."),
+                new Dialogo("Perri", "Se você não acredita em você, acredite em mim que acredito em você"),
+                new Dialogo("Perri", "Nota se recupera, Max. Eu sei que você é capaz."),
+                new Dialogo("Max", "Eu quero acreditar em mim, como você acredita..."),
+                new Dialogo("Perri", "Max, você é capaz, eu terei que te testar pra você cair na real."),
+                new Dialogo("Perri", "Feche os olhos."),
+                new Dialogo("Perri", "Agora batalhe com meus discipulos, você é capaz de ganhar. Te vejo na outra sala")
                 ],
                 iniciar: (cenario) => {
 
@@ -282,11 +275,9 @@ class CenarioManager {
                 dialogos: [
                     new Dialogo("Perri", "Você conseguiu chegar aqui, parabéns."),
                     new Dialogo("Perri", "Eu sabia que você conseguiria, Max."),
-                    new Dialogo("Perri", "Alterarei sua nota, mas você terá que provar seu valor para você mesmo."),
-                    new Dialogo("Perri", "Passe pela prova e pelos seus obstacúlos, você é capaz."),
-                    new Dialogo("Max", "..."),
+                    new Dialogo("Perri", "Passe pela prova e pelos seus obstacúlos e alterarei sua nota."),
                     new Dialogo("Max", "Não tem como você me dar a nota magicamente?"),
-                    new Dialogo("Perri", "Sim, só você acreditar em você mesmo e tentar fazer a prova. Você consegue"),
+                    new Dialogo("Perri", "Tá doido? Faz a prova ai"),
                     new Dialogo("Max", "Ok, eu vou tentar."),
                     new Dialogo("Max", "Como vai funcionar essa prova?"),
                     new Dialogo("Perri", "Serão questões de alternativa."),
@@ -367,7 +358,7 @@ class CenarioManager {
                                 new Dialogo("Caxumbinha", "Miau miau, você fez muito carinho em mim, vou te ajudar!")
                             ],
                             true);
-                        for (let i = 0; i < 20; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinhod', 10, 60, 60, 1, "inimigos"))
+                        for (let i = 0; i < 40; i++) this.cenario.novoTiro(Projetil.chuvaInimiga('./assets/imgs/cenario/animados/gatinhod', 30, 60, 60, 1, "inimigos"))
                     }
                 }
             }),
@@ -432,7 +423,12 @@ class CenarioManager {
                     this.pegarEntidadePrincipal("gatinho"),
                     this.max,
                 ],
-                dialogos: [new Dialogo("Max", "Professor? Acabou?"), ]
+                dialogos: [
+                    new Dialogo("Max", "Professor? Acabou?"),
+                    new Dialogo("Marciel", "Sim, Max. Você recuperou"),
+                    new Dialogo("Perri", "Estamos todos aqui por você"),
+                    new Dialogo("Ivaldo", "Viu, cara, conseguiu"),
+                ]
             }),
 
 

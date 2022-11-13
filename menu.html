@@ -36,7 +36,8 @@
                             Ivaldo Marques Batista <br>
                             Levi Sales <br>
                             Marciel Silva Santos <br>
-                            Paulo Vitor de Souza Perri
+                            Paulo Vitor de Souza Perri <br>
+                            Pedro Miguel dos Santos Neves
 
 
                         </p>
@@ -57,6 +58,8 @@
 
             <div class="telamenu">
                 <audio src="./assets/sounds/MenuInicial.mp4" id="musicatema" loop="-1"></audio>
+                <audio src="./assets/sounds/Selecionando.m4a" id="selecionando"></audio>
+                <audio src="./assets/sounds/Clicando.m4a" id="clicando"></audio>
                 <div class="musicas">
                     <div class="musicadiv" onclick="musica()">
                     </div>
@@ -64,9 +67,9 @@
                 </div>
 
                 <div class="todosbotoes">
-                    <button class="botaoiniciar botao" onclick="iniciarJogo()">Iniciar</button>
-                    <button class="botaocreditos botao" onclick="mostrarCreditos()">Créditos</button>
-                    <button class="botaosair botao" onclick="window.close()">Sair</button>
+                    <button class="botaoiniciar botao" onmouseenter="somSelect()" onclick="iniciarJogo()">Iniciar</button>
+                    <button class="botaocreditos botao" onmouseenter="somSelect()" onclick="mostrarCreditos()">Créditos</button>
+                    <button class="botaosair botao" onmouseenter="somSelect()" onclick="window.close()">Sair</button>
                 </div>
 
             </div>

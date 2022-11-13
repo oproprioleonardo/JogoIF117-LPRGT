@@ -65,7 +65,7 @@ class MaxInimigo extends Inimigo {
             max.posicao.y <= this.posicao.y + this.altura
         ) {
             max.aplicarDano(0.2);
-            if (this.barraPoder != 100) this.barraPoder += 5
+            max.aumentarPoder(5);
         }
 
         ctx.drawImage(this.image, this.posicao.x, this.posicao.y, this.largura, this.altura)

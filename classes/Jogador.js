@@ -24,6 +24,12 @@ class Jogador extends EntidadeViva {
         else this.barraPoder -= a;
     }
 
+    aumentarPoder(a) {
+        if (this.barraPoder >= 100) return;
+        else if (this.barraPoder + a > 100) this.barraPoder = 100;
+        else this.barraPoder += a;
+    }
+
     get algumaEntidadeColidida() {
         return this.entidadesColididas.length > 0;
     }

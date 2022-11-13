@@ -1,6 +1,7 @@
 var musicafundo = document.getElementById("musicatema");
 var mscfundo = false;
 var musicadiv = document.querySelector(".musicadiv");
+var somSelecionando = document.querySelector("#selecionando");
 var volumemusica = document.querySelector(".volumemusica");
 let todosbotoes = document.querySelectorAll(`.botao`)
 let telacreditos = document.querySelector(`.creditos`)
@@ -21,6 +22,15 @@ function musica() {
     mscfundo = !mscfundo
 }
 
+function somSelect() {
+    if (mscfundo) {
+        somSelecionando.volume = guardamusica / 100
+        if (somSelecionando.paused)
+            somSelecionando.play();
+        else somSelecionando.currentTime = 0;
+    }
+}
+
 function volmusica() {
     guardamusica = volumemusica.value;
     musicafundo.volume = guardamusica / 100;
@@ -36,7 +46,7 @@ function iniciarJogo() {
 
 function mostrarCreditos() {
     telacreditos.classList.add("creditosativado")
-    
+
 }
 
 function voltar() {

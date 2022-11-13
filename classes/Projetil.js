@@ -53,7 +53,7 @@ class Projetil extends Entidade {
             largura: 400,
             altura: 400,
             atinge: "inimigos",
-            dano: 220
+            dano: 400
         })
     }
 
