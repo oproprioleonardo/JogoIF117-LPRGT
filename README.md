@@ -12,7 +12,7 @@ Jogo de plataforma realizado por alunos da turma CTII 117 (2022) do IFSP - Campu
 
 ## Contribuidores
 
-- [sans_l](https://github.com/oproprioleonardo) (Leonardo)
+- [leo](https://github.com/oproprioleonardo) (Leonardo)
 - [gu](https://github.com/gustavofg1pontes) (Gustavo)
 - [cat](https://github.com/Cat-07) (Pedro)
 - [reis](https://github.com/Reiss23) (Thiago)
